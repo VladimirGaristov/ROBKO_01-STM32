@@ -39,10 +39,6 @@
 #ifndef __STM32L4xx_LL_USART_H
 #define __STM32L4xx_LL_USART_H
 
-#ifndef USE_FULL_LL_DRIVER
-#define USE_FULL_LL_DRIVER
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif

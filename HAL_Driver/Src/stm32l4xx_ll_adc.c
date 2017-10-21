@@ -35,9 +35,11 @@
   ******************************************************************************
   */
 
+/* USER CODE BEGIN */
 #ifndef USE_FULL_LL_DRIVER
 #define USE_FULL_LL_DRIVER
 #endif
+/* USER CODE END */
 
 #if defined(USE_FULL_LL_DRIVER)
 

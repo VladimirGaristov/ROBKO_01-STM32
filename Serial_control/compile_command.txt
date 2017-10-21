@@ -1,0 +1,1 @@
+gcc -Wall -std=c11 -o run_serial_test serial_test.c -L/usr/local/lib -lserialport

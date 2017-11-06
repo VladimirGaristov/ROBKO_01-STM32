@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/main.c \
+../src/motor_control.c \
 ../src/stm32l4xx_it.c \
 ../src/syscalls.c \
 ../src/system_stm32l4xx.c \
@@ -12,6 +13,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/main.o \
+./src/motor_control.o \
 ./src/stm32l4xx_it.o \
 ./src/syscalls.o \
 ./src/system_stm32l4xx.o \
@@ -19,6 +21,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/main.d \
+./src/motor_control.d \
 ./src/stm32l4xx_it.d \
 ./src/syscalls.d \
 ./src/system_stm32l4xx.d \

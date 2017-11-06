@@ -40,6 +40,7 @@
 "HAL_Driver/Src/stm32l4xx_ll_utils.o"
 "Utilities/STM32L4xx_Nucleo/stm32l4xx_nucleo.o"
 "src/main.o"
+"src/motor_control.o"
 "src/stm32l4xx_it.o"
 "src/syscalls.o"
 "src/system_stm32l4xx.o"

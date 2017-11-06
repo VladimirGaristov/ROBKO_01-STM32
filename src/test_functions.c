@@ -27,7 +27,7 @@ void LED_wave()
 	}
 }
 
-int16_t send_string(const char *msg)
+int8_t send_string(const char *msg)
 {
 	if(!LL_USART_IsActiveFlag_TC(USART1))
 		return -1;
@@ -42,7 +42,7 @@ int16_t send_string(const char *msg)
 	return 0;
 }
 
-int16_t receive_string(char *buffer, uint16_t buff_len)
+int8_t receive_string(char *buffer, uint16_t buff_len)
 {
 	if(!LL_USART_IsActiveFlag_RXNE(USART1))
 		return -1;
@@ -85,4 +85,14 @@ void serial_test()
 		}
 		while(!LL_USART_IsActiveFlag_TC(USART1));
 	}
+}
+
+void motor_test()
+{
+	static int8_t m=0;
+	step_motor(m, STEP_FWD);
+	m++;
+	if(m>5)
+		m=0;
+	LL_mDelay(200);
 }

@@ -77,13 +77,15 @@ int main(void)
   MX_USART1_UART_Init();
 
   /* USER CODE BEGIN 2 */
-  /* Toggle IO in an infinite loop */
-    while (1)
-    {
-    	serial_test();
-    	//LED_Blink();
-    	//LED_wave();
-    }
+  //Enable ROBKO-01
+  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN);
+  while (1)
+  {
+	  //serial_test();
+	  //LED_Blink();
+	  //LED_wave();
+	  motor_test();
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,8 +118,7 @@ static void LL_Init(void)
 
 }
 
-/** System Clock Configuration
-*/
+/** System Clock Configuration */
 void SystemClock_Config(void)
 {
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
@@ -191,11 +192,11 @@ static void MX_ADC1_Init(void)
   PC2   ------> ADC1_IN3
   PC3   ------> ADC1_IN4
   */
-  GPIO_InitStruct.Pin = LEFT_RIGHT_POT_Pin|SHOULDER_POT_Pin|ELBOW_POT_Pin|CLAW_ROTATION_POT_Pin;
+  GPIO_InitStruct.Pin = LEFT_RIGHT_POT_PIN|SHOULDER_POT_PIN|ELBOW_POT_PIN|CLAW_ROTATION_POT_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
-  LL_GPIO_EnablePinAnalogControl(INPUT_PORT, LEFT_RIGHT_POT_Pin|SHOULDER_POT_Pin|ELBOW_POT_Pin|CLAW_ROTATION_POT_Pin);
+  LL_GPIO_EnablePinAnalogControl(INPUT_PORT, LEFT_RIGHT_POT_PIN|SHOULDER_POT_PIN|ELBOW_POT_PIN|CLAW_ROTATION_POT_PIN);
 
   /**Common config*/
   ADC_InitStruct.Resolution = LL_ADC_RESOLUTION_12B;
@@ -276,24 +277,26 @@ static void MX_GPIO_Init(void)
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
 
   /**/
-  LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOW_Pin|IOR_Pin|D2_Pin|D3_Pin
-                          |ENABLE_Pin|D0_Pin|D1_Pin);
+  LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, D2_PIN|D3_PIN|ENABLE_PIN|D0_PIN|D1_PIN);
 
   /**/
-  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, A0_Pin|A1_Pin|A2_Pin);
+  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN|IOR_PIN|A0_PIN|A1_PIN|A2_PIN);
 
   /**/
-  GPIO_InitStruct.Pin = CLAW_RELEASE_BUT_Pin|CLAW_UP_BUT_Pin|CLAW_DOWN_BUT_Pin|CLAW_GRAB_BUT_Pin;
+  GPIO_InitStruct.Pin = CLAW_RELEASE_BUT_PIN|CLAW_UP_BUT_PIN
+		  	  	  	  	  |CLAW_DOWN_BUT_PIN|CLAW_GRAB_BUT_PIN
+						  |MODE_SELECT_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
+  LL_GPIO_SetPinPull(INPUT_PORT,MODE_SELECT_PIN,LL_GPIO_PULL_UP);
 
   /**/
-  GPIO_InitStruct.Pin = IOW_Pin|IOR_Pin|D2_Pin|D3_Pin
-                          |A0_Pin|A1_Pin|A2_Pin|ENABLE_Pin
-                          |D0_Pin|D1_Pin;
+  GPIO_InitStruct.Pin = IOW_PIN|IOR_PIN|D2_PIN|D3_PIN
+                     	  |A0_PIN|A1_PIN|A2_PIN|ENABLE_PIN
+                          |D0_PIN|D1_PIN;
   //Uncomment the next line for LED_test
-  //GPIO_InitStruct.Pin|=D4_Pin | D5_Pin | D6_Pin | D7_Pin;
+  //GPIO_InitStruct.Pin|=D4_PIN | D5_PIN | D6_PIN | D7_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -301,7 +304,7 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(ADDR_DATA_PORT, &GPIO_InitStruct);
 
   //Comment next 4 lines for led_test
-  GPIO_InitStruct.Pin = D4_Pin|D5_Pin|D6_Pin|D7_Pin;
+  GPIO_InitStruct.Pin = D4_PIN|D5_PIN|D6_PIN|D7_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(ADDR_DATA_PORT, &GPIO_InitStruct);

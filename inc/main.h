@@ -67,29 +67,30 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define CLAW_RELEASE_BUT_Pin LL_GPIO_PIN_13
-#define CLAW_GRAB_BUT_Pin LL_GPIO_PIN_12
-#define LEFT_RIGHT_POT_Pin LL_GPIO_PIN_0
-#define SHOULDER_POT_Pin LL_GPIO_PIN_1
-#define ELBOW_POT_Pin LL_GPIO_PIN_2
-#define CLAW_ROTATION_POT_Pin LL_GPIO_PIN_3
-#define CLAW_UP_BUT_Pin LL_GPIO_PIN_10
-#define CLAW_DOWN_BUT_Pin LL_GPIO_PIN_11
+#define CLAW_RELEASE_BUT_PIN LL_GPIO_PIN_13
+#define CLAW_GRAB_BUT_PIN LL_GPIO_PIN_12
+#define LEFT_RIGHT_POT_PIN LL_GPIO_PIN_0
+#define SHOULDER_POT_PIN LL_GPIO_PIN_1
+#define ELBOW_POT_PIN LL_GPIO_PIN_2
+#define CLAW_ROTATION_POT_PIN LL_GPIO_PIN_3
+#define CLAW_UP_BUT_PIN LL_GPIO_PIN_10
+#define CLAW_DOWN_BUT_PIN LL_GPIO_PIN_11
+#define MODE_SELECT_PIN LL_GPIO_PIN_9
 
-#define IOW_Pin LL_GPIO_PIN_1
-#define IOR_Pin LL_GPIO_PIN_2
-#define D0_Pin LL_GPIO_PIN_8
-#define D1_Pin LL_GPIO_PIN_9
-#define D2_Pin LL_GPIO_PIN_10
-#define D3_Pin LL_GPIO_PIN_11
-#define D4_Pin LL_GPIO_PIN_12
-#define D5_Pin LL_GPIO_PIN_13
-#define D6_Pin LL_GPIO_PIN_14
-#define D7_Pin LL_GPIO_PIN_15
-#define A0_Pin LL_GPIO_PIN_3
-#define A1_Pin LL_GPIO_PIN_4
-#define A2_Pin LL_GPIO_PIN_5
-#define ENABLE_Pin LL_GPIO_PIN_6
+#define IOW_PIN LL_GPIO_PIN_1
+#define IOR_PIN LL_GPIO_PIN_2
+#define D0_PIN LL_GPIO_PIN_8
+#define D1_PIN LL_GPIO_PIN_9
+#define D2_PIN LL_GPIO_PIN_10
+#define D3_PIN LL_GPIO_PIN_11
+#define D4_PIN LL_GPIO_PIN_12
+#define D5_PIN LL_GPIO_PIN_13
+#define D6_PIN LL_GPIO_PIN_14
+#define D7_PIN LL_GPIO_PIN_15
+#define A0_PIN LL_GPIO_PIN_3
+#define A1_PIN LL_GPIO_PIN_4
+#define A2_PIN LL_GPIO_PIN_5
+#define ENABLE_PIN LL_GPIO_PIN_6
 
 #ifndef NVIC_PRIORITYGROUP_0
 #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
@@ -117,6 +118,17 @@
 #define INPUT_PORT GPIOC
 
 #define SERIAL_BUFFER_LEN 100
+#define FULL_STEP 2
+#define HALF_STEP 1
+#define STEP_SIZE FULL_STEP
+#define STEP_FWD 1
+#define STEP_REV -1
+#define ROTATION_MOTOR
+#define SHOULDER_MOTOR
+#define ELBOW_MOTOR
+#define CLAW_GRAB_MOTOR
+#define CLAW_ROT_MOTOR_L
+#define CLAW_ROT_MOTOR_R
 
 /* USER CODE END Private defines */
 
@@ -124,9 +136,12 @@ void _Error_Handler(char *, int);
 
 void LED_wave();
 void LED_Blink();
-int16_t send_string(const char *msg);
-int16_t receive_string(char *buffer, uint16_t buff_len);
+int8_t send_string(const char *msg);
+int8_t receive_string(char *buffer, uint16_t buff_len);
 void serial_test();
+void motor_test();
+int8_t set_addr(uint8_t addr);
+int8_t step_motor(uint8_t motor, int8_t dir);
 
 #define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 

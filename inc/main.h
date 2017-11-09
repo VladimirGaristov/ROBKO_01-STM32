@@ -75,7 +75,9 @@
 #define CLAW_ROTATION_POT_PIN LL_GPIO_PIN_3
 #define CLAW_UP_BUT_PIN LL_GPIO_PIN_10
 #define CLAW_DOWN_BUT_PIN LL_GPIO_PIN_11
-#define MODE_SELECT_PIN LL_GPIO_PIN_9
+#define AUTO_MODE_PIN LL_GPIO_PIN_9
+#define MANUAL_MODE_PIN LL_GPIO_PIN_8
+#define JOYSTICK_CONNECTED_PIN LL_GPIO_PIN_7
 
 #define IOW_PIN LL_GPIO_PIN_1
 #define IOR_PIN LL_GPIO_PIN_2
@@ -142,6 +144,9 @@ void serial_test();
 void motor_test();
 int8_t set_addr(uint8_t addr);
 int8_t step_motor(uint8_t motor, int8_t dir);
+void check_mode();
+void manual_control();
+void remote_control();
 
 #define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 

@@ -84,7 +84,8 @@ int main(void)
 	  //serial_test();
 	  //LED_Blink();
 	  //LED_wave();
-	  motor_test();
+	  //motor_test();
+	  check_mode();
   }
   /* USER CODE END 2 */
 
@@ -284,12 +285,16 @@ static void MX_GPIO_Init(void)
 
   /**/
   GPIO_InitStruct.Pin = CLAW_RELEASE_BUT_PIN|CLAW_UP_BUT_PIN
-		  	  	  	  	  |CLAW_DOWN_BUT_PIN|CLAW_GRAB_BUT_PIN
-						  |MODE_SELECT_PIN;
+		  	  	  	  	  |CLAW_DOWN_BUT_PIN|CLAW_GRAB_BUT_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
-  LL_GPIO_SetPinPull(INPUT_PORT,MODE_SELECT_PIN,LL_GPIO_PULL_UP);
+
+  /**/
+  GPIO_InitStruct.Pin = MANUAL_MODE_PIN|AUTO_MODE_PIN|JOYSTICK_CONNECTED_PIN;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
+  LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
 
   /**/
   GPIO_InitStruct.Pin = IOW_PIN|IOR_PIN|D2_PIN|D3_PIN

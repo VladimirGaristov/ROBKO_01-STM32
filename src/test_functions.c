@@ -9,7 +9,8 @@
 
 void LED_Blink()
 {
-	LL_GPIO_TogglePin(GPIOA, LL_GPIO_PIN_5);
+	//Unusable after SB21 was opened
+	LL_GPIO_TogglePin(LED_PORT, TEST_LED_PIN);
 	/* Insert delay 250 ms */
 	LL_mDelay(250);
 }

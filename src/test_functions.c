@@ -28,7 +28,7 @@ void LED_wave()
 	}
 }
 
-int8_t send_string(const char *msg)
+int32_t send_string(const char *msg)
 {
 	if(!LL_USART_IsActiveFlag_TC(USART1))
 		return -1;
@@ -43,7 +43,7 @@ int8_t send_string(const char *msg)
 	return 0;
 }
 
-int8_t receive_string(char *buffer, uint16_t buff_len)
+int32_t receive_string(char *buffer, uint32_t buff_len)
 {
 	if(!LL_USART_IsActiveFlag_RXNE(USART1))
 		return -1;

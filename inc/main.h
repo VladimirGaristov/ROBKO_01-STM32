@@ -155,12 +155,12 @@ void _Error_Handler(char *, int);
 
 void LED_wave();
 void LED_Blink();
-int8_t send_string(const char *msg);
-int8_t receive_string(char *buffer, uint16_t buff_len);
+int32_t send_string(const char *msg);
+int32_t receive_string(char *buffer, uint32_t buff_len);
 void serial_test();
 void motor_test();
-int8_t set_addr(uint8_t addr);
-int8_t step_motor(uint8_t motor, int8_t dir);
+int32_t set_addr(uint32_t addr);
+int32_t step_motor(uint32_t motor, int32_t dir);
 void check_mode();
 void manual_control();
 void remote_control();

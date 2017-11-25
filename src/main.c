@@ -274,41 +274,56 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOC);
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
+  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
 
   /**/
-  LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, D2_PIN|D3_PIN|ENABLE_PIN|D0_PIN|D1_PIN);
+  LL_GPIO_ResetOutputPin(LED_PORT, LED3_PIN|LED4_PIN|LED10_PIN|LED11_PIN
+                          |LED5_PIN|LED6_PIN|LED7_PIN|LED8_PIN
+                          |LED9_PIN|LED0_PIN|LED1_PIN|LED2_PIN);
 
   /**/
-  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN|IOR_PIN|A0_PIN|A1_PIN|A2_PIN);
+  LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, D2_PIN|D3_PIN|ENABLE_PIN|D0_PIN
+                          |D1_PIN);
 
   /**/
-  GPIO_InitStruct.Pin = CLAW_RELEASE_BUT_PIN|CLAW_UP_BUT_PIN
-		  	  	  	  	  |CLAW_DOWN_BUT_PIN|CLAW_GRAB_BUT_PIN;
+  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN|IOR_PIN|A0_PIN|A1_PIN
+                          |A2_PIN);
+
+  /**/
+  GPIO_InitStruct.Pin = CLAW_RELEASE_BUT_PIN|CLAW_UP_BUT_PIN|CLAW_DOWN_BUT_PIN|CLAW_GRAB_BUT_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
 
   /**/
-  GPIO_InitStruct.Pin = MANUAL_MODE_PIN|AUTO_MODE_PIN|JOYSTICK_CONNECTED_PIN;
+  GPIO_InitStruct.Pin = STEP_SIZE_PIN|POT_MODE_PIN|JOYSTICK_CONNECTED_PIN|MANUAL_MODE_PIN
+                          |AUTO_MODE_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
 
   /**/
+  GPIO_InitStruct.Pin = LED3_PIN|LED4_PIN|LED10_PIN|LED11_PIN
+                          |LED5_PIN|LED6_PIN|LED7_PIN|LED8_PIN
+                          |LED9_PIN|LED0_PIN|LED1_PIN|LED2_PIN;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+  LL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+
+  /**/
   GPIO_InitStruct.Pin = IOW_PIN|IOR_PIN|D2_PIN|D3_PIN
-                     	  |A0_PIN|A1_PIN|A2_PIN|ENABLE_PIN
+                          |A0_PIN|A1_PIN|A2_PIN|ENABLE_PIN
                           |D0_PIN|D1_PIN;
-  //Uncomment the next line for LED_test
-  //GPIO_InitStruct.Pin|=D4_PIN | D5_PIN | D6_PIN | D7_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(ADDR_DATA_PORT, &GPIO_InitStruct);
 
-  //Comment next 4 lines for led_test
+  /**/
   GPIO_InitStruct.Pin = D4_PIN|D5_PIN|D6_PIN|D7_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
@@ -320,15 +335,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed      = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull       = LL_GPIO_PULL_NO;
-
-    /* Initialize LED2_GPIO_PORT port according to parameters defined in initialization structure. */
-    if (LL_GPIO_Init(GPIOA, &GPIO_InitStruct) != SUCCESS)
-    {
-      /* Initialization Error */
-      while (1)
-      {
-      }
-    }
+  LL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
 }
 
 /* USER CODE BEGIN 4 */

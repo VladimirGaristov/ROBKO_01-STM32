@@ -11,7 +11,7 @@ const uint8_t coil_current[4][8]={{1, 1, 0, 0, 0, 0, 0, 1}, {0, 0, 0, 1, 1, 1, 0
 								  {0, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1}};
 int8_t motor_pos[6]={1, 1, 1, 1, 1, 1};
 
-int8_t set_addr(uint8_t addr)
+int32_t set_addr(uint32_t addr)
 {
 	if(addr>7)
 		return -1;
@@ -31,7 +31,7 @@ int8_t set_addr(uint8_t addr)
 	return 0;
 }
 
-int8_t step_motor(uint8_t motor, int8_t dir)
+int32_t step_motor(uint32_t motor, int32_t dir)
 {
 	if(motor>5)
 		return -1;

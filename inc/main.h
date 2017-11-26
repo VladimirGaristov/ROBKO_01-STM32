@@ -140,6 +140,7 @@
 #define FULL_STEP 2
 #define HALF_STEP 1
 #define STEP_SIZE FULL_STEP
+#define STEP_TIME 300		//miliseconds
 #define STEP_FWD 1
 #define STEP_REV -1
 #define ROTATION_MOTOR

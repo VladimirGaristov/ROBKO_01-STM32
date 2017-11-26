@@ -84,8 +84,8 @@ int main(void)
 	  //serial_test();
 	  //LED_Blink();
 	  //LED_wave();
-	  //motor_test();
-	  check_mode();
+	  motor_test();
+	  //check_mode();
   }
   /* USER CODE END 2 */
 

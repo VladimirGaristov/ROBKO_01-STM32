@@ -11,4 +11,4 @@ Used libraries and APIs:
 * ST Hardware Abstraction Layer
 * libserialport
 
-ST's APIs make up most of the source code. The MCU firmware should run on all STM32xx boards with minimal changes.
+ST's APIs make up most of the source code. The MCU firmware should run on most STM32xx Nucleo boards with minimal changes.

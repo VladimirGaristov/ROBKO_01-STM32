@@ -90,10 +90,10 @@ void serial_test()
 
 void motor_test()
 {
-	static int8_t m=0;
-	step_motor(m, STEP_FWD);
-	m++;
+	static int8_t m=2;
+	step_motor(m, STEP_REV);
+	//m++;
 	if(m>5)
 		m=0;
-	LL_mDelay(200);
+	LL_mDelay(STEP_TIME);
 }

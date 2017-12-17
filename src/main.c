@@ -81,10 +81,10 @@ int main(void)
   LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN);
   while (1)
   {
-	  //serial_test();
+	  serial_test();
 	  //LED_Blink();
 	  //LED_wave();
-	  motor_test();
+	  //motor_test();
 	  //check_mode();
   }
   /* USER CODE END 2 */

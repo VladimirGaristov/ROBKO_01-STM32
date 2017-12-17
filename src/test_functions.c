@@ -63,7 +63,7 @@ void serial_test()
 {
 	char input_buffer[SERIAL_BUFFER_LEN];
 	input_buffer[0]='\0';
-	int8_t lastbit;
+	int32_t lastbit;
 	while(!LL_USART_IsActiveFlag_RXNE(USART1));
 	lastbit=receive_string(input_buffer, SERIAL_BUFFER_LEN);
 	if(!(lastbit<=0))

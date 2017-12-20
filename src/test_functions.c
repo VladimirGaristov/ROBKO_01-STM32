@@ -7,7 +7,7 @@
 
 #include "main.h"
 
-void LED_Blink()
+void LED_Blink(void)
 {
 	//Unusable after SB21 was opened
 	LL_GPIO_TogglePin(LED_PORT, TEST_LED_PIN);
@@ -15,7 +15,7 @@ void LED_Blink()
 	LL_mDelay(250);
 }
 
-void LED_wave()
+void LED_wave(void)
 {
 	int active_led=0x00000100;	//D0_Pin
 	while(1)
@@ -59,7 +59,7 @@ int32_t receive_string(char *buffer, uint32_t buff_len)
 	return i;
 }
 
-void serial_test()
+void serial_test(void)
 {
 	char input_buffer[SERIAL_BUFFER_LEN];
 	input_buffer[0]='\0';
@@ -68,8 +68,7 @@ void serial_test()
 	lastbit=receive_string(input_buffer, SERIAL_BUFFER_LEN);
 	if(!(lastbit<=0))
 	{
-		input_buffer[lastbit]='\0';
-
+		input_buffer[lastbit]='\0';		//is this necessary?
 		if(!strcmp(input_buffer, "on"))
 		{
 			LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_5);
@@ -88,7 +87,7 @@ void serial_test()
 	}
 }
 
-void motor_test()
+void motor_test(void)
 {
 	static int8_t m=2;
 	step_motor(m, STEP_REV);
@@ -96,4 +95,22 @@ void motor_test()
 	if(m>5)
 		m=0;
 	LL_mDelay(STEP_TIME);
+}
+
+extern uint32_t SystemCoreClock;
+
+void DWT_Init(void)
+{
+	if (!(CoreDebug->DEMCR & CoreDebug_DEMCR_TRCENA_Msk))
+	{
+		CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+		DWT->CYCCNT = 0;
+		DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+	}
+}
+
+void DWT_Delay(uint32_t us)	// microseconds
+{
+	int32_t tp = DWT->CYCCNT + us * (SystemCoreClock/1000000);
+	while (((int32_t)DWT->CYCCNT - tp) < 0);
 }

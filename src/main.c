@@ -77,8 +77,11 @@ int main(void)
   MX_USART1_UART_Init();
 
   /* USER CODE BEGIN 2 */
+  DWT_Init();
   //Enable ROBKO-01
   LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN);
+  //Initialize ROBKO-01 registers
+  stop_motor(6);
   while (1)
   {
 	  serial_test();

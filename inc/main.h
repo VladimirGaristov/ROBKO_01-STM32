@@ -63,6 +63,7 @@
 
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
@@ -140,31 +141,48 @@
 #define FULL_STEP 2
 #define HALF_STEP 1
 #define STEP_SIZE FULL_STEP
-#define STEP_TIME 300		//miliseconds
+#define STEP_TIME 300		//miliseconds	//vmesto POT_MODE, da se smenia tui
 #define STEP_FWD 1
 #define STEP_REV -1
-#define ROTATION_MOTOR
-#define SHOULDER_MOTOR
-#define ELBOW_MOTOR
-#define CLAW_GRAB_MOTOR
-#define CLAW_ROT_MOTOR_L
-#define CLAW_ROT_MOTOR_R
+#define ROTATION_MOTOR 0	//FWD=left
+#define SHOULDER_MOTOR 1	//FWD=forward
+#define ELBOW_MOTOR 2		//FWD=up
+#define CLAW_GRAB_MOTOR 5	//FWD=open
+#define CLAW_ROT_MOTOR_L 4	//FWD=up
+#define CLAW_ROT_MOTOR_R 3	//FWD=down
+
+//Commands for remote control
+#define MOV_FWD 1
+#define MOV_REV 2
+#define OFF 3
+#define OPEN_FILE 4
+#define GOTO_POS 5
+#define TOGETHER 6
+#define KILL 7
+#define CLEAR 8
+#define FREEZE 9
+#define RESUME 10
 
 /* USER CODE END Private defines */
 
 void _Error_Handler(char *, int);
 
-void LED_wave();
-void LED_Blink();
+void DWT_Init(void);
+void DWT_Delay(uint32_t us);
+
+void LED_wave(void);
+void LED_Blink(void);
 int32_t send_string(const char *msg);
 int32_t receive_string(char *buffer, uint32_t buff_len);
-void serial_test();
-void motor_test();
+void serial_test(void);
+void motor_test(void);
 int32_t set_addr(uint32_t addr);
 int32_t step_motor(uint32_t motor, int32_t dir);
-void check_mode();
-void manual_control();
-void remote_control();
+int32_t stop_motor(uint32_t motor);
+void check_mode(void);
+void manual_control(void);
+int32_t remote_control(void);
+void read_cmd(void);
 
 #define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 

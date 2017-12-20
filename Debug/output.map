@@ -8,8 +8,16 @@ Archive member included to satisfy reference by file (symbol)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-exit.o) (_global_impure_ptr)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o (__libc_init_array)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+                              src/motor_control.o (malloc)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o) (_malloc_r)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o (memset)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o) (__malloc_lock)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o) (_sbrk_r)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
                               src/test_functions.o (strcmp)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strlen.o)
@@ -20,8 +28,12 @@ Archive member included to satisfy reference by file (symbol)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o) (atexit)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o) (__libc_fini_array)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o) (_free_r)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o) (__retarget_lock_acquire_recursive)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o) (__retarget_lock_acquire_recursive)
+/home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+                              /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o) (errno)
 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
                               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o) (__register_exitproc)
 
@@ -32,6 +44,8 @@ __lock___atexit_recursive_mutex
                     0x1               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
 __lock___arc4random_mutex
                     0x1               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+errno               0x4               /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+last_cmd            0x4               src/motor_control.o
 uwTick              0x4               HAL_Driver/Src/stm32l4xx_hal.o
 pFlash              0x20              HAL_Driver/Src/stm32l4xx_hal_flash.o
 __lock___env_recursive_mutex
@@ -4042,6 +4056,9 @@ Discarded input sections
  .group         0x0000000000000000        0x8 src/main.o
  .group         0x0000000000000000        0x8 src/main.o
  .group         0x0000000000000000        0x8 src/main.o
+ .group         0x0000000000000000        0x8 src/main.o
+ .group         0x0000000000000000        0x8 src/main.o
+ .group         0x0000000000000000        0x8 src/main.o
  .text          0x0000000000000000        0x0 src/main.o
  .data          0x0000000000000000        0x0 src/main.o
  .bss           0x0000000000000000        0x0 src/main.o
@@ -4171,32 +4188,29 @@ Discarded input sections
  .group         0x0000000000000000        0x8 src/motor_control.o
  .group         0x0000000000000000        0x8 src/motor_control.o
  .group         0x0000000000000000        0x8 src/motor_control.o
+ .group         0x0000000000000000        0x8 src/motor_control.o
+ .group         0x0000000000000000        0x8 src/motor_control.o
+ .group         0x0000000000000000        0x8 src/motor_control.o
  .text          0x0000000000000000        0x0 src/motor_control.o
  .data          0x0000000000000000       0x18 src/motor_control.o
- .bss           0x0000000000000000        0x0 src/motor_control.o
+ .bss           0x0000000000000000        0x6 src/motor_control.o
  .rodata        0x0000000000000000       0x28 src/motor_control.o
+ .text.LL_USART_ReceiveData9
+                0x0000000000000000       0x20 src/motor_control.o
  .text.LL_GPIO_IsInputPinSet
                 0x0000000000000000       0x2a src/motor_control.o
- .text.LL_GPIO_SetOutputPin
-                0x0000000000000000       0x1c src/motor_control.o
- .text.LL_GPIO_ResetOutputPin
-                0x0000000000000000       0x1c src/motor_control.o
- .text.set_addr
-                0x0000000000000000       0x60 src/motor_control.o
+ .text.LL_GPIO_IsOutputPinSet
+                0x0000000000000000       0x2a src/motor_control.o
  .text.step_motor
                 0x0000000000000000       0xd8 src/motor_control.o
  .text.check_mode
-                0x0000000000000000       0x5c src/motor_control.o
+                0x0000000000000000       0x64 src/motor_control.o
  .text.manual_control
                 0x0000000000000000        0xe src/motor_control.o
  .text.remote_control
-                0x0000000000000000        0xe src/motor_control.o
- .debug_info    0x0000000000000000      0xc0d src/motor_control.o
- .debug_abbrev  0x0000000000000000      0x26f src/motor_control.o
- .debug_aranges
-                0x0000000000000000       0x58 src/motor_control.o
- .debug_ranges  0x0000000000000000       0x48 src/motor_control.o
- .debug_macro   0x0000000000000000      0x384 src/motor_control.o
+                0x0000000000000000      0x110 src/motor_control.o
+ .text.read_cmd
+                0x0000000000000000      0x15c src/motor_control.o
  .debug_macro   0x0000000000000000      0x8ce src/motor_control.o
  .debug_macro   0x0000000000000000       0x10 src/motor_control.o
  .debug_macro   0x0000000000000000       0x28 src/motor_control.o
@@ -4264,13 +4278,11 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x176 src/motor_control.o
  .debug_macro   0x0000000000000000       0x16 src/motor_control.o
  .debug_macro   0x0000000000000000       0x35 src/motor_control.o
- .debug_macro   0x0000000000000000      0x16b src/motor_control.o
- .debug_line    0x0000000000000000      0x942 src/motor_control.o
- .debug_str     0x0000000000000000    0xf7245 src/motor_control.o
- .comment       0x0000000000000000       0x80 src/motor_control.o
- .debug_frame   0x0000000000000000      0x134 src/motor_control.o
- .ARM.attributes
-                0x0000000000000000       0x39 src/motor_control.o
+ .debug_macro   0x0000000000000000       0x16 src/motor_control.o
+ .debug_macro   0x0000000000000000       0x16 src/motor_control.o
+ .debug_macro   0x0000000000000000       0x29 src/motor_control.o
+ .debug_macro   0x0000000000000000      0x1b1 src/motor_control.o
+ COMMON         0x0000000000000000        0x4 src/motor_control.o
  .group         0x0000000000000000        0x8 src/stm32l4xx_it.o
  .group         0x0000000000000000        0x8 src/stm32l4xx_it.o
  .group         0x0000000000000000        0x8 src/stm32l4xx_it.o
@@ -4423,7 +4435,6 @@ Discarded input sections
  .group         0x0000000000000000        0x8 src/syscalls.o
  .text          0x0000000000000000        0x0 src/syscalls.o
  .data          0x0000000000000000        0x4 src/syscalls.o
- .bss           0x0000000000000000        0x8 src/syscalls.o
  .text.initialise_monitor_handles
                 0x0000000000000000       0x10 src/syscalls.o
  .text._getpid  0x0000000000000000       0x10 src/syscalls.o
@@ -4431,7 +4442,6 @@ Discarded input sections
  .text._exit    0x0000000000000000       0x14 src/syscalls.o
  .text._read    0x0000000000000000       0x3c src/syscalls.o
  .text._write   0x0000000000000000       0x38 src/syscalls.o
- .text._sbrk    0x0000000000000000       0x58 src/syscalls.o
  .text._close   0x0000000000000000       0x18 src/syscalls.o
  .text._fstat   0x0000000000000000       0x20 src/syscalls.o
  .text._isatty  0x0000000000000000       0x18 src/syscalls.o
@@ -4444,30 +4454,17 @@ Discarded input sections
  .text._link    0x0000000000000000       0x20 src/syscalls.o
  .text._fork    0x0000000000000000       0x18 src/syscalls.o
  .text._execve  0x0000000000000000       0x24 src/syscalls.o
- .debug_info    0x0000000000000000      0x6ca src/syscalls.o
- .debug_abbrev  0x0000000000000000      0x177 src/syscalls.o
- .debug_aranges
-                0x0000000000000000       0xb0 src/syscalls.o
- .debug_ranges  0x0000000000000000       0xa0 src/syscalls.o
- .debug_macro   0x0000000000000000      0x22b src/syscalls.o
  .debug_macro   0x0000000000000000      0x8aa src/syscalls.o
  .debug_macro   0x0000000000000000       0x22 src/syscalls.o
- .debug_macro   0x0000000000000000       0x4c src/syscalls.o
- .debug_macro   0x0000000000000000       0x8d src/syscalls.o
  .debug_macro   0x0000000000000000       0x35 src/syscalls.o
  .debug_macro   0x0000000000000000       0x9c src/syscalls.o
- .debug_macro   0x0000000000000000       0x4a src/syscalls.o
- .debug_macro   0x0000000000000000      0x174 src/syscalls.o
  .debug_macro   0x0000000000000000      0x30d src/syscalls.o
  .debug_macro   0x0000000000000000       0x52 src/syscalls.o
  .debug_macro   0x0000000000000000       0x1f src/syscalls.o
  .debug_macro   0x0000000000000000       0x43 src/syscalls.o
  .debug_macro   0x0000000000000000       0x20 src/syscalls.o
  .debug_macro   0x0000000000000000      0x187 src/syscalls.o
- .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x35 src/syscalls.o
- .debug_macro   0x0000000000000000       0x10 src/syscalls.o
- .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x5e src/syscalls.o
  .debug_macro   0x0000000000000000       0x1c src/syscalls.o
@@ -4476,27 +4473,11 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x40 src/syscalls.o
  .debug_macro   0x0000000000000000       0xd7 src/syscalls.o
- .debug_macro   0x0000000000000000       0x35 src/syscalls.o
- .debug_macro   0x0000000000000000      0x122 src/syscalls.o
  .debug_macro   0x0000000000000000       0x16 src/syscalls.o
  .debug_macro   0x0000000000000000       0x16 src/syscalls.o
- .debug_macro   0x0000000000000000       0x29 src/syscalls.o
- .debug_macro   0x0000000000000000       0x10 src/syscalls.o
- .debug_macro   0x0000000000000000      0x241 src/syscalls.o
- .debug_macro   0x0000000000000000       0x1c src/syscalls.o
- .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x10 src/syscalls.o
  .debug_macro   0x0000000000000000       0x16 src/syscalls.o
  .debug_macro   0x0000000000000000      0x18b src/syscalls.o
- .debug_macro   0x0000000000000000      0x159 src/syscalls.o
- .debug_macro   0x0000000000000000       0x16 src/syscalls.o
- .debug_macro   0x0000000000000000       0x88 src/syscalls.o
- .debug_line    0x0000000000000000      0x5f9 src/syscalls.o
- .debug_str     0x0000000000000000     0x7718 src/syscalls.o
- .comment       0x0000000000000000       0x6f src/syscalls.o
- .debug_frame   0x0000000000000000      0x2d4 src/syscalls.o
- .ARM.attributes
-                0x0000000000000000       0x39 src/syscalls.o
  .group         0x0000000000000000        0x8 src/system_stm32l4xx.o
  .group         0x0000000000000000        0x8 src/system_stm32l4xx.o
  .group         0x0000000000000000        0x8 src/system_stm32l4xx.o
@@ -4675,6 +4656,9 @@ Discarded input sections
  .group         0x0000000000000000        0x8 src/test_functions.o
  .group         0x0000000000000000        0x8 src/test_functions.o
  .group         0x0000000000000000        0x8 src/test_functions.o
+ .group         0x0000000000000000        0x8 src/test_functions.o
+ .group         0x0000000000000000        0x8 src/test_functions.o
+ .group         0x0000000000000000        0x8 src/test_functions.o
  .text          0x0000000000000000        0x0 src/test_functions.o
  .data          0x0000000000000000        0x1 src/test_functions.o
  .bss           0x0000000000000000        0x0 src/test_functions.o
@@ -4755,17 +4739,16 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x176 src/test_functions.o
  .debug_macro   0x0000000000000000       0x16 src/test_functions.o
  .debug_macro   0x0000000000000000       0x35 src/test_functions.o
- .debug_macro   0x0000000000000000      0x16b src/test_functions.o
+ .debug_macro   0x0000000000000000       0x16 src/test_functions.o
+ .debug_macro   0x0000000000000000       0x16 src/test_functions.o
+ .debug_macro   0x0000000000000000       0x29 src/test_functions.o
+ .debug_macro   0x0000000000000000      0x1b1 src/test_functions.o
  .text          0x0000000000000000       0x14 startup/startup_stm32l476xx.o
  .data          0x0000000000000000        0x0 startup/startup_stm32l476xx.o
  .bss           0x0000000000000000        0x0 startup/startup_stm32l476xx.o
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
- .text.__errno  0x0000000000000000        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
- .debug_frame   0x0000000000000000       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
- .ARM.attributes
-                0x0000000000000000       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-exit.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-exit.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-exit.o)
@@ -4776,11 +4759,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
- .data._impure_ptr
-                0x0000000000000000        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+ .text.free     0x0000000000000000       0x10 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
@@ -4788,6 +4776,12 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
  .ARM.attributes
                 0x0000000000000000       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strlen.o)
@@ -4803,6 +4797,9 @@ Discarded input sections
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
@@ -4822,6 +4819,13 @@ Discarded input sections
                 0x0000000000000000        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
  .text.__retarget_lock_release
                 0x0000000000000000        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+ .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .text.cleanup_glue
+                0x0000000000000000       0x1c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .text._reclaim_reent
+                0x0000000000000000       0x88 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
  .text          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
  .data          0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
  .bss           0x0000000000000000        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
@@ -4914,7 +4918,7 @@ LOAD /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-non
                 0x0000000008000000                g_pfnVectors
                 0x0000000008000188                . = ALIGN (0x8)
 
-.text           0x00000000080001c0     0x25d0
+.text           0x00000000080001c0     0x2fe8
                 0x00000000080001c0                . = ALIGN (0x8)
  *(.text)
  .text          0x00000000080001c0       0x6c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
@@ -5146,312 +5150,378 @@ LOAD /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-non
  .text.LL_GPIO_ResetOutputPin
                 0x0000000008001e6e       0x1c src/main.o
  *fill*         0x0000000008001e8a        0x2 
- .text.main     0x0000000008001e8c       0x2c src/main.o
+ .text.main     0x0000000008001e8c       0x34 src/main.o
                 0x0000000008001e8c                main
- .text.LL_Init  0x0000000008001eb8       0xe0 src/main.o
+ .text.LL_Init  0x0000000008001ec0       0xe0 src/main.o
  .text.SystemClock_Config
-                0x0000000008001f98       0xec src/main.o
-                0x0000000008001f98                SystemClock_Config
+                0x0000000008001fa0       0xec src/main.o
+                0x0000000008001fa0                SystemClock_Config
  .text.MX_ADC1_Init
-                0x0000000008002084       0xc8 src/main.o
+                0x000000000800208c       0xc8 src/main.o
  .text.MX_USART1_UART_Init
-                0x000000000800214c       0x7c src/main.o
+                0x0000000008002154       0x7c src/main.o
  .text.MX_GPIO_Init
-                0x00000000080021c8       0xf0 src/main.o
+                0x00000000080021d0       0xf0 src/main.o
  .text._Error_Handler
-                0x00000000080022b8        0xc src/main.o
-                0x00000000080022b8                _Error_Handler
- .text.SysTick_Handler
-                0x00000000080022c4       0x10 src/stm32l4xx_it.o
-                0x00000000080022c4                SysTick_Handler
- .text.SystemInit
-                0x00000000080022d4       0x6c src/system_stm32l4xx.o
-                0x00000000080022d4                SystemInit
- .text.LL_USART_IsActiveFlag_RXNE
-                0x0000000008002340       0x26 src/test_functions.o
- .text.LL_USART_IsActiveFlag_TC
-                0x0000000008002366       0x26 src/test_functions.o
- .text.LL_USART_IsActiveFlag_TXE
-                0x000000000800238c       0x26 src/test_functions.o
- .text.LL_USART_ReceiveData9
-                0x00000000080023b2       0x20 src/test_functions.o
- .text.LL_USART_TransmitData9
-                0x00000000080023d2       0x24 src/test_functions.o
+                0x00000000080022c0        0xc src/main.o
+                0x00000000080022c0                _Error_Handler
  .text.LL_GPIO_SetOutputPin
-                0x00000000080023f6       0x1c src/test_functions.o
+                0x00000000080022cc       0x1c src/motor_control.o
  .text.LL_GPIO_ResetOutputPin
-                0x0000000008002412       0x1c src/test_functions.o
- *fill*         0x000000000800242e        0x2 
+                0x00000000080022e8       0x1c src/motor_control.o
+ .text.set_addr
+                0x0000000008002304       0x60 src/motor_control.o
+                0x0000000008002304                set_addr
+ .text.stop_motor
+                0x0000000008002364       0x6c src/motor_control.o
+                0x0000000008002364                stop_motor
+ .text.SysTick_Handler
+                0x00000000080023d0       0x10 src/stm32l4xx_it.o
+                0x00000000080023d0                SysTick_Handler
+ .text._sbrk    0x00000000080023e0       0x58 src/syscalls.o
+                0x00000000080023e0                _sbrk
+ .text.SystemInit
+                0x0000000008002438       0x6c src/system_stm32l4xx.o
+                0x0000000008002438                SystemInit
+ .text.LL_USART_IsActiveFlag_RXNE
+                0x00000000080024a4       0x26 src/test_functions.o
+ .text.LL_USART_IsActiveFlag_TC
+                0x00000000080024ca       0x26 src/test_functions.o
+ .text.LL_USART_IsActiveFlag_TXE
+                0x00000000080024f0       0x26 src/test_functions.o
+ .text.LL_USART_ReceiveData9
+                0x0000000008002516       0x20 src/test_functions.o
+ .text.LL_USART_TransmitData9
+                0x0000000008002536       0x24 src/test_functions.o
+ .text.LL_GPIO_SetOutputPin
+                0x000000000800255a       0x1c src/test_functions.o
+ .text.LL_GPIO_ResetOutputPin
+                0x0000000008002576       0x1c src/test_functions.o
+ *fill*         0x0000000008002592        0x2 
  .text.send_string
-                0x0000000008002430       0x68 src/test_functions.o
-                0x0000000008002430                send_string
+                0x0000000008002594       0x68 src/test_functions.o
+                0x0000000008002594                send_string
  .text.receive_string
-                0x0000000008002498       0x70 src/test_functions.o
-                0x0000000008002498                receive_string
+                0x00000000080025fc       0x70 src/test_functions.o
+                0x00000000080025fc                receive_string
  .text.serial_test
-                0x0000000008002508       0xac src/test_functions.o
-                0x0000000008002508                serial_test
+                0x000000000800266c       0xac src/test_functions.o
+                0x000000000800266c                serial_test
+ .text.DWT_Init
+                0x0000000008002718       0x40 src/test_functions.o
+                0x0000000008002718                DWT_Init
+ .text.DWT_Delay
+                0x0000000008002758       0x4c src/test_functions.o
+                0x0000000008002758                DWT_Delay
  .text.Reset_Handler
-                0x00000000080025b4       0x50 startup/startup_stm32l476xx.o
-                0x00000000080025b4                Reset_Handler
+                0x00000000080027a4       0x50 startup/startup_stm32l476xx.o
+                0x00000000080027a4                Reset_Handler
  .text.Default_Handler
-                0x0000000008002604        0x2 startup/startup_stm32l476xx.o
-                0x0000000008002604                RTC_Alarm_IRQHandler
-                0x0000000008002604                EXTI2_IRQHandler
-                0x0000000008002604                TIM8_TRG_COM_IRQHandler
-                0x0000000008002604                TIM8_CC_IRQHandler
-                0x0000000008002604                DebugMon_Handler
-                0x0000000008002604                TIM1_CC_IRQHandler
-                0x0000000008002604                TSC_IRQHandler
-                0x0000000008002604                HardFault_Handler
-                0x0000000008002604                TAMP_STAMP_IRQHandler
-                0x0000000008002604                PendSV_Handler
-                0x0000000008002604                NMI_Handler
-                0x0000000008002604                EXTI3_IRQHandler
-                0x0000000008002604                LPTIM2_IRQHandler
-                0x0000000008002604                DFSDM1_FLT1_IRQHandler
-                0x0000000008002604                I2C3_ER_IRQHandler
-                0x0000000008002604                DFSDM1_FLT2_IRQHandler
-                0x0000000008002604                EXTI0_IRQHandler
-                0x0000000008002604                I2C2_EV_IRQHandler
-                0x0000000008002604                CAN1_RX0_IRQHandler
-                0x0000000008002604                FPU_IRQHandler
-                0x0000000008002604                TIM1_UP_TIM16_IRQHandler
-                0x0000000008002604                UsageFault_Handler
-                0x0000000008002604                ADC1_2_IRQHandler
-                0x0000000008002604                SPI1_IRQHandler
-                0x0000000008002604                TIM8_UP_IRQHandler
-                0x0000000008002604                DMA2_Channel2_IRQHandler
-                0x0000000008002604                DMA1_Channel4_IRQHandler
-                0x0000000008002604                SAI2_IRQHandler
-                0x0000000008002604                DFSDM1_FLT3_IRQHandler
-                0x0000000008002604                USART3_IRQHandler
-                0x0000000008002604                DMA1_Channel7_IRQHandler
-                0x0000000008002604                CAN1_RX1_IRQHandler
-                0x0000000008002604                LCD_IRQHandler
-                0x0000000008002604                UART5_IRQHandler
-                0x0000000008002604                ADC3_IRQHandler
-                0x0000000008002604                TIM4_IRQHandler
-                0x0000000008002604                DMA2_Channel1_IRQHandler
-                0x0000000008002604                QUADSPI_IRQHandler
-                0x0000000008002604                I2C1_EV_IRQHandler
-                0x0000000008002604                DMA1_Channel6_IRQHandler
-                0x0000000008002604                UART4_IRQHandler
-                0x0000000008002604                DMA2_Channel4_IRQHandler
-                0x0000000008002604                TIM3_IRQHandler
-                0x0000000008002604                RCC_IRQHandler
-                0x0000000008002604                DMA1_Channel1_IRQHandler
-                0x0000000008002604                Default_Handler
-                0x0000000008002604                DMA2_Channel7_IRQHandler
-                0x0000000008002604                EXTI15_10_IRQHandler
-                0x0000000008002604                TIM7_IRQHandler
-                0x0000000008002604                SDMMC1_IRQHandler
-                0x0000000008002604                TIM5_IRQHandler
-                0x0000000008002604                I2C3_EV_IRQHandler
-                0x0000000008002604                EXTI9_5_IRQHandler
-                0x0000000008002604                RTC_WKUP_IRQHandler
-                0x0000000008002604                PVD_PVM_IRQHandler
-                0x0000000008002604                SPI2_IRQHandler
-                0x0000000008002604                MemManage_Handler
-                0x0000000008002604                CAN1_TX_IRQHandler
-                0x0000000008002604                SVC_Handler
-                0x0000000008002604                DMA2_Channel5_IRQHandler
-                0x0000000008002604                DMA1_Channel5_IRQHandler
-                0x0000000008002604                EXTI4_IRQHandler
-                0x0000000008002604                RNG_IRQHandler
-                0x0000000008002604                TIM1_TRG_COM_TIM17_IRQHandler
-                0x0000000008002604                DMA1_Channel3_IRQHandler
-                0x0000000008002604                COMP_IRQHandler
-                0x0000000008002604                WWDG_IRQHandler
-                0x0000000008002604                LPUART1_IRQHandler
-                0x0000000008002604                DMA2_Channel6_IRQHandler
-                0x0000000008002604                TIM2_IRQHandler
-                0x0000000008002604                EXTI1_IRQHandler
-                0x0000000008002604                USART2_IRQHandler
-                0x0000000008002604                DFSDM1_FLT0_IRQHandler
-                0x0000000008002604                I2C2_ER_IRQHandler
-                0x0000000008002604                DMA1_Channel2_IRQHandler
-                0x0000000008002604                TIM8_BRK_IRQHandler
-                0x0000000008002604                CAN1_SCE_IRQHandler
-                0x0000000008002604                FLASH_IRQHandler
-                0x0000000008002604                BusFault_Handler
-                0x0000000008002604                USART1_IRQHandler
-                0x0000000008002604                OTG_FS_IRQHandler
-                0x0000000008002604                SPI3_IRQHandler
-                0x0000000008002604                I2C1_ER_IRQHandler
-                0x0000000008002604                FMC_IRQHandler
-                0x0000000008002604                SWPMI1_IRQHandler
-                0x0000000008002604                LPTIM1_IRQHandler
-                0x0000000008002604                SAI1_IRQHandler
-                0x0000000008002604                DMA2_Channel3_IRQHandler
-                0x0000000008002604                TIM1_BRK_TIM15_IRQHandler
- *fill*         0x0000000008002606        0x2 
+                0x00000000080027f4        0x2 startup/startup_stm32l476xx.o
+                0x00000000080027f4                RTC_Alarm_IRQHandler
+                0x00000000080027f4                EXTI2_IRQHandler
+                0x00000000080027f4                TIM8_TRG_COM_IRQHandler
+                0x00000000080027f4                TIM8_CC_IRQHandler
+                0x00000000080027f4                DebugMon_Handler
+                0x00000000080027f4                TIM1_CC_IRQHandler
+                0x00000000080027f4                TSC_IRQHandler
+                0x00000000080027f4                HardFault_Handler
+                0x00000000080027f4                TAMP_STAMP_IRQHandler
+                0x00000000080027f4                PendSV_Handler
+                0x00000000080027f4                NMI_Handler
+                0x00000000080027f4                EXTI3_IRQHandler
+                0x00000000080027f4                LPTIM2_IRQHandler
+                0x00000000080027f4                DFSDM1_FLT1_IRQHandler
+                0x00000000080027f4                I2C3_ER_IRQHandler
+                0x00000000080027f4                DFSDM1_FLT2_IRQHandler
+                0x00000000080027f4                EXTI0_IRQHandler
+                0x00000000080027f4                I2C2_EV_IRQHandler
+                0x00000000080027f4                CAN1_RX0_IRQHandler
+                0x00000000080027f4                FPU_IRQHandler
+                0x00000000080027f4                TIM1_UP_TIM16_IRQHandler
+                0x00000000080027f4                UsageFault_Handler
+                0x00000000080027f4                ADC1_2_IRQHandler
+                0x00000000080027f4                SPI1_IRQHandler
+                0x00000000080027f4                TIM8_UP_IRQHandler
+                0x00000000080027f4                DMA2_Channel2_IRQHandler
+                0x00000000080027f4                DMA1_Channel4_IRQHandler
+                0x00000000080027f4                SAI2_IRQHandler
+                0x00000000080027f4                DFSDM1_FLT3_IRQHandler
+                0x00000000080027f4                USART3_IRQHandler
+                0x00000000080027f4                DMA1_Channel7_IRQHandler
+                0x00000000080027f4                CAN1_RX1_IRQHandler
+                0x00000000080027f4                LCD_IRQHandler
+                0x00000000080027f4                UART5_IRQHandler
+                0x00000000080027f4                ADC3_IRQHandler
+                0x00000000080027f4                TIM4_IRQHandler
+                0x00000000080027f4                DMA2_Channel1_IRQHandler
+                0x00000000080027f4                QUADSPI_IRQHandler
+                0x00000000080027f4                I2C1_EV_IRQHandler
+                0x00000000080027f4                DMA1_Channel6_IRQHandler
+                0x00000000080027f4                UART4_IRQHandler
+                0x00000000080027f4                DMA2_Channel4_IRQHandler
+                0x00000000080027f4                TIM3_IRQHandler
+                0x00000000080027f4                RCC_IRQHandler
+                0x00000000080027f4                DMA1_Channel1_IRQHandler
+                0x00000000080027f4                Default_Handler
+                0x00000000080027f4                DMA2_Channel7_IRQHandler
+                0x00000000080027f4                EXTI15_10_IRQHandler
+                0x00000000080027f4                TIM7_IRQHandler
+                0x00000000080027f4                SDMMC1_IRQHandler
+                0x00000000080027f4                TIM5_IRQHandler
+                0x00000000080027f4                I2C3_EV_IRQHandler
+                0x00000000080027f4                EXTI9_5_IRQHandler
+                0x00000000080027f4                RTC_WKUP_IRQHandler
+                0x00000000080027f4                PVD_PVM_IRQHandler
+                0x00000000080027f4                SPI2_IRQHandler
+                0x00000000080027f4                MemManage_Handler
+                0x00000000080027f4                CAN1_TX_IRQHandler
+                0x00000000080027f4                SVC_Handler
+                0x00000000080027f4                DMA2_Channel5_IRQHandler
+                0x00000000080027f4                DMA1_Channel5_IRQHandler
+                0x00000000080027f4                EXTI4_IRQHandler
+                0x00000000080027f4                RNG_IRQHandler
+                0x00000000080027f4                TIM1_TRG_COM_TIM17_IRQHandler
+                0x00000000080027f4                DMA1_Channel3_IRQHandler
+                0x00000000080027f4                COMP_IRQHandler
+                0x00000000080027f4                WWDG_IRQHandler
+                0x00000000080027f4                LPUART1_IRQHandler
+                0x00000000080027f4                DMA2_Channel6_IRQHandler
+                0x00000000080027f4                TIM2_IRQHandler
+                0x00000000080027f4                EXTI1_IRQHandler
+                0x00000000080027f4                USART2_IRQHandler
+                0x00000000080027f4                DFSDM1_FLT0_IRQHandler
+                0x00000000080027f4                I2C2_ER_IRQHandler
+                0x00000000080027f4                DMA1_Channel2_IRQHandler
+                0x00000000080027f4                TIM8_BRK_IRQHandler
+                0x00000000080027f4                CAN1_SCE_IRQHandler
+                0x00000000080027f4                FLASH_IRQHandler
+                0x00000000080027f4                BusFault_Handler
+                0x00000000080027f4                USART1_IRQHandler
+                0x00000000080027f4                OTG_FS_IRQHandler
+                0x00000000080027f4                SPI3_IRQHandler
+                0x00000000080027f4                I2C1_ER_IRQHandler
+                0x00000000080027f4                FMC_IRQHandler
+                0x00000000080027f4                SWPMI1_IRQHandler
+                0x00000000080027f4                LPTIM1_IRQHandler
+                0x00000000080027f4                SAI1_IRQHandler
+                0x00000000080027f4                DMA2_Channel3_IRQHandler
+                0x00000000080027f4                TIM1_BRK_TIM15_IRQHandler
+ *fill*         0x00000000080027f6        0x2 
+ .text.__errno  0x00000000080027f8        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
+                0x00000000080027f8                __errno
  .text.__libc_init_array
-                0x0000000008002608       0x50 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
-                0x0000000008002608                __libc_init_array
+                0x0000000008002804       0x50 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
+                0x0000000008002804                __libc_init_array
+ .text.malloc   0x0000000008002854       0x10 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+                0x0000000008002854                malloc
+ .text._malloc_r
+                0x0000000008002864      0x560 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x0000000008002864                _malloc_r
+ .text.__malloc_lock
+                0x0000000008002dc4        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+                0x0000000008002dc4                __malloc_lock
+ .text.__malloc_unlock
+                0x0000000008002dd0        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+                0x0000000008002dd0                __malloc_unlock
+ .text._sbrk_r  0x0000000008002ddc       0x24 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
+                0x0000000008002ddc                _sbrk_r
  .text.startup.register_fini
-                0x0000000008002658       0x14 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
- .text.atexit   0x000000000800266c        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
-                0x000000000800266c                atexit
+                0x0000000008002e00       0x14 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x0000000008002e14        0xc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
+                0x0000000008002e14                atexit
  .text.__libc_fini_array
-                0x0000000008002678       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
-                0x0000000008002678                __libc_fini_array
+                0x0000000008002e20       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
+                0x0000000008002e20                __libc_fini_array
+ .text._malloc_trim_r
+                0x0000000008002e54       0xa0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+                0x0000000008002e54                _malloc_trim_r
+ .text._free_r  0x0000000008002ef4      0x1cc /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+                0x0000000008002ef4                _free_r
  .text.__retarget_lock_acquire_recursive
-                0x00000000080026ac        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-                0x00000000080026ac                __retarget_lock_acquire_recursive
+                0x00000000080030c0        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+                0x00000000080030c0                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x00000000080026b0        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-                0x00000000080026b0                __retarget_lock_release_recursive
+                0x00000000080030c4        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+                0x00000000080030c4                __retarget_lock_release_recursive
  .text.__register_exitproc
-                0x00000000080026b4       0xc4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
-                0x00000000080026b4                __register_exitproc
+                0x00000000080030c8       0xc4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
+                0x00000000080030c8                __register_exitproc
  *(.glue_7)
- .glue_7        0x0000000008002778        0x0 linker stubs
+ .glue_7        0x000000000800318c        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008002778        0x0 linker stubs
+ .glue_7t       0x000000000800318c        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0000000008002778        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x000000000800318c        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x0000000008002778        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x0000000008002778                _init
- .init          0x000000000800277c        0x8 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x000000000800318c        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x000000000800318c                _init
+ .init          0x0000000008003190        0x8 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x0000000008002784        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x0000000008002784                _fini
- .fini          0x0000000008002788        0x8 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x0000000008002790                . = ALIGN (0x8)
-                0x0000000008002790                _etext = .
+ .fini          0x0000000008003198        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008003198                _fini
+ .fini          0x000000000800319c        0x8 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x00000000080031a8                . = ALIGN (0x8)
+ *fill*         0x00000000080031a4        0x4 
+                0x00000000080031a8                _etext = .
 
-.vfp11_veneer   0x0000000008002790        0x0
- .vfp11_veneer  0x0000000008002790        0x0 linker stubs
+.vfp11_veneer   0x00000000080031a8        0x0
+ .vfp11_veneer  0x00000000080031a8        0x0 linker stubs
 
-.v4_bx          0x0000000008002790        0x0
- .v4_bx         0x0000000008002790        0x0 linker stubs
+.v4_bx          0x00000000080031a8        0x0
+ .v4_bx         0x00000000080031a8        0x0 linker stubs
 
-.iplt           0x0000000008002790        0x0
- .iplt          0x0000000008002790        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x00000000080031a8        0x0
+ .iplt          0x00000000080031a8        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x0000000008002790       0xb8
-                0x0000000008002790                . = ALIGN (0x8)
+.rodata         0x00000000080031a8       0xb8
+                0x00000000080031a8                . = ALIGN (0x8)
  *(.rodata)
- .rodata        0x0000000008002790       0x16 src/main.o
- *fill*         0x00000000080027a6        0x2 
- .rodata        0x00000000080027a8       0x48 src/system_stm32l4xx.o
-                0x00000000080027a8                AHBPrescTable
-                0x00000000080027b8                APBPrescTable
-                0x00000000080027c0                MSIRangeTable
- .rodata        0x00000000080027f0       0x53 src/test_functions.o
+ .rodata        0x00000000080031a8       0x16 src/main.o
+ *fill*         0x00000000080031be        0x2 
+ .rodata        0x00000000080031c0       0x48 src/system_stm32l4xx.o
+                0x00000000080031c0                AHBPrescTable
+                0x00000000080031d0                APBPrescTable
+                0x00000000080031d8                MSIRangeTable
+ .rodata        0x0000000008003208       0x53 src/test_functions.o
  *(.rodata*)
- *fill*         0x0000000008002843        0x1 
+ *fill*         0x000000000800325b        0x1 
  .rodata._global_impure_ptr
-                0x0000000008002844        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
-                0x0000000008002844                _global_impure_ptr
-                0x0000000008002848                . = ALIGN (0x8)
+                0x000000000800325c        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
+                0x000000000800325c                _global_impure_ptr
+                0x0000000008003260                . = ALIGN (0x8)
 
-.rel.dyn        0x0000000008002848        0x0
- .rel.iplt      0x0000000008002848        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x0000000008003260        0x0
+ .rel.iplt      0x0000000008003260        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.ARM.extab      0x0000000008002848        0x0
-                0x0000000008002848                . = ALIGN (0x8)
+.ARM.extab      0x0000000008003260        0x0
+                0x0000000008003260                . = ALIGN (0x8)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000008002848                . = ALIGN (0x8)
+                0x0000000008003260                . = ALIGN (0x8)
 
-.ARM            0x0000000008002848        0x0
-                0x0000000008002848                . = ALIGN (0x8)
-                0x0000000008002848                __exidx_start = .
+.ARM            0x0000000008003260        0x0
+                0x0000000008003260                . = ALIGN (0x8)
+                0x0000000008003260                __exidx_start = .
  *(.ARM.exidx*)
-                0x0000000008002848                __exidx_end = .
-                0x0000000008002848                . = ALIGN (0x8)
+                0x0000000008003260                __exidx_end = .
+                0x0000000008003260                . = ALIGN (0x8)
 
-.preinit_array  0x0000000008002848        0x0
-                0x0000000008002848                . = ALIGN (0x8)
-                0x0000000008002848                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x0000000008003260        0x0
+                0x0000000008003260                . = ALIGN (0x8)
+                0x0000000008003260                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x0000000008002848                PROVIDE (__preinit_array_end, .)
-                0x0000000008002848                . = ALIGN (0x8)
+                0x0000000008003260                PROVIDE (__preinit_array_end, .)
+                0x0000000008003260                . = ALIGN (0x8)
 
-.init_array     0x0000000008002848        0x8
-                0x0000000008002848                . = ALIGN (0x8)
-                0x0000000008002848                PROVIDE (__init_array_start, .)
+.init_array     0x0000000008003260        0x8
+                0x0000000008003260                . = ALIGN (0x8)
+                0x0000000008003260                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  .init_array.00000
-                0x0000000008002848        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+                0x0000000008003260        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
  *(.init_array*)
- .init_array    0x000000000800284c        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x0000000008002850                PROVIDE (__init_array_end, .)
-                0x0000000008002850                . = ALIGN (0x8)
+ .init_array    0x0000000008003264        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x0000000008003268                PROVIDE (__init_array_end, .)
+                0x0000000008003268                . = ALIGN (0x8)
 
-.fini_array     0x0000000008002850        0x8
-                0x0000000008002850                . = ALIGN (0x8)
-                0x0000000008002850                PROVIDE (__fini_array_start, .)
+.fini_array     0x0000000008003268        0x8
+                0x0000000008003268                . = ALIGN (0x8)
+                0x0000000008003268                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0000000008002850        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x0000000008002854                PROVIDE (__fini_array_end, .)
-                0x0000000008002858                . = ALIGN (0x8)
- *fill*         0x0000000008002854        0x4 
-                0x0000000008002858                _sidata = LOADADDR (.data)
+ .fini_array    0x0000000008003268        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x000000000800326c                PROVIDE (__fini_array_end, .)
+                0x0000000008003270                . = ALIGN (0x8)
+ *fill*         0x000000000800326c        0x4 
+                0x0000000008003270                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000      0x438 load address 0x0000000008002858
+.data           0x0000000020000000      0x848 load address 0x0000000008003270
                 0x0000000020000000                . = ALIGN (0x8)
                 0x0000000020000000                _sdata = .
  *(.data)
  .data          0x0000000020000000        0x4 src/system_stm32l4xx.o
                 0x0000000020000000                SystemCoreClock
  *(.data*)
- *fill*         0x0000000020000004        0x4 
+ .data._impure_ptr
+                0x0000000020000004        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
+                0x0000000020000004                _impure_ptr
  .data.impure_data
                 0x0000000020000008      0x428 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
+ .data.__malloc_av_
+                0x0000000020000430      0x408 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x0000000020000430                __malloc_av_
+ .data.__malloc_sbrk_base
+                0x0000000020000838        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x0000000020000838                __malloc_sbrk_base
+ .data.__malloc_trim_threshold
+                0x000000002000083c        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x000000002000083c                __malloc_trim_threshold
  .data.__atexit_recursive_mutex
-                0x0000000020000430        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
-                0x0000000020000430                __atexit_recursive_mutex
-                0x0000000020000438                . = ALIGN (0x8)
- *fill*         0x0000000020000434        0x4 
-                0x0000000020000438                _edata = .
+                0x0000000020000840        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+                0x0000000020000840                __atexit_recursive_mutex
+                0x0000000020000848                . = ALIGN (0x8)
+ *fill*         0x0000000020000844        0x4 
+                0x0000000020000848                _edata = .
 
-.jcr            0x0000000020000438        0x0 load address 0x0000000008002c90
- .jcr           0x0000000020000438        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.jcr            0x0000000020000848        0x0 load address 0x0000000008003ab8
+ .jcr           0x0000000020000848        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.igot.plt       0x0000000020000438        0x0 load address 0x0000000008002c90
- .igot.plt      0x0000000020000438        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x0000000020000438                . = ALIGN (0x4)
+.igot.plt       0x0000000020000848        0x0 load address 0x0000000008003ab8
+ .igot.plt      0x0000000020000848        0x0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x0000000020000848                . = ALIGN (0x4)
 
-.bss            0x0000000020000438       0x80 load address 0x0000000008002c90
-                0x0000000020000438                _sbss = .
-                0x0000000020000438                __bss_start__ = _sbss
+.bss            0x0000000020000848       0xc0 load address 0x0000000008003ab8
+                0x0000000020000848                _sbss = .
+                0x0000000020000848                __bss_start__ = _sbss
  *(.bss)
- .bss           0x0000000020000438       0x1c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .bss           0x0000000020000848       0x1c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .bss           0x0000000020000864        0x8 src/syscalls.o
+                0x0000000020000864                __env
  *(.bss*)
+ .bss.__malloc_current_mallinfo
+                0x000000002000086c       0x28 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x000000002000086c                __malloc_current_mallinfo
+ .bss.__malloc_max_sbrked_mem
+                0x0000000020000894        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x0000000020000894                __malloc_max_sbrked_mem
+ .bss.__malloc_max_total_mem
+                0x0000000020000898        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x0000000020000898                __malloc_max_total_mem
+ .bss.__malloc_top_pad
+                0x000000002000089c        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+                0x000000002000089c                __malloc_top_pad
  *(COMMON)
- COMMON         0x0000000020000454        0x4 HAL_Driver/Src/stm32l4xx_hal.o
-                0x0000000020000454                uwTick
- COMMON         0x0000000020000458       0x3c HAL_Driver/Src/stm32l4xx_hal_timebase_tim_template.o
-                0x0000000020000458                TimHandle
- COMMON         0x0000000020000494       0x21 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
-                0x0000000020000494                __lock___atexit_recursive_mutex
-                0x0000000020000498                __lock___arc4random_mutex
-                0x000000002000049c                __lock___env_recursive_mutex
-                0x00000000200004a0                __lock___sinit_recursive_mutex
-                0x00000000200004a4                __lock___malloc_recursive_mutex
-                0x00000000200004a8                __lock___at_quick_exit_mutex
-                0x00000000200004ac                __lock___dd_hash_mutex
-                0x00000000200004b0                __lock___tz_mutex
-                0x00000000200004b4                __lock___sfp_recursive_mutex
-                0x00000000200004b8                . = ALIGN (0x4)
- *fill*         0x00000000200004b5        0x3 
-                0x00000000200004b8                _ebss = .
-                0x00000000200004b8                __bss_end__ = _ebss
+ COMMON         0x00000000200008a0        0x4 HAL_Driver/Src/stm32l4xx_hal.o
+                0x00000000200008a0                uwTick
+ COMMON         0x00000000200008a4       0x3c HAL_Driver/Src/stm32l4xx_hal_timebase_tim_template.o
+                0x00000000200008a4                TimHandle
+ COMMON         0x00000000200008e0       0x21 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+                0x00000000200008e0                __lock___atexit_recursive_mutex
+                0x00000000200008e4                __lock___arc4random_mutex
+                0x00000000200008e8                __lock___env_recursive_mutex
+                0x00000000200008ec                __lock___sinit_recursive_mutex
+                0x00000000200008f0                __lock___malloc_recursive_mutex
+                0x00000000200008f4                __lock___at_quick_exit_mutex
+                0x00000000200008f8                __lock___dd_hash_mutex
+                0x00000000200008fc                __lock___tz_mutex
+                0x0000000020000900                __lock___sfp_recursive_mutex
+ *fill*         0x0000000020000901        0x3 
+ COMMON         0x0000000020000904        0x4 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+                0x0000000020000904                errno
+                0x0000000020000908                . = ALIGN (0x4)
+                0x0000000020000908                _ebss = .
+                0x0000000020000908                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x00000000200004b8      0x600 load address 0x0000000008002c90
-                0x00000000200004b8                . = ALIGN (0x8)
-                0x00000000200004b8                PROVIDE (end, .)
+                0x0000000020000908      0x600 load address 0x0000000008003ab8
+                0x0000000020000908                . = ALIGN (0x8)
+                0x0000000020000908                PROVIDE (end, .)
                 [!provide]                        PROVIDE (_end, .)
-                0x00000000200006b8                . = (. + _Min_Heap_Size)
- *fill*         0x00000000200004b8      0x200 
-                0x0000000020000ab8                . = (. + _Min_Stack_Size)
- *fill*         0x00000000200006b8      0x400 
-                0x0000000020000ab8                . = ALIGN (0x8)
+                0x0000000020000b08                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020000908      0x200 
+                0x0000000020000f08                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020000b08      0x400 
+                0x0000000020000f08                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -5488,36 +5558,54 @@ LOAD /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-non
  .ARM.attributes
                 0x0000000000000290       0x39 src/main.o
  .ARM.attributes
-                0x00000000000002c9       0x39 src/stm32l4xx_it.o
+                0x00000000000002c9       0x39 src/motor_control.o
  .ARM.attributes
-                0x0000000000000302       0x39 src/system_stm32l4xx.o
+                0x0000000000000302       0x39 src/stm32l4xx_it.o
  .ARM.attributes
-                0x000000000000033b       0x39 src/test_functions.o
+                0x000000000000033b       0x39 src/syscalls.o
  .ARM.attributes
-                0x0000000000000374       0x21 startup/startup_stm32l476xx.o
+                0x0000000000000374       0x39 src/system_stm32l4xx.o
  .ARM.attributes
-                0x0000000000000395       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
+                0x00000000000003ad       0x39 src/test_functions.o
  .ARM.attributes
-                0x00000000000003c9       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
+                0x00000000000003e6       0x21 startup/startup_stm32l476xx.o
  .ARM.attributes
-                0x00000000000003fd       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
+                0x0000000000000407       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
  .ARM.attributes
-                0x000000000000041d       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strlen.o)
+                0x000000000000043b       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x000000000000043d       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+                0x000000000000046f       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
  .ARM.attributes
-                0x0000000000000471       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
+                0x00000000000004a3       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
  .ARM.attributes
-                0x00000000000004a5       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
+                0x00000000000004d7       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
  .ARM.attributes
-                0x00000000000004d9       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+                0x000000000000050b       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
  .ARM.attributes
-                0x000000000000050d       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
+                0x000000000000053f       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x0000000000000541       0x22 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x0000000000000573       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x0000000000000593       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x00000000000005b3       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x00000000000005e7       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x000000000000061b       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
+ .ARM.attributes
+                0x000000000000064f       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x0000000000000683       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+ .ARM.attributes
+                0x00000000000006b7       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000000000006eb       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000000000000071f       0x22 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(ROBKO_01.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0xdc32
+.debug_info     0x0000000000000000     0xf385
  .debug_info    0x0000000000000000      0x9e0 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_info    0x00000000000009e0      0xd28 HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_info    0x0000000000001708     0x2281 HAL_Driver/Src/stm32l4xx_hal_tim.o
@@ -5528,13 +5616,15 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_info    0x0000000000007b32      0xe2f HAL_Driver/Src/stm32l4xx_ll_rcc.o
  .debug_info    0x0000000000008961     0x101f HAL_Driver/Src/stm32l4xx_ll_usart.o
  .debug_info    0x0000000000009980      0xc0b HAL_Driver/Src/stm32l4xx_ll_utils.o
- .debug_info    0x000000000000a58b     0x219e src/main.o
- .debug_info    0x000000000000c729       0xbd src/stm32l4xx_it.o
- .debug_info    0x000000000000c7e6      0x5ac src/system_stm32l4xx.o
- .debug_info    0x000000000000cd92      0xe2f src/test_functions.o
- .debug_info    0x000000000000dbc1       0x71 startup/startup_stm32l476xx.o
+ .debug_info    0x000000000000a58b     0x21a9 src/main.o
+ .debug_info    0x000000000000c734      0xe92 src/motor_control.o
+ .debug_info    0x000000000000d5c6       0xbd src/stm32l4xx_it.o
+ .debug_info    0x000000000000d683      0x6ca src/syscalls.o
+ .debug_info    0x000000000000dd4d      0x5ac src/system_stm32l4xx.o
+ .debug_info    0x000000000000e2f9     0x101b src/test_functions.o
+ .debug_info    0x000000000000f314       0x71 startup/startup_stm32l476xx.o
 
-.debug_abbrev   0x0000000000000000     0x1d86
+.debug_abbrev   0x0000000000000000     0x21b7
  .debug_abbrev  0x0000000000000000      0x1c1 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_abbrev  0x00000000000001c1      0x2b0 HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_abbrev  0x0000000000000471      0x20b HAL_Driver/Src/stm32l4xx_hal_tim.o
@@ -5546,12 +5636,14 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_abbrev  0x000000000000115c      0x27e HAL_Driver/Src/stm32l4xx_ll_usart.o
  .debug_abbrev  0x00000000000013da      0x211 HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_abbrev  0x00000000000015eb      0x373 src/main.o
- .debug_abbrev  0x000000000000195e       0x6a src/stm32l4xx_it.o
- .debug_abbrev  0x00000000000019c8      0x125 src/system_stm32l4xx.o
- .debug_abbrev  0x0000000000001aed      0x287 src/test_functions.o
- .debug_abbrev  0x0000000000001d74       0x12 startup/startup_stm32l476xx.o
+ .debug_abbrev  0x000000000000195e      0x284 src/motor_control.o
+ .debug_abbrev  0x0000000000001be2       0x6a src/stm32l4xx_it.o
+ .debug_abbrev  0x0000000000001c4c      0x177 src/syscalls.o
+ .debug_abbrev  0x0000000000001dc3      0x125 src/system_stm32l4xx.o
+ .debug_abbrev  0x0000000000001ee8      0x2bd src/test_functions.o
+ .debug_abbrev  0x00000000000021a5       0x12 startup/startup_stm32l476xx.o
 
-.debug_aranges  0x0000000000000000      0xf18
+.debug_aranges  0x0000000000000000     0x1050
  .debug_aranges
                 0x0000000000000000      0x118 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_aranges
@@ -5575,15 +5667,19 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000c80      0x198 src/main.o
  .debug_aranges
-                0x0000000000000e18       0x20 src/stm32l4xx_it.o
+                0x0000000000000e18       0x78 src/motor_control.o
  .debug_aranges
-                0x0000000000000e38       0x28 src/system_stm32l4xx.o
+                0x0000000000000e90       0x20 src/stm32l4xx_it.o
  .debug_aranges
-                0x0000000000000e60       0x90 src/test_functions.o
+                0x0000000000000eb0       0xb0 src/syscalls.o
  .debug_aranges
-                0x0000000000000ef0       0x28 startup/startup_stm32l476xx.o
+                0x0000000000000f60       0x28 src/system_stm32l4xx.o
+ .debug_aranges
+                0x0000000000000f88       0xa0 src/test_functions.o
+ .debug_aranges
+                0x0000000000001028       0x28 startup/startup_stm32l476xx.o
 
-.debug_ranges   0x0000000000000000      0xe30
+.debug_ranges   0x0000000000000000      0xf48
  .debug_ranges  0x0000000000000000      0x108 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_ranges  0x0000000000000108       0xf8 HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_ranges  0x0000000000000200      0x368 HAL_Driver/Src/stm32l4xx_hal_tim.o
@@ -5595,12 +5691,14 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_ranges  0x0000000000000a40       0x78 HAL_Driver/Src/stm32l4xx_ll_usart.o
  .debug_ranges  0x0000000000000ab8      0x128 HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_ranges  0x0000000000000be0      0x188 src/main.o
- .debug_ranges  0x0000000000000d68       0x10 src/stm32l4xx_it.o
- .debug_ranges  0x0000000000000d78       0x18 src/system_stm32l4xx.o
- .debug_ranges  0x0000000000000d90       0x80 src/test_functions.o
- .debug_ranges  0x0000000000000e10       0x20 startup/startup_stm32l476xx.o
+ .debug_ranges  0x0000000000000d68       0x68 src/motor_control.o
+ .debug_ranges  0x0000000000000dd0       0x10 src/stm32l4xx_it.o
+ .debug_ranges  0x0000000000000de0       0xa0 src/syscalls.o
+ .debug_ranges  0x0000000000000e80       0x18 src/system_stm32l4xx.o
+ .debug_ranges  0x0000000000000e98       0x90 src/test_functions.o
+ .debug_ranges  0x0000000000000f28       0x20 startup/startup_stm32l476xx.o
 
-.debug_macro    0x0000000000000000    0x2b525
+.debug_macro    0x0000000000000000    0x2c4c6
  .debug_macro   0x0000000000000000      0x325 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_macro   0x0000000000000325      0x8aa HAL_Driver/Src/stm32l4xx_hal.o
  .debug_macro   0x0000000000000bcf       0xa6 HAL_Driver/Src/stm32l4xx_hal.o
@@ -5683,22 +5781,44 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_macro   0x0000000000028fb0      0x70e HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_macro   0x00000000000296be      0x302 HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_macro   0x00000000000299c0      0x1ff HAL_Driver/Src/stm32l4xx_ll_utils.o
- .debug_macro   0x0000000000029bbf      0x384 src/main.o
- .debug_macro   0x0000000000029f43       0x10 src/main.o
- .debug_macro   0x0000000000029f53      0x16b src/main.o
- .debug_macro   0x000000000002a0be      0x1b2 src/main.o
- .debug_macro   0x000000000002a270       0x84 src/main.o
- .debug_macro   0x000000000002a2f4      0x2cb src/main.o
- .debug_macro   0x000000000002a5bf      0x2f7 src/main.o
- .debug_macro   0x000000000002a8b6      0x176 src/main.o
- .debug_macro   0x000000000002aa2c       0x16 src/main.o
- .debug_macro   0x000000000002aa42       0x35 src/main.o
- .debug_macro   0x000000000002aa77      0x16b src/main.o
- .debug_macro   0x000000000002abe2      0x2e1 src/stm32l4xx_it.o
- .debug_macro   0x000000000002aec3      0x2de src/system_stm32l4xx.o
- .debug_macro   0x000000000002b1a1      0x384 src/test_functions.o
+ .debug_macro   0x0000000000029bbf      0x3b8 src/main.o
+ .debug_macro   0x0000000000029f77       0x10 src/main.o
+ .debug_macro   0x0000000000029f87      0x16b src/main.o
+ .debug_macro   0x000000000002a0f2      0x1b2 src/main.o
+ .debug_macro   0x000000000002a2a4       0x84 src/main.o
+ .debug_macro   0x000000000002a328      0x2cb src/main.o
+ .debug_macro   0x000000000002a5f3      0x2f7 src/main.o
+ .debug_macro   0x000000000002a8ea      0x176 src/main.o
+ .debug_macro   0x000000000002aa60       0x16 src/main.o
+ .debug_macro   0x000000000002aa76       0x35 src/main.o
+ .debug_macro   0x000000000002aaab       0x16 src/main.o
+ .debug_macro   0x000000000002aac1       0x16 src/main.o
+ .debug_macro   0x000000000002aad7       0x29 src/main.o
+ .debug_macro   0x000000000002ab00      0x1b1 src/main.o
+ .debug_macro   0x000000000002acb1      0x3b8 src/motor_control.o
+ .debug_macro   0x000000000002b069      0x2e1 src/stm32l4xx_it.o
+ .debug_macro   0x000000000002b34a      0x22b src/syscalls.o
+ .debug_macro   0x000000000002b575       0x4c src/syscalls.o
+ .debug_macro   0x000000000002b5c1       0x8d src/syscalls.o
+ .debug_macro   0x000000000002b64e       0x4a src/syscalls.o
+ .debug_macro   0x000000000002b698      0x174 src/syscalls.o
+ .debug_macro   0x000000000002b80c       0x10 src/syscalls.o
+ .debug_macro   0x000000000002b81c       0x10 src/syscalls.o
+ .debug_macro   0x000000000002b82c       0x10 src/syscalls.o
+ .debug_macro   0x000000000002b83c       0x35 src/syscalls.o
+ .debug_macro   0x000000000002b871      0x122 src/syscalls.o
+ .debug_macro   0x000000000002b993       0x29 src/syscalls.o
+ .debug_macro   0x000000000002b9bc       0x10 src/syscalls.o
+ .debug_macro   0x000000000002b9cc      0x241 src/syscalls.o
+ .debug_macro   0x000000000002bc0d       0x1c src/syscalls.o
+ .debug_macro   0x000000000002bc29       0x10 src/syscalls.o
+ .debug_macro   0x000000000002bc39      0x159 src/syscalls.o
+ .debug_macro   0x000000000002bd92       0x16 src/syscalls.o
+ .debug_macro   0x000000000002bda8       0x88 src/syscalls.o
+ .debug_macro   0x000000000002be30      0x2de src/system_stm32l4xx.o
+ .debug_macro   0x000000000002c10e      0x3b8 src/test_functions.o
 
-.debug_line     0x0000000000000000     0xa161
+.debug_line     0x0000000000000000     0xb1fc
  .debug_line    0x0000000000000000      0x96a HAL_Driver/Src/stm32l4xx_hal.o
  .debug_line    0x000000000000096a      0x9e5 HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_line    0x000000000000134f     0x1a24 HAL_Driver/Src/stm32l4xx_hal_tim.o
@@ -5709,41 +5829,47 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_line    0x000000000000550e     0x1283 HAL_Driver/Src/stm32l4xx_ll_rcc.o
  .debug_line    0x0000000000006791      0x8bc HAL_Driver/Src/stm32l4xx_ll_usart.o
  .debug_line    0x000000000000704d      0xaeb HAL_Driver/Src/stm32l4xx_ll_utils.o
- .debug_line    0x0000000000007b38      0xd3c src/main.o
- .debug_line    0x0000000000008874      0x748 src/stm32l4xx_it.o
- .debug_line    0x0000000000008fbc      0x747 src/system_stm32l4xx.o
- .debug_line    0x0000000000009703      0x9df src/test_functions.o
- .debug_line    0x000000000000a0e2       0x7f startup/startup_stm32l476xx.o
+ .debug_line    0x0000000000007b38      0xd62 src/main.o
+ .debug_line    0x000000000000889a      0xa25 src/motor_control.o
+ .debug_line    0x00000000000092bf      0x748 src/stm32l4xx_it.o
+ .debug_line    0x0000000000009a07      0x5f9 src/syscalls.o
+ .debug_line    0x000000000000a000      0x747 src/system_stm32l4xx.o
+ .debug_line    0x000000000000a747      0xa36 src/test_functions.o
+ .debug_line    0x000000000000b17d       0x7f startup/startup_stm32l476xx.o
 
-.debug_str      0x0000000000000000    0xfe535
- .debug_str     0x0000000000000000    0xe118a HAL_Driver/Src/stm32l4xx_hal.o
+.debug_str      0x0000000000000000    0xff8cd
+ .debug_str     0x0000000000000000    0xe117a HAL_Driver/Src/stm32l4xx_hal.o
                                       0xe1fd8 (size before relaxing)
- .debug_str     0x00000000000e118a      0x3af HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_str     0x00000000000e117a      0x3af HAL_Driver/Src/stm32l4xx_hal_cortex.o
                                       0xe1cf5 (size before relaxing)
- .debug_str     0x00000000000e1539     0x1051 HAL_Driver/Src/stm32l4xx_hal_tim.o
+ .debug_str     0x00000000000e1529     0x1051 HAL_Driver/Src/stm32l4xx_hal_tim.o
                                       0xe2478 (size before relaxing)
- .debug_str     0x00000000000e258a      0x67f HAL_Driver/Src/stm32l4xx_hal_tim_ex.o
+ .debug_str     0x00000000000e257a      0x67f HAL_Driver/Src/stm32l4xx_hal_tim_ex.o
                                       0xe1ea5 (size before relaxing)
- .debug_str     0x00000000000e2c09       0xec HAL_Driver/Src/stm32l4xx_hal_timebase_tim_template.o
+ .debug_str     0x00000000000e2bf9       0xec HAL_Driver/Src/stm32l4xx_hal_timebase_tim_template.o
                                       0xe1e68 (size before relaxing)
- .debug_str     0x00000000000e2cf5     0xe0e4 HAL_Driver/Src/stm32l4xx_ll_adc.o
+ .debug_str     0x00000000000e2ce5     0xe0ce HAL_Driver/Src/stm32l4xx_ll_adc.o
                                       0xef210 (size before relaxing)
- .debug_str     0x00000000000f0dd9      0xe8d HAL_Driver/Src/stm32l4xx_ll_gpio.o
+ .debug_str     0x00000000000f0db3      0xe8d HAL_Driver/Src/stm32l4xx_ll_gpio.o
                                       0xe34f3 (size before relaxing)
- .debug_str     0x00000000000f1c66     0x46da HAL_Driver/Src/stm32l4xx_ll_rcc.o
+ .debug_str     0x00000000000f1c40     0x46da HAL_Driver/Src/stm32l4xx_ll_rcc.o
                                       0xe5b9c (size before relaxing)
- .debug_str     0x00000000000f6340     0x19fa HAL_Driver/Src/stm32l4xx_ll_usart.o
+ .debug_str     0x00000000000f631a     0x19fa HAL_Driver/Src/stm32l4xx_ll_usart.o
                                       0xe79ba (size before relaxing)
- .debug_str     0x00000000000f7d3a     0x3149 HAL_Driver/Src/stm32l4xx_ll_utils.o
+ .debug_str     0x00000000000f7d14     0x3149 HAL_Driver/Src/stm32l4xx_ll_utils.o
                                       0xe80e7 (size before relaxing)
- .debug_str     0x00000000000fae83     0x34d2 src/main.o
-                                      0xf8159 (size before relaxing)
- .debug_str     0x00000000000fe355       0x38 src/stm32l4xx_it.o
+ .debug_str     0x00000000000fae5d     0x3622 src/main.o
+                                      0xf82a9 (size before relaxing)
+ .debug_str     0x00000000000fe47f      0x13e src/motor_control.o
+                                      0xf7486 (size before relaxing)
+ .debug_str     0x00000000000fe5bd       0x38 src/stm32l4xx_it.o
                                       0xe12f1 (size before relaxing)
- .debug_str     0x00000000000fe38d       0x6a src/system_stm32l4xx.o
+ .debug_str     0x00000000000fe5f5     0x108b src/syscalls.o
+                                       0x7718 (size before relaxing)
+ .debug_str     0x00000000000ff680       0x6a src/system_stm32l4xx.o
                                       0xe1530 (size before relaxing)
- .debug_str     0x00000000000fe3f7      0x13e src/test_functions.o
-                                      0xf733f (size before relaxing)
+ .debug_str     0x00000000000ff6ea      0x1e3 src/test_functions.o
+                                      0xf7575 (size before relaxing)
 
 .comment        0x0000000000000000       0xed
  .comment       0x0000000000000000       0x6e HAL_Driver/Src/stm32l4xx_hal.o
@@ -5759,11 +5885,13 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .comment       0x00000000000000ed       0x80 HAL_Driver/Src/stm32l4xx_ll_usart.o
  .comment       0x00000000000000ed       0x6f HAL_Driver/Src/stm32l4xx_ll_utils.o
  .comment       0x00000000000000ed       0x80 src/main.o
+ .comment       0x00000000000000ed       0x80 src/motor_control.o
  .comment       0x00000000000000ed       0x6f src/stm32l4xx_it.o
+ .comment       0x00000000000000ed       0x6f src/syscalls.o
  .comment       0x00000000000000ed       0x6f src/system_stm32l4xx.o
  .comment       0x00000000000000ed       0x80 src/test_functions.o
 
-.debug_frame    0x0000000000000000     0x4190
+.debug_frame    0x0000000000000000     0x4850
  .debug_frame   0x0000000000000000      0x42c HAL_Driver/Src/stm32l4xx_hal.o
  .debug_frame   0x000000000000042c      0x450 HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_frame   0x000000000000087c     0x100c HAL_Driver/Src/stm32l4xx_hal_tim.o
@@ -5775,13 +5903,22 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_frame   0x0000000000002e78      0x238 HAL_Driver/Src/stm32l4xx_ll_usart.o
  .debug_frame   0x00000000000030b0      0x4fc HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_frame   0x00000000000035ac      0x6f8 src/main.o
- .debug_frame   0x0000000000003ca4       0x2c src/stm32l4xx_it.o
- .debug_frame   0x0000000000003cd0       0x58 src/system_stm32l4xx.o
- .debug_frame   0x0000000000003d28      0x240 src/test_functions.o
- .debug_frame   0x0000000000003f68       0x2c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
- .debug_frame   0x0000000000003f94       0x68 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
- .debug_frame   0x0000000000003ffc       0x5c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x0000000000004058       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
- .debug_frame   0x0000000000004078       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
- .debug_frame   0x00000000000040ac       0xb0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
- .debug_frame   0x000000000000415c       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)
+ .debug_frame   0x0000000000003ca4      0x1d4 src/motor_control.o
+ .debug_frame   0x0000000000003e78       0x2c src/stm32l4xx_it.o
+ .debug_frame   0x0000000000003ea4      0x2d4 src/syscalls.o
+ .debug_frame   0x0000000000004178       0x58 src/system_stm32l4xx.o
+ .debug_frame   0x00000000000041d0      0x288 src/test_functions.o
+ .debug_frame   0x0000000000004458       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-errno.o)
+ .debug_frame   0x0000000000004478       0x2c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-init.o)
+ .debug_frame   0x00000000000044a4       0x30 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-malloc.o)
+ .debug_frame   0x00000000000044d4       0x58 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mallocr.o)
+ .debug_frame   0x000000000000452c       0x30 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-mlock.o)
+ .debug_frame   0x000000000000455c       0x2c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000004588       0x68 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000000000045f0       0x5c /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x000000000000464c       0x20 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-atexit.o)
+ .debug_frame   0x000000000000466c       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-fini.o)
+ .debug_frame   0x00000000000046a0       0x74 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-freer.o)
+ .debug_frame   0x0000000000004714       0xb0 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-lock.o)
+ .debug_frame   0x00000000000047c4       0x58 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-reent.o)
+ .debug_frame   0x000000000000481c       0x34 /home/cartogan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc.a(lib_a-__atexit.o)

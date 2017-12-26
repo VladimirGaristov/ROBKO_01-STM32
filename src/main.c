@@ -84,11 +84,13 @@ int main(void)
   stop_motor(6);
   while (1)
   {
-	  serial_test();
+	  //serial_test();
 	  //LED_Blink();
 	  //LED_wave();
 	  //motor_test();
 	  //check_mode();
+	  remote_control();
+	  LL_mDelay(STEP_TIME);
   }
   /* USER CODE END 2 */
 
@@ -119,6 +121,11 @@ static void LL_Init(void)
   NVIC_SetPriority(PendSV_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
   /* SysTick_IRQn interrupt configuration */
   NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
+  /* USER CODE BEGIN 3 */
+  // USART1 interrupt configuration
+  NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
+  NVIC_EnableIRQ(USART1_IRQn);
+  /* USER CODE END 3 */
 
 }
 
@@ -232,7 +239,6 @@ static void MX_USART1_UART_Init(void)
 {
 
   LL_USART_InitTypeDef USART_InitStruct;
-
   LL_GPIO_InitTypeDef GPIO_InitStruct;
 
   /* Peripheral clock enable */
@@ -260,6 +266,10 @@ static void MX_USART1_UART_Init(void)
   LL_USART_Init(USART1, &USART_InitStruct);
   LL_USART_ConfigAsyncMode(USART1);
   LL_USART_Enable(USART1);
+
+  /* USER CODE BEGIN 4 */
+  LL_USART_EnableIT_RXNE(USART1);
+  /* USER CODE END 4 */
 
 }
 
@@ -309,7 +319,7 @@ static void MX_GPIO_Init(void)
   /**/
   GPIO_InitStruct.Pin = LED3_PIN|LED4_PIN|LED10_PIN|LED11_PIN
                           |LED5_PIN|LED6_PIN|LED7_PIN|LED8_PIN
-                          |LED9_PIN|LED0_PIN|LED1_PIN|LED2_PIN;
+                          |LED9_PIN;//|LED0_PIN|LED1_PIN|LED2_PIN;	//LED0-2 are used by the debugger
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -333,17 +343,15 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(ADDR_DATA_PORT, &GPIO_InitStruct);
 
   /* Configure IO in output push-pull mode to drive external LED2 */
-  GPIO_InitStruct.Pin        = LL_GPIO_PIN_5;
+  /*
+  GPIO_InitStruct.Pin        = TEST_LED_PIN;
   GPIO_InitStruct.Mode       = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed      = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull       = LL_GPIO_PULL_NO;
   LL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+  */
 }
-
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.

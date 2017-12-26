@@ -24,7 +24,20 @@ src/stm32l4xx_it.o: ../src/stm32l4xx_it.c \
  /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_hal_tim.h \
  /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
- /home/cartogan/Ac6/workspace/ROBKO_01/inc/stm32l4xx_it.h
+ /home/cartogan/Ac6/workspace/ROBKO_01/inc/stm32l4xx_it.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/inc/main.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_adc.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_crs.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_rcc.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_bus.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_system.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_exti.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_cortex.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_utils.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_pwr.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_dma.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_usart.h \
+ /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_gpio.h
 
 /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_hal.h:
 
@@ -77,3 +90,29 @@ src/stm32l4xx_it.o: ../src/stm32l4xx_it.c \
 /home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 
 /home/cartogan/Ac6/workspace/ROBKO_01/inc/stm32l4xx_it.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/inc/main.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_adc.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_crs.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_rcc.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_bus.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_system.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_exti.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_cortex.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_utils.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_pwr.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_dma.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_usart.h:
+
+/home/cartogan/Ac6/workspace/ROBKO_01/HAL_Driver/Inc/stm32l4xx_ll_gpio.h:

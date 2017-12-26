@@ -144,6 +144,8 @@
 #define STEP_TIME 300		//miliseconds	//vmesto POT_MODE, da se smenia tui
 #define STEP_FWD 1
 #define STEP_REV -1
+
+//Stepper motors addresses and directions
 #define ROTATION_MOTOR 0	//FWD=left
 #define SHOULDER_MOTOR 1	//FWD=forward
 #define ELBOW_MOTOR 2		//FWD=up
@@ -183,6 +185,7 @@ void check_mode(void);
 void manual_control(void);
 int32_t remote_control(void);
 void read_cmd(void);
+void set_LEDs(void);
 
 #define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 

@@ -220,3 +220,8 @@ void read_cmd(void)
 		}
 	}
 }
+
+void set_LEDs(void)
+{
+
+}

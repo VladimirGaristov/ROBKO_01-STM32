@@ -15,6 +15,7 @@
 #include <cmsis_os.h>
 #endif
 #include "stm32l4xx_it.h"
+#include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -39,4 +40,10 @@ void SysTick_Handler(void)
 #ifdef USE_RTOS_SYSTICK
 	osSystickHandler();
 #endif
+}
+
+void USART1_IRQHandler(void)
+{
+	if(LL_USART_IsActiveFlag_RXNE(USART1))
+		read_cmd();
 }

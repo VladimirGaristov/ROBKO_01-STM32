@@ -60,7 +60,7 @@ int main(void)
 			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
 			memset(serial_buffer, 0, SER_BUFFER_SIZE);
 			n=read(newsockfd, sock_buffer, SOCK_BUFFER_SIZE);
-			//add data parsing and serial retransmit
+			//add data parsing?
 			//If FIN has been received, close the socket
 			if(!n)
 			{
@@ -69,12 +69,8 @@ int main(void)
 				close(newsockfd);
 				break;
 			}
-			printf("Received %d bytes - '%s'\n", n, sock_buffer);
+			printf("Received %d bytes\n", n);
 			transmit_string(serial_port, sock_buffer);
-			while(sp_input_waiting(serial_port)<=0);
-			delay(10);
-			sp_nonblocking_read(serial_port, serial_buffer, SER_BUFFER_SIZE);
-			n=write(newsockfd, serial_buffer, strlen(serial_buffer));
 			if(n<0)
 				error("ERROR writing to socket\n");
 		}
@@ -126,9 +122,10 @@ int port_configuration(struct sp_port **ser_port)
 
 void transmit_string(struct sp_port *ser_port, char *s_out)
 {
-	int i=0;
-	int l=strlen(s_out);
-	while(i<=l)
+	int i=1;
+	//int l=strlen(s_out);
+	int l=s_out[0];
+	while(i<l)
 	{
 		sp_nonblocking_write(ser_port, s_out+i, 1);
 		i++;

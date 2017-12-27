@@ -233,9 +233,9 @@ void read_cmd(void)
 				}
 				while(current_cmd!=NULL);
 				break;
-			case MOV_FWD: case MOV_REV: rem_bytes+=1;
-			/* no break */
 			case GOTO_POS: rem_bytes+=1;
+			/* no break */
+			case MOV_FWD: case MOV_REV: rem_bytes+=1;
 			/* no break */
 			case TOGETHER: case OFF: rem_bytes+=1;
 				//Allocate memory for the new command and add it to the linked list

@@ -1,0 +1,2 @@
+all:
+	gcc -o robko_server robko_server.c -L/usr/local/lib -lserialport

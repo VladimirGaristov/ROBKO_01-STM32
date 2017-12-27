@@ -28,6 +28,7 @@ void LED_wave(void)
 	}
 }
 
+//Send a string through USART
 int32_t send_string(const char *msg)
 {
 	if(!LL_USART_IsActiveFlag_TC(USART1))
@@ -43,6 +44,8 @@ int32_t send_string(const char *msg)
 	return 0;
 }
 
+//Receive a string from USART
+//Blocks with no timeout
 int32_t receive_string(char *buffer, uint32_t buff_len)
 {
 	if(!LL_USART_IsActiveFlag_RXNE(USART1))
@@ -50,7 +53,7 @@ int32_t receive_string(char *buffer, uint32_t buff_len)
 	uint16_t i=0;
 	while(i<buff_len)
 	{
-		while((!LL_USART_IsActiveFlag_RXNE(USART1)));	//add timeout
+		while((!LL_USART_IsActiveFlag_RXNE(USART1)));	//TODO: add timeout
 		buffer[i]=LL_USART_ReceiveData9(USART1);
 		if(buffer[i]=='\0')
 			break;
@@ -59,6 +62,7 @@ int32_t receive_string(char *buffer, uint32_t buff_len)
 	return i;
 }
 
+//Toggles the test LED based on USART commands and replies accordingly
 void serial_test(void)
 {
 	char input_buffer[SERIAL_BUFFER_LEN];
@@ -71,12 +75,12 @@ void serial_test(void)
 		input_buffer[lastbit]='\0';		//is this necessary?
 		if(!strcmp(input_buffer, "on"))
 		{
-			LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_5);
+			LL_GPIO_SetOutputPin(LED_PORT, TEST_LED_PIN);
 			send_string("Brightening up the world!\n");
 		}
 		else if(!strcmp(input_buffer, "off"))
 		{
-			LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_5);
+			LL_GPIO_ResetOutputPin(LED_PORT, TEST_LED_PIN);
 			send_string("Getting dark...\n");
 		}
 		else
@@ -87,11 +91,12 @@ void serial_test(void)
 	}
 }
 
+//Checks the condition of the motors
 void motor_test(void)
 {
 	static int8_t m=2;
-	step_motor(m, STEP_REV);
-	//m++;
+	step_motor(m, STEP_FWD);
+	m++;
 	if(m>5)
 		m=0;
 	LL_mDelay(STEP_TIME);
@@ -99,6 +104,7 @@ void motor_test(void)
 
 extern uint32_t SystemCoreClock;
 
+//Initialize the modules used by DWT_Delay()
 void DWT_Init(void)
 {
 	if (!(CoreDebug->DEMCR & CoreDebug_DEMCR_TRCENA_Msk))
@@ -109,7 +115,8 @@ void DWT_Init(void)
 	}
 }
 
-void DWT_Delay(uint32_t us)	// microseconds
+//Provides delay in microseconds
+void DWT_Delay(uint32_t us)
 {
 	int32_t tp = DWT->CYCCNT + us * (SystemCoreClock/1000000);
 	while (((int32_t)DWT->CYCCNT - tp) < 0);

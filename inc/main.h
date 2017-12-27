@@ -124,6 +124,8 @@
                                                                  0 bit  for subpriority */
 #endif
 
+#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
+
 /* ########################## Assert Selection ############################## */
 /**
   * @brief Uncomment the line below to expanse the "assert_param" macro in the
@@ -140,8 +142,8 @@
 #define SERIAL_BUFFER_LEN 100
 #define FULL_STEP 2
 #define HALF_STEP 1
-#define STEP_SIZE FULL_STEP
-#define STEP_TIME 300		//miliseconds	//vmesto POT_MODE, da se smenia tui
+#define STEP_SIZE FULL_STEP	//Da se chete ot DIP switch
+#define STEP_TIME 300		//miliseconds
 #define STEP_FWD 1
 #define STEP_REV -1
 
@@ -152,6 +154,7 @@
 #define CLAW_GRAB_MOTOR 5	//FWD=open
 #define CLAW_ROT_MOTOR_L 4	//FWD=up
 #define CLAW_ROT_MOTOR_R 3	//FWD=down
+#define ALL_MOTORS 6
 
 //Commands for remote control
 #define MOV_FWD 1
@@ -165,7 +168,13 @@
 #define FREEZE 9
 #define RESUME 10
 
+//Enabling and disabling ROBKO 01
+#define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
+#define DISABLE_ROBKO() LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
+
 /* USER CODE END Private defines */
+
+//Exported function prototypes ----------------------------------------------
 
 void _Error_Handler(char *, int);
 
@@ -186,8 +195,6 @@ void manual_control(void);
 int32_t remote_control(void);
 void read_cmd(void);
 void set_LEDs(void);
-
-#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 
 /**
   * @}

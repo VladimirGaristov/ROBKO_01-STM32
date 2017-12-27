@@ -79,9 +79,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   DWT_Init();
   //Enable ROBKO-01
-  LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN);
+  ENABLE_ROBKO();
   //Initialize ROBKO-01 registers
-  stop_motor(6);
+  stop_motor(ALL_MOTORS);
   while (1)
   {
 	  //serial_test();
@@ -91,6 +91,7 @@ int main(void)
 	  //check_mode();
 	  remote_control();
 	  LL_mDelay(STEP_TIME);
+	  set_LEDs();
   }
   /* USER CODE END 2 */
 

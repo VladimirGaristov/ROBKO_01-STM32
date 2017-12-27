@@ -58,7 +58,7 @@ int32_t step_motor(uint32_t motor, int32_t dir)
 	//Increment/decrement motor position
 	motor_pos[motor]+=dir*STEP_SIZE;
 	//Overflow and underflow protection
-	uint32_t new_pos=motor_pos[motor];
+	int32_t new_pos=motor_pos[motor];
 	new_pos%=8;
 	if(new_pos<0)
 		new_pos+=8;
@@ -76,7 +76,7 @@ int32_t step_motor(uint32_t motor, int32_t dir)
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, D2_PIN);
 	if(coil_current[3][new_pos]==1)
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, D3_PIN);
-	//Send the data to ROBKO-01
+	//Send the data to ROBKO 01
 	LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOW_PIN);
 	DWT_Delay(10);
 	LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN);

@@ -14,7 +14,7 @@
 #define SER_BUFFER_SIZE 100
 #define SERIAL_PORT "/dev/ttyUSB0"
 #define BAUDRATE 115200
-#define STOP_BITS 2
+#define STOP_BITS 1
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
 

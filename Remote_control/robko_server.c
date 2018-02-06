@@ -1,17 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <string.h>
 #include <unistd.h>
 #include <libserialport.h>
 #include <time.h>
+#include "robko_decode.h"
+//Includes string.h, stdlib.h and stdint.h
 
-#define SOCK_PORT 55321
-#define SOCK_PROTOCOL SOCK_STREAM	//SOCK_STREAM=TCP
 #define SOCK_BUFFER_SIZE 1501
 #define SER_BUFFER_SIZE 100
+#define FILE_BUFFER_SIZE 256
+#define CMD_MAX_SIZE 14
 #define SERIAL_PORT "/dev/ttyUSB0"
 #define BAUDRATE 115200
 #define STOP_BITS 1
@@ -22,13 +22,15 @@ void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
 void transmit_string(struct sp_port *ser_port, char *s_out);
 void error(const char *);
+int execute_file(char * filename);
+
+struct sp_port *serial_port;
 
 int main(void)
 {
 	struct sockaddr_in serv_addr, cli_addr;
 	int sockfd, newsockfd, clilen, n;
 	char sock_buffer[SOCK_BUFFER_SIZE], serial_buffer[SER_BUFFER_SIZE];
-	struct sp_port *serial_port;
 	//Open serial connection
 	if(port_configuration(&serial_port))
 		error("Serial port error\n");
@@ -61,7 +63,6 @@ int main(void)
 			memset(serial_buffer, 0, SER_BUFFER_SIZE);
 			n=read(newsockfd, sock_buffer, SOCK_BUFFER_SIZE-1);
 			//if file, add null byte
-			//add data parsing?
 			//If FIN has been received, close the socket
 			if(!n)
 			{
@@ -71,9 +72,12 @@ int main(void)
 				break;
 			}
 			printf("Received %d bytes\n", n);
-			transmit_string(serial_port, sock_buffer);
+			if(sock_buffer[1]==OPEN_FILE)
+				execute_file(sock_buffer+2);
+			else
+				transmit_string(serial_port, sock_buffer);
 			if(n<0)
-				error("ERROR writing to socket\n");
+					error("ERROR writing to socket\n");
 		}
 	}
 	sp_free_port(serial_port);
@@ -124,7 +128,6 @@ int port_configuration(struct sp_port **ser_port)
 void transmit_string(struct sp_port *ser_port, char *s_out)
 {
 	int i=1;
-	//int l=strlen(s_out);
 	int l=s_out[0];
 	while(i<l)
 	{
@@ -133,4 +136,23 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 		delay(20);
 	}
 	printf("Bytes written: %d\n", i);
+}
+
+int execute_file(char * filename)
+{
+	FILE *fd;
+	char file_buffer[FILE_BUFFER_SIZE];
+	int l=0;
+	uint8_t cmd[CMD_MAX_SIZE];
+	printf("Executing %s\n", filename);
+	memset(file_buffer, 0, FILE_BUFFER_SIZE);
+	fd=fopen(filename, "r");
+	//Reads one line at a time
+	while(fgets(file_buffer, FILE_BUFFER_SIZE-1, fd))
+	{
+		decode_cmd(file_buffer, cmd);
+		transmit_string(serial_port, cmd);
+	}
+	printf("Done\n");
+	fclose(fd);
 }

@@ -1,2 +1,11 @@
-all:
-	gcc -o robko_client robko_client.c
+all: decode.o client.o
+	gcc -o robko_client client.o decode.o
+
+decode.o: robko_decode.c
+	gcc -c robko_decode.c -o decode.o
+
+client.o: robko_client.c
+	gcc -c robko_client.c -o client.o
+
+clean:
+	rm decode.o client.o

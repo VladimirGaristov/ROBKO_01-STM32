@@ -1,2 +1,11 @@
-all:
-	gcc -o robko_server robko_server.c -L/usr/local/lib -lserialport
+all: decode.o server.o
+	gcc -o robko_server server.o decode.o -L/usr/local/lib -lserialport
+
+decode.o: robko_decode.c
+	gcc -c robko_decode.c -o decode.o
+
+server.o: robko_server.c
+	gcc -c robko_server.c -o server.o
+
+clean:
+	rm decode.o server.o

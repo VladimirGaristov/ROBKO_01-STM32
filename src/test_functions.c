@@ -53,7 +53,7 @@ int32_t receive_string(char *buffer, uint32_t buff_len)
 	uint16_t i=0;
 	while(i<buff_len)
 	{
-		while((!LL_USART_IsActiveFlag_RXNE(USART1)));	//TODO: add timeout
+		while((!LL_USART_IsActiveFlag_RXNE(USART1)));
 		buffer[i]=LL_USART_ReceiveData9(USART1);
 		if(buffer[i]=='\0')
 			break;
@@ -95,11 +95,12 @@ void serial_test(void)
 void motor_test(void)
 {
 	static int8_t m=2;
+	extern uint16_t local_step_time;
 	step_motor(m, STEP_FWD);
 	m++;
 	if(m>5)
 		m=0;
-	LL_mDelay(STEP_TIME);
+	LL_mDelay(local_step_time);
 }
 
 extern uint32_t SystemCoreClock;

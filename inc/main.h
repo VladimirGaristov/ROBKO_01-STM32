@@ -80,7 +80,7 @@
 #define MANUAL_MODE_PIN LL_GPIO_PIN_8
 #define JOYSTICK_CONNECTED_PIN LL_GPIO_PIN_7
 #define STEP_SIZE_PIN LL_GPIO_PIN_14
-#define POT_MODE_PIN LL_GPIO_PIN_4
+#define STEP_TIME_PIN LL_GPIO_PIN_4
 
 #define IOW_PIN LL_GPIO_PIN_1
 #define IOR_PIN LL_GPIO_PIN_2
@@ -142,10 +142,16 @@
 #define SERIAL_BUFFER_LEN 100
 #define FULL_STEP 2
 #define HALF_STEP 1
-#define STEP_SIZE FULL_STEP	//Da se chete ot DIP switch
-#define STEP_TIME 300		//miliseconds
+#define USE_LOCAL_STEP 0
+#define USE_LOCAL_TIME 0
+#define MAX_STEP_SPEED 50
+#define FAST_STEP 100
+#define SLOW_STEP 200
 #define STEP_FWD 1
 #define STEP_REV -1
+#define MOVE_UNTIL_DETECTION 1
+#define MOVE_UNTIL_NO_DETECTION 2
+#define MOVE_FREELY 0
 
 //Stepper motors addresses and directions
 #define ROTATION_MOTOR 0	//FWD=left
@@ -157,16 +163,20 @@
 #define ALL_MOTORS 6
 
 //Commands for remote control
-#define MOV_FWD 1
-#define MOV_REV 2
+#define MOV 1
+#define MOVE 2
 #define OFF 3
 #define OPEN_FILE 4
 #define GOTO_POS 5
-#define TOGETHER 6
+#define GET_POS 6
 #define KILL 7
 #define CLEAR 8
 #define FREEZE 9
 #define RESUME 10
+#define SAVE_POS 11
+#define OPTO 12
+#define SET_STEP 13
+#define SET_SPEED 14
 
 //Enabling and disabling ROBKO 01
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
@@ -187,14 +197,16 @@ int32_t send_string(const char *msg);
 int32_t receive_string(char *buffer, uint32_t buff_len);
 void serial_test(void);
 void motor_test(void);
-int32_t set_addr(uint32_t addr);
-int32_t step_motor(uint32_t motor, int32_t dir);
-int32_t stop_motor(uint32_t motor);
+int32_t set_addr(uint8_t addr);
+int32_t step_motor(uint8_t motor, int8_t dir);
+int32_t stop_motor(uint8_t motor);
 void check_mode(void);
 void manual_control(void);
 int32_t remote_control(void);
 void read_cmd(void);
 void set_LEDs(void);
+int8_t get_opto(void);
+int8_t check_opto_flag(void);
 
 /**
   * @}

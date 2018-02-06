@@ -82,6 +82,7 @@ int main(void)
   ENABLE_ROBKO();
   //Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
+  extern uint16_t local_step_time;
   while (1)
   {
 	  //serial_test();
@@ -90,7 +91,7 @@ int main(void)
 	  //motor_test();
 	  //check_mode();
 	  remote_control();
-	  LL_mDelay(STEP_TIME);
+	  LL_mDelay(local_step_time);
 	  set_LEDs();
   }
   /* USER CODE END 2 */
@@ -311,7 +312,7 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(INPUT_PORT, &GPIO_InitStruct);
 
   /**/
-  GPIO_InitStruct.Pin = STEP_SIZE_PIN|POT_MODE_PIN|JOYSTICK_CONNECTED_PIN|MANUAL_MODE_PIN
+  GPIO_InitStruct.Pin = STEP_SIZE_PIN|STEP_TIME_PIN|JOYSTICK_CONNECTED_PIN|MANUAL_MODE_PIN
                           |AUTO_MODE_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;

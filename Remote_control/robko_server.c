@@ -10,7 +10,7 @@
 
 #define SOCK_PORT 55321
 #define SOCK_PROTOCOL SOCK_STREAM	//SOCK_STREAM=TCP
-#define SOCK_BUFFER_SIZE 255
+#define SOCK_BUFFER_SIZE 1501
 #define SER_BUFFER_SIZE 100
 #define SERIAL_PORT "/dev/ttyUSB0"
 #define BAUDRATE 115200
@@ -59,7 +59,8 @@ int main(void)
 		{
 			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
 			memset(serial_buffer, 0, SER_BUFFER_SIZE);
-			n=read(newsockfd, sock_buffer, SOCK_BUFFER_SIZE);
+			n=read(newsockfd, sock_buffer, SOCK_BUFFER_SIZE-1);
+			//if file, add null byte
 			//add data parsing?
 			//If FIN has been received, close the socket
 			if(!n)

@@ -16,7 +16,7 @@ typedef struct cmd_buffer_t
 }
 cmd_buffer_t;
 
-cmd_buffer_t *current_cmd=NULL, *last_cmd;
+cmd_buffer_t *current_cmd=NULL, *last_cmd=NULL;
 
 //Describes the sequence for driving the 4 coils in half-step mode of 2-phase unipolar stepper motor
 //For full-step mode only the every even numbered state is skipped
@@ -111,6 +111,7 @@ void check_mode(void)
 		else
 			remote_control();
 	}
+	set_LEDs();
 	//Wait for the motors to finish moving
 	if(remote_step_time==USE_LOCAL_TIME)
 		LL_mDelay(local_step_time);
@@ -128,7 +129,7 @@ void manual_control(void)
 int32_t remote_control(void)
 {
 	//n is a flag, raised if the current command has been completed and can be deleted
-	int8_t n=0;
+	int8_t n=0, i;
 	cmd_buffer_t *old;
 	//Check if any commands are pending
 	if(current_cmd==NULL || LL_GPIO_IsOutputPinSet(ADDR_DATA_PORT, ENABLE_PIN)==0)
@@ -162,7 +163,37 @@ int32_t remote_control(void)
 			if((* (int16_t *) (current_cmd->cmd+2))==0)
 				n=1;
 			break;
-		//case MOVE:
+		case MOVE:
+			for(i=0;i<12;i+=2)
+			{
+				if((* (int16_t *) (current_cmd->cmd+1+i))>0)
+				{
+					n=step_motor(i/2, STEP_FWD);
+					//Decrement number of steps
+					(* (int16_t *) (current_cmd->cmd+1+i))--;
+				}
+				else if((* (int16_t *) (current_cmd->cmd+1+i))<0)
+				{
+					n=step_motor(i/2, STEP_REV);
+					//Decrement number of steps
+					(* (int16_t *) (current_cmd->cmd+1+i))++;
+				}
+			}
+			//Checks if the robot should stop moving before finishing the command
+			if(check_opto_flag())
+			{
+				n=1;
+				move_until=MOVE_FREELY;
+			}
+			//Check if command has been finished
+			if(0 == ((* (int16_t *) (current_cmd->cmd+1)) ||
+					 (* (int16_t *) (current_cmd->cmd+3)) ||
+					 (* (int16_t *) (current_cmd->cmd+5)) ||
+					 (* (int16_t *) (current_cmd->cmd+7)) ||
+					 (* (int16_t *) (current_cmd->cmd+9)) ||
+					 (* (int16_t *) (current_cmd->cmd+11))))
+				n=1;
+			break;
 		case OFF:
 			stop_motor(current_cmd->cmd[1]);
 			n=1;
@@ -326,7 +357,7 @@ void set_LEDs(void)
 			LL_GPIO_SetOutputPin(LED_PORT, LED_pins[i*2+1]);
 	}
 	//Clear the motor_status array so the step_motor() function can safely set it
-	memset(motor_status, 0, sizeof(motor_status));
+	memset(motor_status, 0, sizeof(motor_status[0])*6);
 }
 
 //Check if an object is detected inside the claw

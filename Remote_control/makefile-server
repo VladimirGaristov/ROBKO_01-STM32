@@ -1,11 +1,11 @@
 all: decode.o server.o
-	gcc -o robko_server server.o decode.o -L/usr/local/lib -lserialport
+	gcc -Wall -pedantic -std=c11 -o robko_server server.o decode.o -L/usr/local/lib -lserialport
 
 decode.o: robko_decode.c
-	gcc -c robko_decode.c -o decode.o
+	gcc -Wall -pedantic -std=c11 -c -o decode.o robko_decode.c
 
 server.o: robko_server.c
-	gcc -c robko_server.c -o server.o
+	gcc -Wall -pedantic -std=c11 -c -o server.o robko_server.c
 
 clean:
 	rm decode.o server.o

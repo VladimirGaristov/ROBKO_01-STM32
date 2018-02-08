@@ -82,17 +82,16 @@ int main(void)
   ENABLE_ROBKO();
   //Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
-  extern uint16_t local_step_time;
+  //extern uint16_t local_step_time;
   while (1)
   {
 	  //serial_test();
 	  //LED_Blink();
 	  //LED_wave();
 	  //motor_test();
-	  //check_mode();
-	  remote_control();
-	  LL_mDelay(local_step_time);
-	  set_LEDs();
+	  check_mode();
+	  //remote_control();
+	  //LL_mDelay(local_step_time);
   }
   /* USER CODE END 2 */
 

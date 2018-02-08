@@ -3,24 +3,32 @@
 
 void decode_cmd(char *buffer, uint8_t *cmd)
 {
+	char *next_val, i;
+	int l;
 	//Dobavi proverki dali ne sa vavedeni krivi stoinosti
 	//The first byte is the lenght
-	if (strstr(buffer, "MOV"))
+	if (strstr(buffer, "MOVE"))
+	{
+		cmd[0] = 14;
+		cmd[1] = MOVE;
+		l=strlen(buffer);
+		* (int16_t *) (cmd+2) = (int16_t) strtol(buffer+5, &next_val, 10);
+		for(i=0;i<10;i+=2)
+		{
+			//Prevents reading from adresses beyond the end of the buffer
+			if(next_val > buffer+l)
+				break;
+			* (int16_t *) (cmd+4+i) = (int16_t) strtol(next_val+1, &next_val, 10);
+		}
+	}
+	else if (strstr(buffer, "MOV"))
 	{
 		cmd[0] = 5;
 		cmd[1] = MOV;
-		* (int16_t *) (cmd+3) = (int16_t) strtol(buffer+5, NULL, 10);
+		* (int16_t *) (cmd+3) = (int16_t) strtol(buffer+6, NULL, 10);
 		buffer[5] = '\0';
 		cmd[2] = (uint8_t) strtol(buffer+4, NULL, 10);
 	}
-	/*else if (strstr(buffer, "MOVE"))
-	{
-		cmd[0] = 13;
-		cmd[1] = MOVE;
-		cmd[3] = (uint8_t) strtol(buffer+10, NULL, 10);
-		buffer[9] = '\0';
-		cmd[2] = (uint8_t) strtol(buffer+8, NULL, 10);
-	}*/
 	else if (strstr(buffer, "OFF"))
 	{
 		cmd[0] = 3;

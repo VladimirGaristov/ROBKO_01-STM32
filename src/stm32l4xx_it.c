@@ -48,3 +48,8 @@ void USART1_IRQHandler(void)
 	if(LL_USART_IsActiveFlag_RXNE(USART1))
 		read_cmd();
 }
+
+void DMA1_Channel1_IRQHandler(void)
+{
+
+}

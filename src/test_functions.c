@@ -2,7 +2,7 @@
  * test_functions.c
  *
  *  Created on: Oct 11, 2017
- *      Author: cartogan
+ *      Author: Vladimir Garistov
  */
 
 #include "main.h"

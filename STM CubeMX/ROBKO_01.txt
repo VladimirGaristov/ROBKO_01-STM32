@@ -1,0 +1,88 @@
+Configuration	ROBKO 01
+STM32CubeMX 	4.22.0
+Date	02/10/2018
+MCU	STM32L476RGTx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC1	IN1 Single-ended	ADC1_IN1	PC0
+ADC1	IN2 Single-ended	ADC1_IN2	PC1
+ADC1	IN3 Single-ended	ADC1_IN3	PC2
+ADC1	IN4 Single-ended	ADC1_IN4	PC3
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+USART1	Asynchronous	USART1_RX	PA10
+USART1	Asynchronous	USART1_TX	PA9
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+2	PC13	GPIO_Input	CLAW_RELEASE_BUT
+3	PC14-OSC32_IN (PC14)	GPIO_Input	STEP_SIZE
+8	PC0	ADC1_IN1	SHOULDER_POT
+9	PC1	ADC1_IN2	LEFT_RIGHT_POT
+10	PC2	ADC1_IN3	CLaW_ROTATION_POT
+11	PC3	ADC1_IN4	ELBOW_POT
+14	PA0	GPIO_Output	LED3
+15	PA1	GPIO_Output	LED4
+16	PA2	GPIO_Output	LED10
+17	PA3	GPIO_Output	LED11
+20	PA4	GPIO_Output	LED5
+21	PA5	GPIO_Output	LED6
+22	PA6	GPIO_Output	LED7
+23	PA7	GPIO_Output	LED8
+24	PC4	GPIO_Input	STEP_TIME
+27	PB1	GPIO_Output	IOW
+28	PB2	GPIO_Output	IOR
+29	PB10	GPIO_Output	D3
+30	PB11	GPIO_Output	D2
+33	PB12	GPIO_Input	D4
+34	PB13	GPIO_Input	D5
+35	PB14	GPIO_Input	D6
+36	PB15	GPIO_Input	D7
+38	PC7	GPIO_Input	JOYSTICK_CONNECTED
+39	PC8	GPIO_Input	MANUAL
+40	PC9	GPIO_Input	AUTO
+41	PA8	GPIO_Output	LED9
+42	PA9	USART1_TX	
+43	PA10	USART1_RX	
+46	PA13 (JTMS-SWDIO)	GPIO_Output	LED0
+49	PA14 (JTCK-SWCLK)	GPIO_Output	LED1
+50	PA15 (JTDI)	GPIO_Output	LED2
+51	PC10	GPIO_Input	CLAW_UP_BUT
+52	PC11	GPIO_Input	CLAW_DOWN_BUT
+53	PC12	GPIO_Input	CLAW_GRAB_BUT
+55	PB3 (JTDO-TRACESWO)	GPIO_Output	A0
+56	PB4 (NJTRST)	GPIO_Output	A1
+57	PB5	GPIO_Output	A2
+58	PB6	GPIO_Output	ENABLE
+61	PB8	GPIO_Output	D1
+62	PB9	GPIO_Output	D0
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : ROBKO 01
+Project Folder : /home/cartogan/Desktop/ROBKO 01
+Toolchain / IDE : SW4STM32
+Firmware Package Name and Version : STM32Cube FW_L4 V1.8.1
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : No
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+

@@ -55,6 +55,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_USART1_UART_Init(void);
+void Configure_DMA(void);
+static void Activate_ADC(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -73,12 +75,17 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  Configure_DMA();
   MX_ADC1_Init();
   MX_USART1_UART_Init();
+  Activate_ADC();
 
   /* USER CODE BEGIN 2 */
   DWT_Init();
-  //Enable ROBKO-01
+  //Begin reading potentiometer values
+  LL_ADC_REG_StartConversion(ADC1);
+  //Enable DMA channel 1
+  //Enable ROBKO 01
   ENABLE_ROBKO();
   //Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
@@ -89,7 +96,7 @@ int main(void)
 	  //LED_Blink();
 	  //LED_wave();
 	  //motor_test();
-	  check_mode();
+	  check_mode();		//Uncomment only this line for normal operation
 	  //remote_control();
 	  //LL_mDelay(local_step_time);
   }
@@ -98,6 +105,8 @@ int main(void)
   /* Infinite loop */
   while (1);
 }
+
+//TODO Add initialization checks
 
 static void LL_Init(void)
 {
@@ -126,6 +135,9 @@ static void LL_Init(void)
   // USART1 interrupt configuration
   NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
   NVIC_EnableIRQ(USART1_IRQn);
+  //DMA interrupt configuration
+  NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 1));
+  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
   /* USER CODE END 3 */
 
 }
@@ -158,7 +170,7 @@ void SystemClock_Config(void)
   {
 
   }
-  LL_RCC_PLLSAI1_ConfigDomain_ADC(LL_RCC_PLLSOURCE_MSI, LL_RCC_PLLM_DIV_1, 16, LL_RCC_PLLSAI1R_DIV_2);
+  LL_RCC_PLLSAI1_ConfigDomain_ADC(LL_RCC_PLLSOURCE_MSI, LL_RCC_PLLM_DIV_1, 16, LL_RCC_PLLSAI1R_DIV_8);
   LL_RCC_PLLSAI1_EnableDomain_ADC();
   LL_RCC_PLLSAI1_Enable();
 
@@ -216,11 +228,11 @@ static void MX_ADC1_Init(void)
   ADC_InitStruct.LowPowerMode = LL_ADC_LP_MODE_NONE;
   LL_ADC_Init(ADC1, &ADC_InitStruct);
   ADC_REG_InitStruct.TriggerSource = LL_ADC_REG_TRIG_SOFTWARE;
-  ADC_REG_InitStruct.SequencerLength = LL_ADC_REG_SEQ_SCAN_DISABLE;
+  ADC_REG_InitStruct.SequencerLength = LL_ADC_REG_SEQ_SCAN_ENABLE_4RANKS;
   ADC_REG_InitStruct.SequencerDiscont = LL_ADC_REG_SEQ_DISCONT_DISABLE;
-  ADC_REG_InitStruct.ContinuousMode = LL_ADC_REG_CONV_SINGLE;
-  ADC_REG_InitStruct.DMATransfer = LL_ADC_REG_DMA_TRANSFER_LIMITED;
-  ADC_REG_InitStruct.Overrun = LL_ADC_REG_OVR_DATA_PRESERVED;
+  ADC_REG_InitStruct.ContinuousMode = LL_ADC_REG_CONV_CONTINUOUS;
+  ADC_REG_InitStruct.DMATransfer = LL_ADC_REG_DMA_TRANSFER_UNLIMITED;
+  ADC_REG_InitStruct.Overrun = LL_ADC_REG_OVR_DATA_OVERWRITTEN;
   LL_ADC_REG_Init(ADC1, &ADC_REG_InitStruct);
   LL_ADC_SetOverSamplingScope(ADC1, LL_ADC_OVS_DISABLE);
   ADC_CommonInitStruct.CommonClock = LL_ADC_CLOCK_ASYNC_DIV1;
@@ -229,10 +241,29 @@ static void MX_ADC1_Init(void)
   LL_ADC_EnableIT_EOC(ADC1);
   LL_ADC_DisableIT_EOS(ADC1);
 
-  /**Configure Regular Channel*/
+  /**Configure Regular Channel
+  */
   LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_1);
-  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_2CYCLES_5);
+  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_92CYCLES_5);
   LL_ADC_SetChannelSingleDiff(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SINGLE_ENDED);
+
+  /**Configure Regular Channel
+  */
+  LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_2, LL_ADC_CHANNEL_2);
+  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_2, LL_ADC_SAMPLINGTIME_92CYCLES_5);
+  LL_ADC_SetChannelSingleDiff(ADC1, LL_ADC_CHANNEL_2, LL_ADC_SINGLE_ENDED);
+
+  /**Configure Regular Channel
+  */
+  LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_3, LL_ADC_CHANNEL_3);
+  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_3, LL_ADC_SAMPLINGTIME_92CYCLES_5);
+  LL_ADC_SetChannelSingleDiff(ADC1, LL_ADC_CHANNEL_3, LL_ADC_SINGLE_ENDED);
+
+  /**Configure Regular Channel
+  */
+  LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_4, LL_ADC_CHANNEL_4);
+  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_4, LL_ADC_SAMPLINGTIME_92CYCLES_5);
+  LL_ADC_SetChannelSingleDiff(ADC1, LL_ADC_CHANNEL_4, LL_ADC_SINGLE_ENDED);
 }
 
 /* USART1 init function */
@@ -268,9 +299,9 @@ static void MX_USART1_UART_Init(void)
   LL_USART_ConfigAsyncMode(USART1);
   LL_USART_Enable(USART1);
 
-  /* USER CODE BEGIN 4 */
+  /* USER CODE BEGIN 5 */
   LL_USART_EnableIT_RXNE(USART1);
-  /* USER CODE END 4 */
+  /* USER CODE END 5 */
 
 }
 
@@ -352,6 +383,198 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull       = LL_GPIO_PULL_NO;
   LL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
   */
+}
+
+/**
+  * @brief  This function configures the DMA1 Channel 1 to copy data from
+  *         Flash memory(aSRC_Const_Buffer) to Internal SRAM(aDST_Buffer).
+  * @note   This function is used to :
+  *         -1- Enable DMA1 clock
+  *         -2- Configure the DMA functionnal parameters
+  *         -3- Configure NVIC for DMA transfer complete/error interrupts
+  * @param   None
+  * @retval  None
+  */
+void Configure_DMA(void)
+{
+  LL_DMA_InitTypeDef dma_initstruct;
+  extern uint32_t adc_pot_vals;
+
+  /* (1) Enable the clock of DMA1 */
+  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA1);
+
+  /* (2) Configure the DMA functional parameters */
+
+  /* Reset DMA1 data registers */
+  LL_DMA_DeInit(DMA1, LL_DMA_CHANNEL_1);
+
+  /* Set fields of initialization structure:
+   *  - Source base address:        aSRC_Const_Buffer
+   *  - Destination base address:   aDST_Buffer
+   *  - Transfer direction :        Memory to memory
+   *  - Source increment mode:      Increment mode Enable
+   *  - Destination increment mode: Increment mode Enable
+   *  - Source data alignment:      Word alignment
+   *  - Destination data alignment: Word alignment
+   *  - Number of data to transfer: BUFFER_SIZE
+   *  - DMA peripheral request:     No request
+   *  - Transfer priority level:    High priority
+  */
+  dma_initstruct.PeriphOrM2MSrcAddress  = LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA);
+  dma_initstruct.MemoryOrM2MDstAddress  = (uint32_t) &adc_pot_vals;
+  dma_initstruct.Direction              = LL_DMA_DIRECTION_PERIPH_TO_MEMORY;
+  dma_initstruct.Mode                   = LL_DMA_MODE_CIRCULAR;
+  dma_initstruct.PeriphOrM2MSrcIncMode  = LL_DMA_PERIPH_NOINCREMENT;
+  dma_initstruct.MemoryOrM2MDstIncMode  = LL_DMA_MEMORY_INCREMENT;
+  dma_initstruct.PeriphOrM2MSrcDataSize = LL_DMA_PDATAALIGN_HALFWORD;
+  dma_initstruct.MemoryOrM2MDstDataSize = LL_DMA_MDATAALIGN_HALFWORD;
+  dma_initstruct.NbData                 = 4;
+  dma_initstruct.PeriphRequest          = LL_DMA_REQUEST_0;
+  dma_initstruct.Priority               = LL_DMA_PRIORITY_MEDIUM;
+
+  /* Initialize DMA instance according to parameters defined in initialization structure. */
+  LL_DMA_Init(DMA1, LL_DMA_CHANNEL_1, &dma_initstruct);
+
+  /* (3) Configure NVIC for DMA transfer complete/error interrupts */
+  //LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_1);
+  //LL_DMA_EnableIT_TE(DMA1, LL_DMA_CHANNEL_1);
+  /* USER CODE BEGIN 5 */
+  //Enable DMA channel for ADC
+  LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_1);
+  /* USER CODE END 5 */
+}
+
+/**
+  * @brief  Perform ADC activation procedure to make it ready to convert
+  *         (ADC instance: ADC1).
+  * @note   Operations:
+  *         - ADC instance
+  *           - Disable deep power down
+  *           - Enable internal voltage regulator
+  *           - Run ADC self calibration
+  *           - Enable ADC
+  *         - ADC group regular
+  *           none: ADC conversion start-stop to be performed
+  *                 after this function
+  *         - ADC group injected
+  *           none: ADC conversion start-stop to be performed
+  *                 after this function
+  * @param  None
+  * @retval None
+  */
+static void Activate_ADC(void)
+{
+  __IO uint32_t wait_loop_index = 0;
+  #if (USE_TIMEOUT == 1)
+  uint32_t Timeout = 0; /* Variable used for timeout management */
+  #endif /* USE_TIMEOUT */
+
+  /*## Operation on ADC hierarchical scope: ADC instance #####################*/
+
+  /* Note: Hardware constraint (refer to description of the functions         */
+  /*       below):                                                            */
+  /*       On this STM32 serie, setting of these features is conditioned to   */
+  /*       ADC state:                                                         */
+  /*       ADC must be disabled.                                              */
+  /* Note: In this example, all these checks are not necessary but are        */
+  /*       implemented anyway to show the best practice usages                */
+  /*       corresponding to reference manual procedure.                       */
+  /*       Software can be optimized by removing some of these checks, if     */
+  /*       they are not relevant considering previous settings and actions    */
+  /*       in user application.                                               */
+  if (LL_ADC_IsEnabled(ADC1) == 0)
+  {
+    /* Disable ADC deep power down (enabled by default after reset state) */
+    LL_ADC_DisableDeepPowerDown(ADC1);
+
+    /* Enable ADC internal voltage regulator */
+    LL_ADC_EnableInternalRegulator(ADC1);
+
+    /* Delay for ADC internal voltage regulator stabilization.                */
+    /* Compute number of CPU cycles to wait for, from delay in us.            */
+    /* Note: Variable divided by 2 to compensate partially                    */
+    /*       CPU processing cycles (depends on compilation optimization).     */
+    /* Note: If system core clock frequency is below 200kHz, wait time        */
+    /*       is only a few CPU processing cycles.                             */
+    wait_loop_index = ((LL_ADC_DELAY_INTERNAL_REGUL_STAB_US * (SystemCoreClock / (100000 * 2))) / 10);
+    while(wait_loop_index != 0)
+    {
+      wait_loop_index--;
+    }
+
+    /* Run ADC self calibration */
+    LL_ADC_StartCalibration(ADC1, LL_ADC_SINGLE_ENDED);
+
+    /* Poll for ADC effectively calibrated */
+    #if (USE_TIMEOUT == 1)
+    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
+    #endif /* USE_TIMEOUT */
+
+    while (LL_ADC_IsCalibrationOnGoing(ADC1) != 0)
+    {
+    #if (USE_TIMEOUT == 1)
+      /* Check Systick counter flag to decrement the time-out value */
+      if (LL_SYSTICK_IsActiveCounterFlag())
+      {
+        if(Timeout-- == 0)
+        {
+        /* Time-out occurred. Set LED to blinking mode */
+        LED_Blinking(LED_BLINK_ERROR);
+        }
+      }
+    #endif /* USE_TIMEOUT */
+    }
+
+    /* Delay between ADC end of calibration and ADC enable.                   */
+    /* Note: Variable divided by 2 to compensate partially                    */
+    /*       CPU processing cycles (depends on compilation optimization).     */
+    wait_loop_index = (ADC_DELAY_CALIB_ENABLE_CPU_CYCLES >> 1);
+    while(wait_loop_index != 0)
+    {
+      wait_loop_index--;
+    }
+
+    /* Enable ADC */
+    LL_ADC_Enable(ADC1);
+
+    /* Poll for ADC ready to convert */
+    #if (USE_TIMEOUT == 1)
+    Timeout = ADC_ENABLE_TIMEOUT_MS;
+    #endif /* USE_TIMEOUT */
+
+    while (LL_ADC_IsActiveFlag_ADRDY(ADC1) == 0)
+    {
+    #if (USE_TIMEOUT == 1)
+      /* Check Systick counter flag to decrement the time-out value */
+      if (LL_SYSTICK_IsActiveCounterFlag())
+      {
+        if(Timeout-- == 0)
+        {
+        /* Time-out occurred. Set LED to blinking mode */
+        LED_Blinking(LED_BLINK_ERROR);
+        }
+      }
+    #endif /* USE_TIMEOUT */
+    }
+
+    /* Note: ADC flag ADRDY is not cleared here to be able to check ADC       */
+    /*       status afterwards.                                               */
+    /*       This flag should be cleared at ADC Deactivation, before a new    */
+    /*       ADC activation, using function "LL_ADC_ClearFlag_ADRDY()".       */
+  }
+
+  /*## Operation on ADC hierarchical scope: ADC group regular ################*/
+  /* Note: No operation on ADC group regular performed here.                  */
+  /*       ADC group regular conversions to be performed after this function  */
+  /*       using function:                                                    */
+  /*       "LL_ADC_REG_StartConversion();"                                    */
+
+  /*## Operation on ADC hierarchical scope: ADC group injected ###############*/
+  /* Note: No operation on ADC group injected performed here.                 */
+  /*       ADC group injected conversions to be performed after this function */
+  /*       using function:                                                    */
+  /*       "LL_ADC_INJ_StartConversion();"                                    */
+
 }
 
 /**

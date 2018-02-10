@@ -2,7 +2,7 @@
  * motor_control.c
  *
  *  Created on: Nov 1, 2017
- *      Author: cartogan
+ *      Author: Vladimir Garistov
  */
 
 #include "main.h"
@@ -26,11 +26,14 @@ const uint8_t coil_current[4][8]={{1, 1, 0, 0, 0, 0, 0, 1}, {0, 0, 0, 1, 1, 1, 0
 int16_t motor_pos[6]={1, 1, 1, 1, 1, 1};
 //Stores the direction of the last steps. Used to determine which status LEDs to illuminate
 int8_t motor_status[6]={0};
-uint8_t move_until=MOVE_FREELY, local_step_size=FULL_STEP, remote_step_size=USE_LOCAL_STEP;
+//Step size and speed parameters
+uint8_t move_until=MOVE_FREELY, local_step_size=FULL_STEP, remote_step_size=FULL_STEP;
 uint16_t local_step_time=SLOW_STEP, remote_step_time=USE_LOCAL_TIME;
 //This is needed for looping
 const uint32_t LED_pins[12]={LED0_PIN, LED1_PIN, LED2_PIN, LED3_PIN, LED4_PIN, LED5_PIN,
 							 LED6_PIN, LED7_PIN, LED8_PIN, LED9_PIN, LED10_PIN, LED11_PIN};
+//Stores the potentiometer values after ADC conversion
+__IO uint16_t adc_pot_vals[4]={POT_INIT_VAL};
 
 //Translates an address of ROBKO register to states of the address pins
 int32_t set_addr(uint8_t addr)
@@ -61,6 +64,8 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 	//Increment/decrement motor position
 	if(remote_step_size==USE_LOCAL_STEP)
 		motor_pos[motor]+=dir*local_step_size;
+	else if(remote_step_size==FULL_STEP || remote_step_size==HALF_STEP)
+		motor_pos[motor]+=dir*remote_step_size;
 	//Overflow and underflow protection
 	int16_t new_pos=motor_pos[motor];
 	new_pos%=8;
@@ -96,8 +101,12 @@ void check_mode(void)
 	manual_mode=LL_GPIO_IsInputPinSet(INPUT_PORT, MANUAL_MODE_PIN);
 	if(LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_SIZE_PIN))
 		local_step_size=FULL_STEP;
+	else
+		local_step_size=HALF_STEP;
 	if(LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_TIME_PIN))
 		local_step_time=FAST_STEP;
+	else
+		local_step_time=SLOW_STEP;
 	if(!auto_mode)
 		if(manual_mode)
 			manual_control();
@@ -119,10 +128,49 @@ void check_mode(void)
 		LL_mDelay(remote_step_time);
 }
 
-//
 void manual_control(void)
 {
-
+	int8_t upper_but, lower_but;
+	upper_but=LL_GPIO_IsInputPinSet(INPUT_PORT, CLAW_GRAB_BUT_PIN);
+	lower_but=LL_GPIO_IsInputPinSet(INPUT_PORT, CLAW_RELEASE_BUT_PIN);
+	if(upper_but && !lower_but)
+		step_motor(CLAW_GRAB_MOTOR, STEP_REV);
+	else if(!upper_but && lower_but)
+		step_motor(CLAW_GRAB_MOTOR, STEP_FWD);
+	upper_but=LL_GPIO_IsInputPinSet(INPUT_PORT, CLAW_UP_BUT_PIN);
+	lower_but=LL_GPIO_IsInputPinSet(INPUT_PORT, CLAW_DOWN_BUT_PIN);
+	if(upper_but && !lower_but)
+	{
+		step_motor(CLAW_ROT_MOTOR_L, STEP_FWD);
+		step_motor(CLAW_ROT_MOTOR_R, STEP_REV);
+	}
+	else if(!upper_but && lower_but)
+	{
+		step_motor(CLAW_ROT_MOTOR_L, STEP_REV);
+		step_motor(CLAW_ROT_MOTOR_R, STEP_FWD);
+	}
+	if(adc_pot_vals[LEFT_RIGHT_POT_NUM] > LEFT_THR)
+		step_motor(ROTATION_MOTOR, STEP_FWD);
+	else if(adc_pot_vals[LEFT_RIGHT_POT_NUM] < RIGHT_THR)
+		step_motor(ROTATION_MOTOR, STEP_REV);
+	if(adc_pot_vals[SHOULDER_POT_NUM] > UP_THR)
+		step_motor(SHOULDER_MOTOR, STEP_FWD);
+	else if(adc_pot_vals[SHOULDER_POT_NUM] < DOWN_THR)
+		step_motor(SHOULDER_MOTOR, STEP_REV);
+	if(adc_pot_vals[ELBOW_POT_NUM] > UP_THR)
+		step_motor(ELBOW_MOTOR, STEP_FWD);
+	else if(adc_pot_vals[ELBOW_POT_NUM] < DOWN_THR)
+		step_motor(ELBOW_MOTOR, STEP_REV);
+	if(adc_pot_vals[CLAW_ROTATION_POT_NUM] > LEFT_THR)
+	{
+		step_motor(CLAW_ROT_MOTOR_R, STEP_REV);
+		step_motor(CLAW_ROT_MOTOR_L, STEP_REV);
+	}
+	else if(adc_pot_vals[CLAW_ROTATION_POT_NUM] < RIGHT_THR)
+	{
+		step_motor(CLAW_ROT_MOTOR_R, STEP_FWD);
+		step_motor(CLAW_ROT_MOTOR_L, STEP_FWD);
+	}
 }
 
 //Executes a stored command
@@ -202,6 +250,7 @@ int32_t remote_control(void)
 			DISABLE_ROBKO();
 			n=1;
 			break;
+		//TODO
 		//case GOTO_POS:
 		//case SAVE_POS:
 		case SET_STEP:
@@ -305,7 +354,7 @@ void read_cmd(void)
 				while(current_cmd!=NULL);
 				break;
 			case GET_POS:
-				//
+				//TODO
 				break;
 			case GOTO_POS: case MOVE: rem_bytes+=9;
 			/* no break*/

@@ -45,6 +45,14 @@
 #ifndef STM32L476xx
 #define STM32L476xx
 #endif
+#define USE_TIMEOUT 0
+
+/* Delay between ADC end of calibration and ADC enable.                     */
+/* Delay estimation in CPU cycles: Case of ADC enable done                  */
+/* immediately after ADC calibration, ADC clock setting slow                */
+/* (LL_ADC_CLOCK_ASYNC_DIV32). Use a higher delay if ratio                  */
+/* (CPU clock / ADC clock) is above 32.                                     */
+#define ADC_DELAY_CALIB_ENABLE_CPU_CYCLES  (LL_ADC_DELAY_CALIB_ENABLE_ADC_CYCLES * 32)
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_ll_adc.h"
@@ -68,6 +76,7 @@
 
 /* Private define ------------------------------------------------------------*/
 
+//TODO Switch the joysticks
 #define CLAW_RELEASE_BUT_PIN LL_GPIO_PIN_13
 #define CLAW_GRAB_BUT_PIN LL_GPIO_PIN_12
 #define LEFT_RIGHT_POT_PIN LL_GPIO_PIN_1
@@ -79,7 +88,7 @@
 #define AUTO_MODE_PIN LL_GPIO_PIN_9
 #define MANUAL_MODE_PIN LL_GPIO_PIN_8
 #define JOYSTICK_CONNECTED_PIN LL_GPIO_PIN_7
-#define STEP_SIZE_PIN LL_GPIO_PIN_14
+#define STEP_SIZE_PIN LL_GPIO_PIN_14		//Conflicts with LSE oscillator, solder SB49 and remove R34 on Nucleo board to use
 #define STEP_TIME_PIN LL_GPIO_PIN_4
 
 #define IOW_PIN LL_GPIO_PIN_1
@@ -92,14 +101,14 @@
 #define D5_PIN LL_GPIO_PIN_13
 #define D6_PIN LL_GPIO_PIN_14
 #define D7_PIN LL_GPIO_PIN_15
-#define A0_PIN LL_GPIO_PIN_3
+#define A0_PIN LL_GPIO_PIN_3		//Conflicts with debugger, but still works
 #define A1_PIN LL_GPIO_PIN_4
 #define A2_PIN LL_GPIO_PIN_5
 #define ENABLE_PIN LL_GPIO_PIN_6
 
 #define TEST_LED_PIN LL_GPIO_PIN_5
-#define LED0_PIN LL_GPIO_PIN_13
-#define LED1_PIN LL_GPIO_PIN_14
+#define LED0_PIN LL_GPIO_PIN_13		//Conflicts with debugger
+#define LED1_PIN LL_GPIO_PIN_14		//Conflicts with debugger
 #define LED2_PIN LL_GPIO_PIN_15
 #define LED3_PIN LL_GPIO_PIN_0
 #define LED4_PIN LL_GPIO_PIN_1
@@ -139,6 +148,14 @@
 #define INPUT_PORT GPIOC
 #define LED_PORT GPIOA
 
+//ADC thresholds
+#define LEFT_THR		0x09CBU	//2.02V
+#define RIGHT_THR		0x057BU	//1.13V
+#define UP_THR			0x08F8U	//1.85V
+#define DOWN_THR		0x0746U	//1.5V
+#define LKG_CORRECTION	0x003EU	//0.05V	Subtract from threshold
+#define POT_INIT_VAL	0x0800U
+
 #define SERIAL_BUFFER_LEN 100
 #define FULL_STEP 2
 #define HALF_STEP 1
@@ -161,6 +178,11 @@
 #define CLAW_ROT_MOTOR_L 4	//FWD=up
 #define CLAW_ROT_MOTOR_R 3	//FWD=down
 #define ALL_MOTORS 6
+
+#define LEFT_RIGHT_POT_NUM 1
+#define SHOULDER_POT_NUM 0
+#define ELBOW_POT_NUM 3
+#define CLAW_ROTATION_POT_NUM 2
 
 //Commands for remote control
 #define MOV 1

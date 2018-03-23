@@ -30,7 +30,7 @@ Instructions for remote control:
 * launch the client, providing the server IP address as a parameter
 * send commands to the MCU
 
-Command syntax:
+Command syntax:\
 MOV *motor* *num_of_steps*\
 MOVE *motor0_steps* *motor1_steps* *motor2_steps* *motor3_steps* *motor4_steps* *motor5_steps*\
 OFF *motor*\
@@ -41,7 +41,7 @@ FREEZE\
 RESUME\
 OPTO *mode*\
 SET_STEP *step_mode*\
-SET_SPEED *delay_btw_steps*\
+SET_SPEED *delay_btw_steps*
 
 Words in *italics* are parameters. Negative numbers of steps cause movement in reverse. 'OFF 6' turns off all motors.
 The file, specified by OPEN_FILE must be located in the same directory as the server executable and it must contain

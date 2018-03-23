@@ -5,10 +5,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "robko_decode.h"
-//Includes string.h, stdlib.h and stdint.h
 
 #define BUFFER_SIZE (512)
-//#define SERVER_IP_ADDR "192.168.1.4"
 
 void error(char *msg);
 
@@ -47,7 +45,7 @@ int main(int argc, const char *argv[])
 		printf("Please enter a command: ");
 		memset(buffer, 0, BUFFER_SIZE);
 		fgets(buffer, BUFFER_SIZE, stdin);
-		//Add command verification
+		//Add command verification?
 		decode_cmd(buffer, cmd);
 		//Send data to the server
 		n = write(sockfd, cmd, cmd[0]);

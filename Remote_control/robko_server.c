@@ -48,7 +48,7 @@ int main(void)
 	//sockaddr is a generic socket address, sockaddr_in is for IPv4
 	if(bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr))<0)
 		error("ERROR on binding\n");
-	listen(sockfd,5);
+	listen(sockfd, 5);
 	clilen=sizeof(cli_addr);
 	while(1)
 	{
@@ -98,9 +98,11 @@ void delay(int msec)
 		current=clock();
 }
 
+//Initialize the serial port
 int port_configuration(struct sp_port **ser_port)
 {
 	int check;
+	//Decode port name
 	sp_get_port_by_name(SERIAL_PORT, ser_port);
 	if(ser_port==NULL)
 	{

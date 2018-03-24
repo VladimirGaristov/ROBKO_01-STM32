@@ -210,10 +210,14 @@ int32_t remote_control(void)
 			if(check_opto_flag())
 			{
 				n=1;
+				move_until=MOVE_FREELY;
 			}
 			//Check if command has been finished
 			if((* (int16_t *) (current_cmd->cmd+2))==0)
+			{
 				n=1;
+				move_until=MOVE_FREELY;
+			}
 			break;
 		case MOVE:
 			for(i=0;i<12;i+=2)
@@ -235,6 +239,7 @@ int32_t remote_control(void)
 			if(check_opto_flag())
 			{
 				n=1;
+				move_until=MOVE_FREELY;
 			}
 			//Check if command has been finished
 			if(0 == ((* (int16_t *) (current_cmd->cmd+1)) ||
@@ -243,7 +248,10 @@ int32_t remote_control(void)
 					 (* (int16_t *) (current_cmd->cmd+7)) ||
 					 (* (int16_t *) (current_cmd->cmd+9)) ||
 					 (* (int16_t *) (current_cmd->cmd+11))))
+			{
 				n=1;
+				move_until=MOVE_FREELY;
+			}
 			break;
 		case OFF:
 			stop_motor(current_cmd->cmd[1]);
@@ -281,7 +289,6 @@ int32_t remote_control(void)
 		old=current_cmd;
 		current_cmd=current_cmd->next_cmd;
 		free(old);
-		move_until=MOVE_FREELY;
 	}
 	return 0;
 }

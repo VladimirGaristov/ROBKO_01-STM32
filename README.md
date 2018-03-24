@@ -21,8 +21,8 @@ ST's APIs make up most of the source code. The MCU firmware should run on most S
 
 Instructions for remote control:
 * manufacture the boards from the provided gerber files
-* assemble the hardware as shown in the documentation
 * set solder bridges, according to inc/main.h
+* assemble the hardware as shown in the documentation
 * set the DIP switches to enable remote control
 * import, compile and upload the MCU firmware
 * modify the macro SERIAL_PORT in Remote_control/robko_server.c to match your serial port

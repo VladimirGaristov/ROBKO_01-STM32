@@ -101,7 +101,7 @@
 #define D5_PIN LL_GPIO_PIN_13
 #define D6_PIN LL_GPIO_PIN_14
 #define D7_PIN LL_GPIO_PIN_15
-#define A0_PIN LL_GPIO_PIN_3		//Conflicts with debugger, but still works
+#define A0_PIN LL_GPIO_PIN_3		//Conflicts with debugger, but still works if asynchronous trace is not used (default)
 #define A1_PIN LL_GPIO_PIN_4
 #define A2_PIN LL_GPIO_PIN_5
 #define ENABLE_PIN LL_GPIO_PIN_6
@@ -113,12 +113,13 @@
 #define LED3_PIN LL_GPIO_PIN_0
 #define LED4_PIN LL_GPIO_PIN_1
 #define LED5_PIN LL_GPIO_PIN_4
-#define LED6_PIN LL_GPIO_PIN_5
+#define LED6_PIN LL_GPIO_PIN_5		//Connected to LED on Nucleo board. Desolder SB21 to prevent over-current
 #define LED7_PIN LL_GPIO_PIN_6
 #define LED8_PIN LL_GPIO_PIN_7
 #define LED9_PIN LL_GPIO_PIN_8
-#define LED10_PIN LL_GPIO_PIN_2
-#define LED11_PIN LL_GPIO_PIN_3
+#define LED10_PIN LL_GPIO_PIN_2		//Conflicts with ST-LINK virtual COM port
+#define LED11_PIN LL_GPIO_PIN_3		//Conflicts with ST-LINK virtual COM port
+									//Solder SB62, SB63 and desolder SB13, SB14 on Nucleo board to use
 
 #ifndef NVIC_PRIORITYGROUP_0
 #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
@@ -161,9 +162,9 @@
 #define HALF_STEP 1
 #define USE_LOCAL_STEP 0
 #define USE_LOCAL_TIME 0
-#define MAX_STEP_SPEED 30
-#define FAST_STEP 30
-#define SLOW_STEP 100
+#define MAX_STEP_SPEED 15
+#define FAST_STEP 15
+#define SLOW_STEP 50
 #define STEP_FWD 1
 #define STEP_REV -1
 #define MOVE_UNTIL_DETECTION 1

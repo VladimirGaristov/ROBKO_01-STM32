@@ -66,6 +66,11 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 		motor_pos[motor]+=dir*local_step_size;
 	else if(remote_step_size==FULL_STEP || remote_step_size==HALF_STEP)
 		motor_pos[motor]+=dir*remote_step_size;
+	if((motor_pos[motor]%2==0 && remote_step_size==FULL_STEP) ||
+	   (motor_pos[motor]%2==0 && remote_step_size==USE_LOCAL_STEP && local_step_size==FULL_STEP))
+	{
+		motor_pos[motor]--;
+	}
 	//Overflow and underflow protection
 	int16_t new_pos=motor_pos[motor];
 	new_pos%=8;
@@ -102,7 +107,7 @@ void check_mode(void)
 	if(LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_SIZE_PIN))
 		local_step_size=FULL_STEP;
 	else
-		local_step_size=HALF_STEP;
+		local_step_size=FULL_STEP;
 	if(LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_TIME_PIN))
 		local_step_time=FAST_STEP;
 	else
@@ -205,7 +210,6 @@ int32_t remote_control(void)
 			if(check_opto_flag())
 			{
 				n=1;
-				move_until=MOVE_FREELY;
 			}
 			//Check if command has been finished
 			if((* (int16_t *) (current_cmd->cmd+2))==0)
@@ -231,7 +235,6 @@ int32_t remote_control(void)
 			if(check_opto_flag())
 			{
 				n=1;
-				move_until=MOVE_FREELY;
 			}
 			//Check if command has been finished
 			if(0 == ((* (int16_t *) (current_cmd->cmd+1)) ||
@@ -278,6 +281,7 @@ int32_t remote_control(void)
 		old=current_cmd;
 		current_cmd=current_cmd->next_cmd;
 		free(old);
+		move_until=MOVE_FREELY;
 	}
 	return 0;
 }

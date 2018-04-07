@@ -374,6 +374,8 @@ void read_cmd(void)
 			case SET_SPEED: rem_bytes+=1;
 			/* no break */
 			case OPTO: case OFF: case SET_STEP: rem_bytes+=1;
+			/* no break */
+			case FREEZE:
 				//Allocate memory for the new command and add it to the linked list
 				//Check if the queue is empty
 				if(current_cmd==NULL)
@@ -393,7 +395,8 @@ void read_cmd(void)
 					memset(last_cmd, 0, sizeof(cmd_buffer_t));
 					//Write the byte of data that was read
 					last_cmd->cmd[0]=read_buffer;
-					last_cmd->incomplete=1;
+					if(read_buffer!=FREEZE)
+						last_cmd->incomplete=1;
 				}
 				break;
 			default:;

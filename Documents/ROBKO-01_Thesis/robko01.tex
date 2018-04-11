@@ -1,0 +1,134 @@
+\documentclass
+[
+	paper=A4,					% paper size --> A4 is default in Germany
+	twoside=true,				% onesite or twoside printing
+	openright,					% doublepage cleaning ends up right side
+	parskip=full,				% spacing value / method for paragraphs
+	chapterprefix=true,			% prefix for chapter marks
+	12pt,						% font size
+	headings=normal,			% size of headings
+	bibliography=totoc,			% include bib in toc
+	listof=totoc,				% include listof entries in toc
+	titlepage=on,				% own page for each title page
+	captions=tableabove,		% display table captions above the float env
+	draft=false,				% value for draft version
+]
+{scrreprt}
+
+%Text encryption
+\usepackage[T2A, T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\thesisTitle}{Управление на български робот РОБКО 01 с ARM-базиран микроконтролер STM32L476RG и отдалечен достъп през интернет}
+\newcommand{\thesisAuthor}{Владимир Гаристов}
+\newcommand{\thesisSupervisor}{маг. инж. Росен Витанов}
+\newcommand{\thesisReviewer}{}
+\newcommand{\thesisSubject}{\thesisTitle}
+\newcommand{\thesisDate}{8 Декември 2017}
+\newcommand{\thesisVersion}{0.4}
+\newcommand{\thesisUniversity}{Технически Университет - София}
+\newcommand{\thesisSchool}{Технологично Училище "Електронни Системи"}
+\newcommand{\thesisFaculty}{Факултет "Електронна Техника и Технологии"}
+\newcommand{\thesisDepartment}{Катедра "Електронна Техника"}
+
+%Subject застава над заглавието
+\subject{\Large\thesisSchool\\ към \thesisUniversity\newline\newline}
+\title{\thesisTitle}
+\author{\thesisAuthor}
+\date{}
+
+\makeatletter
+\newcommand*{\textoverline}[1]{$\overline{\hbox{#1}}\m@th$}
+\makeatother
+
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+%Used packages
+\usepackage{minted}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[main=bulgarian,english]{babel}
+\usepackage{pdfpages}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage
+[                           % clean thesis style
+	figuresep=colon,
+	sansserif=false,
+	hangfigurecaption=false,
+	hangsection=true,
+	hangsubsection=true,
+	colorize=full,
+	colortheme=bluegreen,
+	bibsys=biber,
+	bibfile=references.bib,
+	bibstyle=numeric
+]
+{cleanthesis}
+
+\hypersetup
+{					            % setup the hyperref-package options
+	pdftitle={\thesisTitle},	% 	- title (PDF meta)
+	pdfsubject={\thesisSubject},% 	- subject (PDF meta)
+	pdfauthor={\thesisAuthor},	% 	- author (PDF meta)
+	plainpages=false,			% 	-
+	colorlinks=false,			% 	- colorize links?
+	pdfborder={0 0 0},			% 	-
+	breaklinks=true,			% 	- allow line break inside links
+	bookmarksnumbered=true,		%
+	bookmarksopen=true,			%
+	unicode=true                % non-Latin characters in Acrobat’s bookmarks
+}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=green!30, inner sep = -0.4cm]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{arrow_no_head} = [thick]
+
+\begin{document}
+
+\pagestyle{plain}
+
+%\maketitle
+\includepdf[pages={1}]{documents/title_page.pdf}
+\cleardoublepage
+\includepdf[pages={1}]{documents/zadanie.pdf}
+\cleardoublepage
+\tableofcontents
+\listoffigures
+\listoftables
+
+\begin{center}
+    {\large \bigskip \bigskip Благодарности на\\маг. инж. Константин Несторов,\\маг. инж. Иван Учерджиев и\\гл. ас. др. инж. Димитър Николов}
+\end{center}
+
+\pagestyle{maincontentstyle}
+
+\input{intro.tex}
+\input{overview.tex}
+\input{boards.tex}
+\input{network.tex}
+\input{firmware.tex}
+\input{demo.tex}
+\input{conclusion.tex}
+
+\nocite{mcu_man}
+\begin{singlespace}
+\printbibliography[title=\foreignlanguage{bulgarian}{Библиография}]
+\end{singlespace}
+
+\end{document}

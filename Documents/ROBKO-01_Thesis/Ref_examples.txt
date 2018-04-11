@@ -1,0 +1,47 @@
+%Examples
+
+@online
+{
+    ,
+	Author = {},
+	Title = {},
+	Url = {},
+	%Urldate = {},
+	Year = {}
+}
+	
+@book
+{
+    ,
+	Author = {},
+	Publisher = {},
+	Title = {},
+	Year = {}
+}
+	
+@manual
+{
+    ,
+	Author = {},
+	Title = {},
+	Year = {}
+}
+	
+@article
+{
+    ,
+    Author = {},
+    Title = {},
+    Journal = {},
+    Volume = {},
+    Pages = {},
+    Year = {}
+}
+
+@misc
+{
+    ,
+    Author = {},
+    Title = {},
+    Year = {}
+}

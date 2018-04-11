@@ -350,7 +350,7 @@ static void MX_GPIO_Init(void)
   /**/
   GPIO_InitStruct.Pin = LED3_PIN|LED4_PIN|LED10_PIN|LED11_PIN
                           |LED5_PIN|LED6_PIN|LED7_PIN|LED8_PIN
-                          |LED9_PIN|/*LED0_PIN|LED1_PIN|*/LED2_PIN;	//pins LED0-1 are used by the debugger
+                          |LED9_PIN|LED0_PIN|LED1_PIN|LED2_PIN;	//pins LED0-1 are used by the debugger
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;

@@ -135,7 +135,7 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	{
 		sp_nonblocking_write(ser_port, s_out+i, 1);
 		i++;
-		delay(20);
+		//delay(1);
 	}
 	printf("Bytes written: %d\n", i);
 }
@@ -144,7 +144,6 @@ int execute_file(char * filename)
 {
 	FILE *fd;
 	char file_buffer[FILE_BUFFER_SIZE];
-	int l=0;
 	uint8_t cmd[CMD_MAX_SIZE];
 	printf("Executing %s\n", filename);
 	memset(file_buffer, 0, FILE_BUFFER_SIZE);
@@ -153,8 +152,9 @@ int execute_file(char * filename)
 	while(fgets(file_buffer, FILE_BUFFER_SIZE-1, fd))
 	{
 		decode_cmd(file_buffer, cmd);
-		transmit_string(serial_port, cmd);
+		transmit_string(serial_port, (char *) cmd);
 	}
 	printf("Done\n");
 	fclose(fd);
+	return 0;
 }

@@ -1,3 +1,5 @@
+#define _GNU_SOURCE		//Checked for by one of the included files
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>

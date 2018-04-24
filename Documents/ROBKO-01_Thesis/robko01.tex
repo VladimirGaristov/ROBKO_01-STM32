@@ -2,7 +2,8 @@
 [
 	paper=A4,					% paper size --> A4 is default in Germany
 	twoside=true,				% onesite or twoside printing
-	openright,					% doublepage cleaning ends up right side
+	%openright,					% doublepage cleaning ends up right side
+	openany,
 	parskip=full,				% spacing value / method for paragraphs
 	chapterprefix=true,			% prefix for chapter marks
 	12pt,						% font size
@@ -25,17 +26,17 @@
 \newcommand{\thesisReviewer}{}
 \newcommand{\thesisSubject}{\thesisTitle}
 \newcommand{\thesisDate}{8 Декември 2017}
-\newcommand{\thesisVersion}{0.4}
+\newcommand{\thesisVersion}{1.2}
 \newcommand{\thesisUniversity}{Технически Университет - София}
 \newcommand{\thesisSchool}{Технологично Училище "Електронни Системи"}
 \newcommand{\thesisFaculty}{Факултет "Електронна Техника и Технологии"}
 \newcommand{\thesisDepartment}{Катедра "Електронна Техника"}
 
 %Subject застава над заглавието
-\subject{\Large\thesisSchool\\ към \thesisUniversity\newline\newline}
-\title{\thesisTitle}
+\subject{\Large\textbf{\thesisSchool\\ към \thesisUniversity}\newline\newline}
+\title{\Huge\hspace{1cm}\textbf{ДИПЛОМНА РАБОТА}\newline\newline\Large \thesisTitle}
 \author{\thesisAuthor}
-\date{}
+\date{\vspace{8.4cm}София\\2018}
 
 \makeatletter
 \newcommand*{\textoverline}[1]{$\overline{\hbox{#1}}\m@th$}
@@ -102,6 +103,8 @@
 \begin{document}
 
 \pagestyle{plain}
+%\footskip=0pt
+%\hoffset=0pt
 
 %\maketitle
 \includepdf[pages={1}]{documents/title_page.pdf}
@@ -128,7 +131,7 @@
 
 \nocite{mcu_man}
 \begin{singlespace}
-\printbibliography[title=\foreignlanguage{bulgarian}{Библиография}]
+    \printbibliography[title=\foreignlanguage{bulgarian}{Библиография}]
 \end{singlespace}
 
 \end{document}

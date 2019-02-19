@@ -31,17 +31,23 @@ int main(int argc, const char *argv[])
 	//Open a socket
 	sockfd = socket(AF_INET, SOCK_PROTOCOL, 0);
 	if (sockfd < 0)
+	{
 		error("ERROR opening socket\n");
+	}
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	//Set the server address and port
 	serv_addr.sin_family = AF_INET;
 	if (!(inet_aton(argv[1], (struct in_addr *) &serv_addr.sin_addr.s_addr)))
-	error("ERROR converting server address\n");
+	{
+		error("ERROR converting server address\n");
+	}
 	serv_addr.sin_port = htons(SOCK_PORT);
 	printf("Attempting to connect...\n");
 	//Connect to the server
 	if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+	{
 		error("ERROR connecting\n");
+	}
 	while (1)
 	{
 		printf("Please enter a command: ");
@@ -52,7 +58,9 @@ int main(int argc, const char *argv[])
 		//Send data to the server
 		n = write(sockfd, cmd, cmd[0]);
 		if (n < 0)
+		{
 			 error("ERROR writing to socket\n");
+		}
 		printf("%d bytes sent.\n", n);
 		memset(buffer, 0, BUFFER_SIZE);
 		memset(cmd, 0, BUFFER_SIZE);

@@ -200,6 +200,20 @@
 #define OPTO 12
 #define SET_STEP 13
 #define SET_SPEED 14
+#define GET_STEP 15
+#define GET_SPEED 16
+#define SET_HOME 17
+
+#define POS_REPLY 18
+#define STEP_REPLY 19
+#define SPEED_REPLY 20
+#define ACK 21
+#define ERROR 22
+#define LAST_CMD 23
+
+#define REPEAT
+
+#define FULL_RAM -1
 
 //Enabling and disabling ROBKO 01
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)

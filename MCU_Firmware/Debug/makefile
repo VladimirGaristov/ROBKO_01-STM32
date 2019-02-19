@@ -32,10 +32,10 @@ endif
 all: ROBKO_01.elf
 
 # Tool invocations
-ROBKO_01.elf: $(OBJS) $(USER_OBJS) /home/cartogan/Ac6/workspace/ROBKO_01/MCU_Firmware/LinkerScript.ld
+ROBKO_01.elf: $(OBJS) $(USER_OBJS) C:\Users\Vlado\workspace\ROBKO_01-STM32\MCU_Firmware/LinkerScript.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/cartogan/Ac6/workspace/ROBKO_01/MCU_Firmware/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"C:/Users/Vlado/workspace/ROBKO_01-STM32/MCU_Firmware/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

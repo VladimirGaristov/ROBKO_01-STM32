@@ -21,19 +21,34 @@
 #define GET_SPEED 16
 #define SET_HOME 17
 
-#define POS_REPLY 18
-#define STEP_REPLY 19
-#define SPEED_REPLY 20
-#define ACK 21
-#define ERROR 22
-#define LAST_CMD 23
+#define GET_POS_REPLY 18
+#define SAVE_POS_REPLY 19
+#define STEP_REPLY 20
+#define SPEED_REPLY 21
+#define ACK 22
+#define ERROR 23
+#define LAST_CMD 24
 
-#define REPEAT 24
+#define REPEAT 25
 
 #define FULL_RAM -1
+
+#define FULL_STEP 2
+#define HALF_STEP 1
+#define USE_LOCAL_STEP 0
+#define USE_LOCAL_TIME 0
 
 //Socket parameters
 #define SOCK_PORT 55321
 #define SOCK_PROTOCOL SOCK_STREAM	//SOCK_STREAM=TCP
 
+#define MAX_FILENAME_SIZE 256
+
 int decode_cmd(char *buffer, uint8_t *cmd);
+
+typedef struct
+{
+	uint8_t repeat, last_cmd;
+	char filename[MAX_FILENAME_SIZE];
+}
+script_file_t;

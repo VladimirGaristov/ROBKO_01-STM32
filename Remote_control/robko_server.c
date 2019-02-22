@@ -6,6 +6,7 @@
 #include <libserialport.h>
 #include <time.h>
 #include "robko_decode.h"
+#include <bsd/string.h>
 //Includes string.h, stdlib.h and stdint.h
 
 #define SOCK_BUFFER_SIZE 1501
@@ -17,21 +18,23 @@
 #define STOP_BITS 1
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
+#define OUTPUT_FILE "position_log.robko"
 
 void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
 void transmit_string(struct sp_port *ser_port, char *s_out);
 void error(const char *);
-int execute_file(char *filename, uint8_t *repeat);
+int execute_file(script_file_t *file, struct sp_port *ser_port);
+int get_client_commands(int client_sockfd, struct sp_port *ser_port);
+int parse_reply(struct sp_port *ser_port, char *msg);
+int save_position(uint16_t *position);
 
 struct sp_port *serial_port;
 
 int main(void)
 {
 	struct sockaddr_in serv_addr, cli_addr;
-	int sockfd, newsockfd, clilen, n;
-	uint8_t repeat = 0;
-	char sock_buffer[SOCK_BUFFER_SIZE], serial_buffer[SER_BUFFER_SIZE];
+	int sockfd, clilen;
 	//Open serial connection
 	if (port_configuration(&serial_port))
 	{
@@ -61,42 +64,57 @@ int main(void)
 	{
 		printf("\nAwaiting connection...\n");
 		//Open a socket to communicate with the client
-		newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
-		if (newsockfd < 0)
-		{
-			error("ERROR on accept\n");
-		}
-		while (1)
-		{
-			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
-			memset(serial_buffer, 0, SER_BUFFER_SIZE);
-			n = read(newsockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
-			//if file, add null byte
-			//If FIN has been received, close the socket
-			if (!n)
-			{
-				//add a console message
-				shutdown(newsockfd, SHUT_RDWR);
-				close(newsockfd);
-				break;
-			}
-			printf("Received %d bytes\n", n);
-			if (sock_buffer[1] == OPEN_FILE)
-			{
-				execute_file(sock_buffer + 2, &repeat);
-			}
-			else
-			{
-				transmit_string(serial_port, sock_buffer);
-			}
-			if (n < 0)
-			{
-				error("ERROR reading from socket\n");
-			}
-		}
+		get_client_commands(accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen), serial_port);
 	}
 	sp_free_port(serial_port);
 	return 0;
+}
+
+int get_client_commands(int client_sockfd, struct sp_port *ser_port)
+{
+	int n;
+	char sock_buffer[SOCK_BUFFER_SIZE];
+	script_file_t script_file =
+	{
+		.repeat = 0, .last_cmd = 0, .filename[0] = '\0'
+	};
+	if (client_sockfd < 0)
+	{
+		printf("ERROR on accept\n");
+		return -1;
+	}
+	while (1)
+	{
+		memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
+		//memset(serial_buffer, 0, SER_BUFFER_SIZE);
+		n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
+		//if file, add null byte
+		//If FIN has been received, close the socket
+		if (!n)
+		{
+			//add a console message
+			shutdown(client_sockfd, SHUT_RDWR);
+			close(client_sockfd);
+			return 0;
+		}
+		printf("Received %d bytes\n", n);
+		if (sock_buffer[1] == OPEN_FILE)
+		{
+			script_file.repeat = 0;
+			strlcpy(script_file.filename, sock_buffer + 2, MAX_FILENAME_SIZE);
+			execute_file(&script_file, ser_port);
+		}
+		else
+		{
+			script_file.repeat = 0;
+			transmit_string(ser_port, sock_buffer);
+		}
+		if (n < 0)
+		{
+			printf("ERROR reading from socket\n");
+			return -2;
+		}
+	}
 }
 
 void error(const char *error_msg)
@@ -157,25 +175,30 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	printf("Bytes written: %d\n", i);
 }
 
-int execute_file(char * filename, uint8_t *repeat)
+int execute_file(script_file_t *file, struct sp_port *ser_port)
 {
-	FILE *fd;
+	FILE *fd = NULL;
 	char file_buffer[FILE_BUFFER_SIZE];
 	uint8_t cmd[CMD_MAX_SIZE], decode_status;
-	printf("Executing %s\n", filename);
 	memset(file_buffer, 0, FILE_BUFFER_SIZE);
-	fd = fopen(filename, "r");
+	fd = fopen(file->filename, "r");
+	if (fd == NULL)
+	{
+		printf("Error when opening file \"%s\". It may not exist.\n", file->filename);
+		return -1;
+	}
+	printf("Executing %s\n", file->filename);
 	//Reads one line at a time
 	while (fgets(file_buffer, FILE_BUFFER_SIZE - 1, fd))
 	{
 		decode_status = decode_cmd(file_buffer, cmd);
 		if (!decode_status)
 		{
-			transmit_string(serial_port, (char *) cmd);
+			transmit_string(ser_port, (char *) cmd);
 		}
 		else if (decode_status == REPEAT)
 		{
-			*repeat = 1;
+			file->repeat = 1;
 		}
 		else
 		{
@@ -184,5 +207,115 @@ int execute_file(char * filename, uint8_t *repeat)
 	}
 	printf("Done\n");
 	fclose(fd);
+	return 0;
+}
+
+int parse_reply(struct sp_port *ser_port, char *msg)
+{
+	uint8_t reply[13] = {0}, read_status;
+	uint16_t speed = 0;
+	read_status = sp_blocking_read(ser_port, reply, 1, 100);
+	if (!read_status)
+	{
+		return 0;
+	}
+	else if (read_status == 1)
+	{
+		switch (reply[0])
+		{
+			case ACK:
+				return 0;
+			case STEP_REPLY:
+				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
+				if (read_status < 1)
+				{
+					return -1;
+				}
+				switch (reply[1])
+				{
+					case USE_LOCAL_STEP:
+						sprintf(msg, "ROBKO 01 is set to use local step setting.\n");
+						return 1;
+					case FULL_STEP:
+						sprintf(msg, "Step mode is set to FULL_STEP.\n");
+						return 1;
+					case HALF_STEP:
+						sprintf(msg, "Step mode is set to HALF_STEP.\n");
+						return 1;
+					default:
+						return -1;
+				}
+			case SPEED_REPLY:
+				read_status = sp_blocking_read(ser_port, reply + 1, 2, 100);
+				if (read_status < 2)
+				{
+					return -1;
+				}
+				speed = * (uint16_t *) (reply + 1);
+				if (speed == USE_LOCAL_TIME)
+				{
+					sprintf(msg, "ROBKO 01 is set to use local speed setting.\n");
+					return 1;
+				}
+				else
+				{
+					sprintf(msg, "Time between steps is %d miliseconds.\n", speed);
+					return 1;
+				}
+			case GET_POS_REPLY:
+			case SAVE_POS_REPLY:
+				read_status = sp_blocking_read(ser_port, reply + 1, 12, 100);
+				if (read_status < 12)
+				{
+					return -1;
+				}
+				//No hate pls
+				sprintf(
+					msg,
+					"Current motor positions:\n"
+					"\tMotor 0: %d\n"
+					"\tMotor 1: %d\n"
+					"\tMotor 2: %d\n"
+					"\tMotor 3: %d\n"
+					"\tMotor 4: %d\n"
+					"\tMotor 5: %d\n",
+					* (uint16_t *) (reply + 1),
+					* (uint16_t *) (reply + 3),
+					* (uint16_t *) (reply + 5),
+					* (uint16_t *) (reply + 7),
+					* (uint16_t *) (reply + 9),
+					* (uint16_t *) (reply + 11));
+				if (reply[0] == SAVE_POS_REPLY)
+				{
+					save_position((uint16_t *) (reply + 1));
+				}
+				return 1;
+
+
+
+
+
+
+			
+		}
+	}
+	return -1;
+}
+
+int save_position(uint16_t *position)
+{
+	FILE *output_fp = NULL;
+	uint8_t i;
+	output_fp = fopen(OUTPUT_FILE, "a");
+	if (output_fp == NULL)
+	{
+		return -1;
+	}
+	fputs("MOVE ", output_fp);
+	for (i = 0; i < 6; i++)
+	{
+		fprintf(output_fp, "%d ", * (position + 2 * i));
+	}
+	fputs("\n", output_fp);
 	return 0;
 }

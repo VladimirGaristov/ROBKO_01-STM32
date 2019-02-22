@@ -334,7 +334,7 @@ int32_t remote_control(void)
 		case SET_SPEED:
 			if ((* (uint16_t *) (current_cmd->cmd + 1)) >= MAX_STEP_SPEED || (* (uint16_t *) (current_cmd->cmd + 1)) == USE_LOCAL_TIME)
 			{
-				remote_step_time=(* (uint16_t *) (current_cmd->cmd+1));
+				remote_step_time = (* (uint16_t *) (current_cmd->cmd + 1));
 			}
 			n = 1;
 			break;

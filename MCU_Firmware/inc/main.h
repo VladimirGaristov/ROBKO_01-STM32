@@ -204,14 +204,15 @@
 #define GET_SPEED 16
 #define SET_HOME 17
 
-#define POS_REPLY 18
-#define STEP_REPLY 19
-#define SPEED_REPLY 20
-#define ACK 21
-#define ERROR 22
-#define LAST_CMD 23
+#define GET_POS_REPLY 18
+#define SAVE_POS_REPLY 19
+#define STEP_REPLY 20
+#define SPEED_REPLY 21
+#define ACK 22
+#define ERROR 23
+#define LAST_CMD 24
 
-#define REPEAT 24
+#define REPEAT 25
 
 #define FULL_RAM -1
 

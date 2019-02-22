@@ -7,10 +7,13 @@
 #include <time.h>
 #include "robko_decode.h"
 #include <bsd/string.h>
+#include <errno.h>
+#include <fcntl.h>
 //Includes string.h, stdlib.h and stdint.h
 
 #define SOCK_BUFFER_SIZE 1501
 #define SER_BUFFER_SIZE 100
+#define REPLY_MSG_SIZE 150
 #define FILE_BUFFER_SIZE 256
 #define CMD_MAX_SIZE 14
 #define SERIAL_PORT "/dev/ttyUSB0"
@@ -28,6 +31,7 @@ int execute_file(script_file_t *file, struct sp_port *ser_port);
 int get_client_commands(int client_sockfd, struct sp_port *ser_port);
 int parse_reply(struct sp_port *ser_port, char *msg);
 int save_position(uint16_t *position);
+int send_reply(int client_sockfd, char *reply_msg);
 
 struct sp_port *serial_port;
 
@@ -73,20 +77,39 @@ int main(void)
 int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 {
 	int n;
-	char sock_buffer[SOCK_BUFFER_SIZE];
+	char sock_buffer[SOCK_BUFFER_SIZE], reply_msg[REPLY_MSG_SIZE];
 	script_file_t script_file =
 	{
 		.repeat = 0, .last_cmd = 0, .filename[0] = '\0'
 	};
+	int sock_flags;
 	if (client_sockfd < 0)
 	{
 		printf("ERROR on accept\n");
 		return -1;
 	}
+	//Set the socket file descriptor to non-blocking mode
+	sock_flags = fcntl(client_sockfd, F_GETFL, 0);
+	fcntl(client_sockfd, F_SETFL, sock_flags | O_NONBLOCK);
 	while (1)
 	{
+		switch (parse_reply(ser_port, reply_msg))
+		{
+			case 2:
+				if (script_file.repeat)
+				{
+					execute_file(&script_file, ser_port);
+				}
+				break;
+			case 1:
+				puts(reply_msg);
+				send_reply(client_sockfd, reply_msg);
+				break;
+			default:;
+		}
 		memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
 		//memset(serial_buffer, 0, SER_BUFFER_SIZE);
+		errno = 0;
 		n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
 		//if file, add null byte
 		//If FIN has been received, close the socket
@@ -96,6 +119,18 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 			shutdown(client_sockfd, SHUT_RDWR);
 			close(client_sockfd);
 			return 0;
+		}
+		if (n < 0)
+		{
+			if (errno == EAGAIN)
+			{
+				continue;
+			}
+			else
+			{
+				printf("ERROR reading from socket\n");
+				return -2;
+			}
 		}
 		printf("Received %d bytes\n", n);
 		if (sock_buffer[1] == OPEN_FILE)
@@ -108,11 +143,6 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 		{
 			script_file.repeat = 0;
 			transmit_string(ser_port, sock_buffer);
-		}
-		if (n < 0)
-		{
-			printf("ERROR reading from socket\n");
-			return -2;
 		}
 	}
 }
@@ -290,13 +320,20 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 					save_position((uint16_t *) (reply + 1));
 				}
 				return 1;
-
-
-
-
-
-
-			
+			case LAST_CMD:
+				return 2;
+			case ERROR:
+				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
+				if (read_status < 1)
+				{
+					return -1;
+				}
+				switch (reply[1])
+				{
+					case FULL_RAM:
+						sprintf(msg, "Error - MCU RAM is full!\n");
+						return 1;
+				}
 		}
 	}
 	return -1;
@@ -317,5 +354,18 @@ int save_position(uint16_t *position)
 		fprintf(output_fp, "%d ", * (position + 2 * i));
 	}
 	fputs("\n", output_fp);
+	return 0;
+}
+
+int send_reply(int client_sockfd, char *reply_msg)
+{
+	int bytes_sent;
+	bytes_sent = write(client_sockfd, reply_msg, strlen(reply_msg + 1));
+	if (bytes_sent < 0)
+	{
+		puts("ERROR writing to socket\n");
+		return -1;
+	}
+	printf("%d bytes sent.\n", bytes_sent);
 	return 0;
 }

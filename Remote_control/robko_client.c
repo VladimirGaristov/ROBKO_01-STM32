@@ -59,7 +59,7 @@ int main(int argc, const char *argv[])
 		n = write(sockfd, cmd, cmd[0]);
 		if (n < 0)
 		{
-			 error("ERROR writing to socket\n");
+			error("ERROR writing to socket\n");
 		}
 		printf("%d bytes sent.\n", n);
 		memset(buffer, 0, BUFFER_SIZE);

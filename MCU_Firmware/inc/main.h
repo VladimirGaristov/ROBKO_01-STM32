@@ -214,7 +214,7 @@
 
 #define REPEAT 25
 
-#define FULL_RAM -1
+#define FULL_RAM 101
 
 //Enabling and disabling ROBKO 01
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)

@@ -31,7 +31,7 @@
 
 #define REPEAT 25
 
-#define FULL_RAM -1
+#define FULL_RAM 101
 
 #define FULL_STEP 2
 #define HALF_STEP 1

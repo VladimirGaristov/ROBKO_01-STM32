@@ -1,7 +1,7 @@
 #include "robko_decode.h"
 //Includes string.h, stdlib.h and stdint.h
 
-void decode_cmd(char *buffer, uint8_t *cmd)
+int decode_cmd(char *buffer, uint8_t *cmd)
 {
 	char *next_val, i;
 	int l;
@@ -41,13 +41,20 @@ void decode_cmd(char *buffer, uint8_t *cmd)
 		cmd[1] = OPEN_FILE;
 		strcpy((char *) cmd + 2, buffer + 10);
 	}
-	/*else if (strstr(buffer, "GOTO_POS"))
+	else if (strstr(buffer, "GOTO_POS"))
 	{
-		cmd[0] = 12;
+		cmd[0] = 14;
 		cmd[1] = GOTO_POS;
-		*(short int *) (cmd + 2) = (short int) strtol(buffer + 9, NULL, 10);
-	}*/
-	//dobavi GET_POS SAVE_POS
+		l = strlen(buffer);
+		* (int16_t *) (cmd + 2) = (int16_t) strtol(buffer + 5, &next_val, 10);
+		for (i = 0; i < 10; i += 2)
+		{
+			//Prevents reading from adresses beyond the end of the buffer
+			if (next_val > buffer + l)
+				break;
+			* (int16_t *) (cmd + 4 + i) = (int16_t) strtol(next_val + 1, &next_val, 10);
+		}
+	}
 	else if (strstr(buffer, "KILL"))
 	{
 		cmd[0] = 2;
@@ -96,5 +103,28 @@ void decode_cmd(char *buffer, uint8_t *cmd)
 		cmd[1] = SET_SPEED;
 		* (uint16_t *) (cmd + 2) = (uint16_t) strtol(buffer + 10, NULL, 10);
 	}
-
+	else if (strstr(buffer, "SET_HOME"))
+	{
+		cmd[0] = 2;
+		cmd[1] = SET_HOME;
+	}
+	else if (strstr(buffer, "GET_STEP"))
+	{
+		cmd[0] = 2;
+		cmd[1] = GET_STEP;
+	}
+	else if (strstr(buffer, "GET_SPEED"))
+	{
+		cmd[0] = 2;
+		cmd[1] = GET_SPEED;
+	}
+	else if (strstr(buffer, "REPEAT"))
+	{
+		return REPEAT;
+	}
+	else
+	{
+		return -1;
+	}
+	return 0;
 }

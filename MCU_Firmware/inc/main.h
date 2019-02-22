@@ -211,7 +211,7 @@
 #define ERROR 22
 #define LAST_CMD 23
 
-#define REPEAT
+#define REPEAT 24
 
 #define FULL_RAM -1
 

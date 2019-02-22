@@ -74,8 +74,8 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 	{
 		motor_pos[motor] += dir * remote_step_size;
 	}
-	if ((motor_pos[motor] %2 == 0 && remote_step_size == FULL_STEP) ||
-		(motor_pos[motor] %2 ==0 && remote_step_size == USE_LOCAL_STEP && local_step_size == FULL_STEP))
+	if ((motor_pos[motor] % 2 == 0 && remote_step_size == FULL_STEP) ||
+		(motor_pos[motor] % 2 == 0 && remote_step_size == USE_LOCAL_STEP && local_step_size == FULL_STEP))
 	{
 		motor_pos[motor] -= dir;
 	}

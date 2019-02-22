@@ -22,7 +22,7 @@ void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
 void transmit_string(struct sp_port *ser_port, char *s_out);
 void error(const char *);
-int execute_file(char * filename);
+int execute_file(char *filename, uint8_t *repeat);
 
 struct sp_port *serial_port;
 
@@ -30,6 +30,7 @@ int main(void)
 {
 	struct sockaddr_in serv_addr, cli_addr;
 	int sockfd, newsockfd, clilen, n;
+	uint8_t repeat = 0;
 	char sock_buffer[SOCK_BUFFER_SIZE], serial_buffer[SER_BUFFER_SIZE];
 	//Open serial connection
 	if (port_configuration(&serial_port))
@@ -82,15 +83,15 @@ int main(void)
 			printf("Received %d bytes\n", n);
 			if (sock_buffer[1] == OPEN_FILE)
 			{
-				execute_file(sock_buffer + 2);
+				execute_file(sock_buffer + 2, &repeat);
 			}
 			else
 			{
 				transmit_string(serial_port, sock_buffer);
 			}
-			if(n < 0)
+			if (n < 0)
 			{
-					error("ERROR writing to socket\n");
+				error("ERROR reading from socket\n");
 			}
 		}
 	}
@@ -156,19 +157,30 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	printf("Bytes written: %d\n", i);
 }
 
-int execute_file(char * filename)
+int execute_file(char * filename, uint8_t *repeat)
 {
 	FILE *fd;
 	char file_buffer[FILE_BUFFER_SIZE];
-	uint8_t cmd[CMD_MAX_SIZE];
+	uint8_t cmd[CMD_MAX_SIZE], decode_status;
 	printf("Executing %s\n", filename);
 	memset(file_buffer, 0, FILE_BUFFER_SIZE);
 	fd = fopen(filename, "r");
 	//Reads one line at a time
 	while (fgets(file_buffer, FILE_BUFFER_SIZE - 1, fd))
 	{
-		decode_cmd(file_buffer, cmd);
-		transmit_string(serial_port, (char *) cmd);
+		decode_status = decode_cmd(file_buffer, cmd);
+		if (!decode_status)
+		{
+			transmit_string(serial_port, (char *) cmd);
+		}
+		else if (decode_status == REPEAT)
+		{
+			*repeat = 1;
+		}
+		else
+		{
+			printf("Invalid command - \"%s\"\n", file_buffer);
+		}
 	}
 	printf("Done\n");
 	fclose(fd);

@@ -28,7 +28,7 @@
 #define ERROR 22
 #define LAST_CMD 23
 
-#define REPEAT
+#define REPEAT 24
 
 #define FULL_RAM -1
 
@@ -36,4 +36,4 @@
 #define SOCK_PORT 55321
 #define SOCK_PROTOCOL SOCK_STREAM	//SOCK_STREAM=TCP
 
-void decode_cmd(char *buffer, uint8_t *cmd);
+int decode_cmd(char *buffer, uint8_t *cmd);

@@ -6,7 +6,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
 #include "robko_decode.h"
+//Includes string.h, stdlib.h and stdint.h
 
 #define BUFFER_SIZE (512)
 
@@ -20,7 +23,7 @@ void error(char *msg)
 
 int main(int argc, const char *argv[])
 {
-	int sockfd, n;
+	int sockfd, n, bytes_available = 0, sock_flags;
 	struct sockaddr_in serv_addr;
 	char buffer[BUFFER_SIZE];
 	uint8_t cmd[BUFFER_SIZE];
@@ -48,22 +51,39 @@ int main(int argc, const char *argv[])
 	{
 		error("ERROR connecting\n");
 	}
+	//Set the socket file descriptor to non-blocking mode
+	sock_flags = fcntl(sockfd, F_GETFL, 0);
+	fcntl(sockfd, F_SETFL, sock_flags | O_NONBLOCK);
+	printf("Please enter a command: ");
 	while (1)
-	{
-		printf("Please enter a command: ");
-		memset(buffer, 0, BUFFER_SIZE);
-		fgets(buffer, BUFFER_SIZE, stdin);
-		//Add command verification?
-		decode_cmd(buffer, cmd);
-		//Send data to the server
-		n = write(sockfd, cmd, cmd[0]);
-		if (n < 0)
+	{	
+		//File descriptor 0 is stdin
+		if (ioctl(0, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
 		{
-			error("ERROR writing to socket\n");
+			memset(buffer, 0, BUFFER_SIZE);
+			memset(cmd, 0, BUFFER_SIZE);
+			fgets(buffer, BUFFER_SIZE, stdin);
+			printf("Please enter a command: ");
+			//Add command verification?
+			decode_cmd(buffer, cmd);
+			//Send data to the server
+			n = write(sockfd, cmd, cmd[0]);
+			if (n < 0)
+			{
+				error("ERROR writing to socket\n");
+			}
+			printf("%d bytes sent.\n", n);
 		}
-		printf("%d bytes sent.\n", n);
-		memset(buffer, 0, BUFFER_SIZE);
-		memset(cmd, 0, BUFFER_SIZE);
+		if (ioctl(sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
+		{
+			memset(buffer, 0, BUFFER_SIZE);
+			n = read(sockfd, buffer, BUFFER_SIZE - 1);
+			if (n < 0)
+			{
+				printf("ERROR reading from socket\n");
+			}
+			printf("Reply from server:\t%s\n", buffer);
+		}
 	}
 	//shutdown(sockfd, SHUT_WR);
 	return 0;

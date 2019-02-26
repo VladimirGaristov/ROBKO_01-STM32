@@ -5,10 +5,11 @@
 #include <unistd.h>
 #include <libserialport.h>
 #include <time.h>
-#include "robko_decode.h"
 #include <bsd/string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
+#include "robko_decode.h"
 //Includes string.h, stdlib.h and stdint.h
 
 #define SOCK_BUFFER_SIZE 1501
@@ -22,6 +23,7 @@
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
 #define OUTPUT_FILE "position_log.robko"
+#define READ_TIMEOUT 25		//ms
 
 void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
@@ -33,12 +35,11 @@ int parse_reply(struct sp_port *ser_port, char *msg);
 int save_position(uint16_t *position);
 int send_reply(int client_sockfd, char *reply_msg);
 
-struct sp_port *serial_port;
-
 int main(void)
 {
 	struct sockaddr_in serv_addr, cli_addr;
 	int sockfd, clilen;
+	struct sp_port *serial_port;
 	//Open serial connection
 	if (port_configuration(&serial_port))
 	{
@@ -76,13 +77,12 @@ int main(void)
 
 int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 {
-	int n;
+	int n, bytes_available = 0, sock_flags;
 	char sock_buffer[SOCK_BUFFER_SIZE], reply_msg[REPLY_MSG_SIZE];
 	script_file_t script_file =
 	{
 		.repeat = 0, .last_cmd = 0, .filename[0] = '\0'
 	};
-	int sock_flags;
 	if (client_sockfd < 0)
 	{
 		printf("ERROR on accept\n");
@@ -107,42 +107,44 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				break;
 			default:;
 		}
-		memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
-		//memset(serial_buffer, 0, SER_BUFFER_SIZE);
-		errno = 0;
-		n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
-		//if file, add null byte
-		//If FIN has been received, close the socket
-		if (!n)
+		if (ioctl(client_sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
 		{
-			//add a console message
-			shutdown(client_sockfd, SHUT_RDWR);
-			close(client_sockfd);
-			return 0;
-		}
-		if (n < 0)
-		{
-			if (errno == EAGAIN)
+			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
+			errno = 0;
+			n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
+			//if file, add null byte
+			//If FIN has been received, close the socket
+			if (!n)
 			{
-				continue;
+				//add a console message
+				shutdown(client_sockfd, SHUT_RDWR);
+				close(client_sockfd);
+				return 0;
+			}
+			if (n < 0)
+			{
+				if (errno == EAGAIN)
+				{
+					continue;
+				}
+				else
+				{
+					printf("ERROR reading from socket\n");
+					return -2;
+				}
+			}
+			printf("Received %d bytes\n", n);
+			if (sock_buffer[1] == OPEN_FILE)
+			{
+				script_file.repeat = 0;
+				strlcpy(script_file.filename, sock_buffer + 2, MAX_FILENAME_SIZE);
+				execute_file(&script_file, ser_port);
 			}
 			else
 			{
-				printf("ERROR reading from socket\n");
-				return -2;
+				script_file.repeat = 0;
+				transmit_string(ser_port, sock_buffer);
 			}
-		}
-		printf("Received %d bytes\n", n);
-		if (sock_buffer[1] == OPEN_FILE)
-		{
-			script_file.repeat = 0;
-			strlcpy(script_file.filename, sock_buffer + 2, MAX_FILENAME_SIZE);
-			execute_file(&script_file, ser_port);
-		}
-		else
-		{
-			script_file.repeat = 0;
-			transmit_string(ser_port, sock_buffer);
 		}
 	}
 }
@@ -200,7 +202,6 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	{
 		sp_nonblocking_write(ser_port, s_out + i, 1);
 		i++;
-		//delay(1);
 	}
 	printf("Bytes written: %d\n", i);
 }
@@ -244,7 +245,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 {
 	uint8_t reply[13] = {0}, read_status;
 	uint16_t speed = 0;
-	read_status = sp_blocking_read(ser_port, reply, 1, 100);
+	read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
 	if (!read_status)
 	{
 		return 0;

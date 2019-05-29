@@ -245,6 +245,8 @@ void read_cmd(void);
 void set_LEDs(void);
 int8_t get_opto(void);
 int8_t check_opto_flag(void);
+int16_t max_steps_current_cmd(void);
+int32_t calculate_ratio_to_max(float ratio[6], int16_t max);
 
 /**
   * @}

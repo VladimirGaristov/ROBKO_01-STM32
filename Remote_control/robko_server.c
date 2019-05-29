@@ -9,8 +9,10 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include "robko_decode.h"
-//Includes string.h, stdlib.h and stdint.h
 
 #define SOCK_BUFFER_SIZE 1501
 #define SER_BUFFER_SIZE 100

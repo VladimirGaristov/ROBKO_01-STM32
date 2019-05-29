@@ -1,7 +1,3 @@
-#include <string.h>
-#include <stdlib.h>
-#include <stdint.h>
-
 //Commands for remote control
 #define MOV 1
 #define MOVE 2

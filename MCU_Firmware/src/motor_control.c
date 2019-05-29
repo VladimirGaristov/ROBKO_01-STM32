@@ -240,6 +240,10 @@ int32_t remote_control(void)
 	//n is a flag, raised if the current command has been completed and can be deleted
 	int8_t n = 0, i;
 	cmd_buffer_t *old;
+	int16_t max_steps;
+	static float orig_ratio_to_max[6] = {0.0};
+	float ratio_to_max[6] = {0.0};
+	static uint8_t first_run = 1;
 	//Check if any commands are pending
 	if (current_cmd == NULL || LL_GPIO_IsOutputPinSet(ADDR_DATA_PORT, ENABLE_PIN) == 0)
 	{
@@ -280,26 +284,35 @@ int32_t remote_control(void)
 			}
 			break;
 		case MOVE:
-			for (i = 0; i < 12; i += 2)
-			{
-				if ((* (int16_t *) (current_cmd->cmd + 1 + i)) > 0)
-				{
-					n = step_motor(i / 2, STEP_FWD);
-					//Decrement number of steps
-					(* (int16_t *) (current_cmd->cmd + 1 + i))--;
-				}
-				else if ((* (int16_t *) (current_cmd->cmd + 1 + i)) < 0)
-				{
-					n = step_motor(i / 2, STEP_REV);
-					//Decrement number of steps
-					(* (int16_t *) (current_cmd->cmd + 1 + i))++;
-				}
-			}
 			//Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
 			{
 				n = 1;
 				move_until = MOVE_FREELY;
+				first_run = 1;
+				break;
+			}
+			max_steps = max_steps_current_cmd();
+			if (first_run)
+			{
+				first_run = 0;
+				calculate_ratio_to_max(orig_ratio_to_max, max_steps);
+			}
+			calculate_ratio_to_max(ratio_to_max, max_steps);
+			for (i = 0; i < 12; i += 2)
+			{
+				if ((* (int16_t *) (current_cmd->cmd + 1 + i)) > 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
+				{
+					n = step_motor(i / 2, STEP_FWD);
+					//Decrement number of steps
+					(* (int16_t *) (current_cmd->cmd + 1 + i))--;
+				}
+				else if ((* (int16_t *) (current_cmd->cmd + 1 + i)) < 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
+				{
+					n = step_motor(i / 2, STEP_REV);
+					//Decrement number of steps
+					(* (int16_t *) (current_cmd->cmd + 1 + i))++;
+				}
 			}
 			//Check if command has been finished
 			if (0 == ((* (int16_t *) (current_cmd->cmd + 1)) ||
@@ -311,6 +324,7 @@ int32_t remote_control(void)
 			{
 				n = 1;
 				move_until = MOVE_FREELY;
+				first_run = 1;
 			}
 			break;
 		case OFF:
@@ -542,4 +556,35 @@ int8_t check_opto_flag(void)
 	{
 		return 0;
 	}
+}
+
+int32_t calculate_ratio_to_max(float ratio[6], int16_t max)
+{
+	uint8_t i;
+	int16_t tmp;
+	if (current_cmd == NULL)
+		return -1;
+	for (i = 0; i < 12; i += 2)
+	{
+		tmp = * (int16_t *) (current_cmd->cmd + 1 + i);
+		if (tmp < 0)
+			tmp = -tmp;
+		ratio[i >> 1] = (float) tmp / max;
+	}
+	return 0;
+}
+
+int16_t max_steps_current_cmd(void)
+{
+	uint8_t i;
+	int16_t max = 0, tmp;
+	for (i = 0; i < 12; i += 2)
+	{
+		tmp = * (int16_t *) (current_cmd->cmd + 1 + i);
+		if (tmp < 0)
+			tmp = -tmp;
+		max += tmp;
+	}
+	max /= 6;
+	return max;
 }

@@ -8,8 +8,10 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include "robko_decode.h"
-//Includes string.h, stdlib.h and stdint.h
 
 #define BUFFER_SIZE (512)
 

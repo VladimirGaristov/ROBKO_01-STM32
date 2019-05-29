@@ -1,5 +1,7 @@
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include "robko_decode.h"
-//Includes string.h, stdlib.h and stdint.h
 
 int decode_cmd(char *buffer, uint8_t *cmd)
 {

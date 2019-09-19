@@ -220,6 +220,15 @@
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
 #define DISABLE_ROBKO() LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
 
+// Heap limit
+extern int _ebss;
+extern int _estack;
+#define HEAP_BASE _ebss
+#define STACK_BASE _estack
+#define HEAP_SIZE (HEAP_LIMIT - HEAP_BASE)
+#define STACK_SIZE 0x8000	// 32KB
+#define HEAP_LIMIT (&_estack - STACK_SIZE)
+
 /* USER CODE END Private defines */
 
 //Exported function prototypes ----------------------------------------------
@@ -247,6 +256,7 @@ int8_t get_opto(void);
 int8_t check_opto_flag(void);
 int16_t max_steps_current_cmd(void);
 int32_t calculate_ratio_to_max(float ratio[6], int16_t max);
+inline int heap_overflow(void *new_alloc, size_t size);
 
 /**
   * @}

@@ -122,3 +122,11 @@ void DWT_Delay(uint32_t us)
 	int32_t tp = DWT->CYCCNT + us * (SystemCoreClock/1000000);
 	while (((int32_t)DWT->CYCCNT - tp) < 0);
 }
+
+inline int heap_overflow(void *new_alloc, size_t size)
+{
+	if (new_alloc + size > (void *) HEAP_LIMIT)
+		return 1;
+	else
+		return 0;
+}

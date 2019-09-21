@@ -47,14 +47,14 @@ GET_STEP\
 GET_SPEED\
 GET_POS\
 
-Words in *italics* are parameters.
-Negative numbers of steps cause movement in reverse. 'OFF 6' turns off all motors.
+Words in *italics* are parameters.\
+Negative numbers of steps cause movement in reverse. 'OFF 6' turns off all motors.\
 The file, specified by OPEN_FILE must be located in the same directory as the server executable and it must contain
-commands in this syntax.
+commands in this syntax.\
 KILL command performs emergency shutdown. CLEAR clears the command queue. FREEZE halts
-the robot until it receives RESUME command.
+the robot until it receives RESUME command.\
 OPTO 1 will cause the next movement command to finish when the optical
 sensor on the claw detects an object (or when it completes its steps). OPTO 2 acts the same way but it stops the
-movement command when an object is no longer being detected.
-SET_STEP 1 will set the step mode to half step and SET_STEP 2 to full step. SET_SPEED sets the delay between steps in miliseconds. GET_STEP, GET_SPEED and GET_POS report the currently set step mode, delay between steps and position respectively.
-Commands KILL, CLEAR, FREEZE, RESUME, GET_STEP, GET_SPEED and GET_POS are executed immediately after being received. All other commands are added to a queue and executed in order of reception.
+movement command when an object is no longer being detected.\
+SET_STEP 1 will set the step mode to half step and SET_STEP 2 to full step. SET_SPEED sets the delay between steps in miliseconds. GET_STEP, GET_SPEED and GET_POS report the currently set step mode, delay between steps and position respectively.\
+Commands KILL, CLEAR, FREEZE, RESUME, GET_STEP, GET_SPEED and GET_POS are executed immediately after being received. All other commands are added to a queue and executed in order of reception.\

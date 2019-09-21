@@ -300,6 +300,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE BEGIN 5 */
   LL_USART_EnableIT_RXNE(USART1);
+  LL_USART_EnableIT_TXE(USART1);
   /* USER CODE END 5 */
 
 }

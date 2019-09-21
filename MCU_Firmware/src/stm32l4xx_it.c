@@ -45,8 +45,15 @@ void SysTick_Handler(void)
 void USART1_IRQHandler(void)
 {
 	//Check the source of the interrupt
-	if(LL_USART_IsActiveFlag_RXNE(USART1))
+	if (LL_USART_IsActiveFlag_RXNE(USART1))
+	{
 		read_cmd();
+	}
+	else if (LL_USART_IsActiveFlag_TXE(USART1))
+	{
+		send_reply(NULL, 0);
+	}
+
 }
 
 void DMA1_Channel1_IRQHandler(void)

@@ -158,6 +158,9 @@
 #define POT_INIT_VAL	0x0800U
 
 #define SERIAL_BUFFER_LEN 100
+#define MAX_CMD_LEN 13
+#define MAX_REPLY_LEN 13
+
 #define FULL_STEP 2
 #define HALF_STEP 1
 #define USE_LOCAL_STEP 0
@@ -209,12 +212,13 @@
 #define STEP_REPLY 20
 #define SPEED_REPLY 21
 #define ACK 22
-#define ERROR 23
+#define ERROR_REPLY 23
 #define LAST_CMD 24
 
 #define REPEAT 25
 
 #define FULL_RAM 101
+#define UNKNOWN_CMD 102
 
 //Enabling and disabling ROBKO 01
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)
@@ -257,6 +261,7 @@ int8_t check_opto_flag(void);
 int16_t max_steps_current_cmd(void);
 int32_t calculate_ratio_to_max(float ratio[6], int16_t max);
 inline int heap_overflow(void *new_alloc, size_t size);
+int send_reply(uint8_t *reply, uint8_t reply_len);
 
 /**
   * @}

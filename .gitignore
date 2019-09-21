@@ -1,0 +1,16 @@
+# Compiled source #
+###################
+*.o
+*.d
+*.elf
+*.bin
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

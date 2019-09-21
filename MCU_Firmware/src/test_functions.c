@@ -45,7 +45,7 @@ int32_t send_string(const char *msg)
 }
 
 //Receive a string from USART
-//Blocks with no timeout
+//Blocks with no timeout!
 int32_t receive_string(char *buffer, uint32_t buff_len)
 {
 	if(!LL_USART_IsActiveFlag_RXNE(USART1))
@@ -126,7 +126,63 @@ void DWT_Delay(uint32_t us)
 inline int heap_overflow(void *new_alloc, size_t size)
 {
 	if (new_alloc + size > (void *) HEAP_LIMIT)
+	{
 		return 1;
+	}
 	else
+	{
 		return 0;
+	}
+}
+
+/*
+ * Sends reply_len number of bytes from memory, pointed to by reply through UART
+ * Each call to the function sends only one byte. Call it again as send_reply(NULL, 0) to send the next byte.
+ */
+int send_reply(uint8_t *reply, uint8_t reply_len)
+{
+	static uint8_t reply_buffer[MAX_REPLY_LEN] = {0};
+	static uint8_t reply_lenght = 0;
+	static uint8_t current_byte = 0;
+	uint8_t i;
+	if (reply != NULL)
+	{
+		if (reply_len == 0 || reply_len > MAX_REPLY_LEN)
+		{
+			return -2;
+		}
+		if (current_byte < reply_lenght)
+		{
+			return -1;
+		}
+		reply_lenght = reply_len;
+		current_byte = 0;
+		// copy data to buffer to avoid corruption
+		for (i = 0; i < reply_len; i++)
+		{
+			reply_buffer[i] = reply[i];
+		}
+		if (LL_USART_IsActiveFlag_TXE(USART1))
+		{
+			LL_USART_TransmitData9(USART1, reply_buffer[current_byte]);
+			current_byte++;
+		}
+		return 0;
+	}
+	else
+	{
+		if (current_byte < reply_lenght)
+		{
+			if (LL_USART_IsActiveFlag_TXE(USART1))
+			{
+				LL_USART_TransmitData9(USART1, reply_buffer[current_byte]);
+				current_byte++;
+			}
+			return 0;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

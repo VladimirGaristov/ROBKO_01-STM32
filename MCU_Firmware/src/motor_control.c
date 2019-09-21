@@ -10,7 +10,7 @@
 //Stores pending commands, used to implement a linked list
 typedef struct cmd_buffer_t
 {
-	uint8_t cmd[13];
+	uint8_t cmd[MAX_CMD_LEN];
 	uint8_t incomplete;
 	struct cmd_buffer_t *next_cmd;
 }
@@ -27,7 +27,8 @@ int16_t motor_pos[6] = {1, 1, 1, 1, 1, 1};
 //Stores the direction of the last steps. Used to determine which status LEDs to illuminate
 int8_t motor_status[6] = {0};
 //Step size and speed parameters
-uint8_t move_until = MOVE_FREELY, local_step_size = FULL_STEP, remote_step_size = FULL_STEP;
+uint8_t move_until = MOVE_FREELY;
+uint8_t local_step_size = FULL_STEP, remote_step_size = FULL_STEP;
 uint16_t local_step_time = SLOW_STEP, remote_step_time = USE_LOCAL_TIME;
 //This is needed for looping
 const uint32_t LED_pins[12] = {LED0_PIN, LED1_PIN, LED2_PIN, LED3_PIN, LED4_PIN, LED5_PIN,
@@ -244,7 +245,9 @@ int32_t remote_control(void)
 	static float orig_ratio_to_max[6] = {0.0};
 	float ratio_to_max[6] = {0.0};
 	static uint8_t first_run = 1;
-	//Check if any commands are pending
+	uint8_t reply[MAX_REPLY_LEN];
+	uint8_t reply_len = 0;
+	//Check if any commands are pending and if the robot is enabled
 	if (current_cmd == NULL || LL_GPIO_IsOutputPinSet(ADDR_DATA_PORT, ENABLE_PIN) == 0)
 	{
 		return -1;
@@ -338,10 +341,11 @@ int32_t remote_control(void)
 		//TODO
 		//case GOTO_POS:
 		//case SAVE_POS:
+		//case SET_HOME:
 		case SET_STEP:
-			if (current_cmd->cmd[1] <= FULL_STEP)		//FULL_STEP has the highest value from
+			if (current_cmd->cmd[1] <= FULL_STEP)		//FULL_STEP has the highest value from the possible values of this flag
 			{
-				remote_step_size = current_cmd->cmd[1];	//the possible values of this flag
+				remote_step_size = current_cmd->cmd[1];
 			}
 			n = 1;
 			break;
@@ -408,6 +412,8 @@ void read_cmd(void)
 	static uint8_t rem_bytes = 0, current_byte = 0;
 	uint8_t read_buffer;
 	cmd_buffer_t *eraser;
+	uint8_t reply[MAX_REPLY_LEN];
+	uint8_t i, reply_len = 0;
 	//Read a byte of data
 	read_buffer = LL_USART_ReceiveData9(USART1);
 	//Check if there is a command not fully received
@@ -420,6 +426,8 @@ void read_cmd(void)
 		if (!rem_bytes)
 		{
 			last_cmd->incomplete = 0;
+			reply[0] = ACK;
+			reply_len = 1;
 		}
 	}
 	else
@@ -434,9 +442,13 @@ void read_cmd(void)
 				//Emergency stop
 				stop_motor(6);
 				DISABLE_ROBKO();
+				reply[0] = ACK;
+				reply_len = 1;
 				break;
 			case RESUME:
 				ENABLE_ROBKO();
+				reply[0] = ACK;
+				reply_len = 1;
 				break;
 			case CLEAR:
 				//Clear the command queue
@@ -447,9 +459,40 @@ void read_cmd(void)
 					free(eraser);
 				}
 				while (current_cmd != NULL);
+				reply[0] = ACK;
+				reply_len = 1;
 				break;
 			case GET_POS:
-				//TODO
+				reply[0] = GET_POS_REPLY;
+				for (i = 0; i < 6; i++)
+				{
+					* (int16_t *) (reply + 1 + 2 * i) = motor_pos[i];
+				}
+				reply_len = 13;
+				break;
+			case GET_STEP:
+				reply[0] = STEP_REPLY;
+				if (remote_step_size == USE_LOCAL_STEP)
+				{
+					reply[1] = local_step_size;
+				}
+				else
+				{
+					reply[1] = remote_step_size;
+				}
+				reply_len = 2;
+				break;
+			case GET_SPEED:
+				reply[0] = SPEED_REPLY;
+				if (remote_step_time == USE_LOCAL_TIME)
+				{
+					* (uint16_t) (reply + 1) = local_step_time;
+				}
+				else
+				{
+					* (uint16_t) (reply + 1) = remote_step_time;
+				}
+				reply_len = 3;
 				break;
 			case GOTO_POS: case MOVE: rem_bytes += 9;
 			/* no break*/
@@ -473,7 +516,25 @@ void read_cmd(void)
 					last_cmd = last_cmd->next_cmd;
 				}
 				//Check if memory was allocated successfully
-				if (last_cmd != NULL)
+				if (last_cmd == NULL)
+				{
+					reply[0] = ERROR_REPLY;
+					reply[1] = FULL_RAM;
+					reply_len = 2;
+				}
+				else if (heap_overflow(last_cmd))
+				{
+					reply[0] = ERROR_REPLY;
+					reply[1] = FULL_RAM;
+					reply_len = 2;
+					free(last_cmd);
+					if (current_cmd == last_cmd)
+					{
+						current_cmd = NULL;
+					}
+					last_cmd = NULL;
+				}
+				else
 				{
 					//Zero-out the new block of memory
 					memset(last_cmd, 0, sizeof(cmd_buffer_t));
@@ -485,8 +546,15 @@ void read_cmd(void)
 					}
 				}
 				break;
-			default:;
+			default:
+				reply[0] = ERROR_REPLY;
+				reply[1] = UNKNOWN_CMD;
+				reply_len = 2;
 		}
+	}
+	if (reply_len)
+	{
+		send_reply(reply, reply_len);
 	}
 }
 

@@ -22,12 +22,13 @@
 #define STEP_REPLY 20
 #define SPEED_REPLY 21
 #define ACK 22
-#define ERROR 23
+#define ERROR_REPLY 23
 #define LAST_CMD 24
 
 #define REPEAT 25
 
 #define FULL_RAM 101
+#define UNKNOWN_CMD 102
 
 #define FULL_STEP 2
 #define HALF_STEP 1

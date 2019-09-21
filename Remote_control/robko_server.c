@@ -237,6 +237,7 @@ int execute_file(script_file_t *file, struct sp_port *ser_port)
 		{
 			printf("Invalid command - \"%s\"\n", file_buffer);
 		}
+		//TODO parse reply and check for error or ACK
 	}
 	printf("Done\n");
 	fclose(fd);

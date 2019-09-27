@@ -238,8 +238,8 @@ void manual_control(void)
 //Executes a stored command
 int32_t remote_control(void)
 {
-	//n is a flag, raised if the current command has been completed and can be deleted
-	int8_t n = 0, i;
+	//cmd_finished is a flag, raised if the current command has been completed and can be deleted
+	uint8_t cmd_finished = 0, i;
 	cmd_buffer_t *old;
 	int16_t max_steps;
 	static float orig_ratio_to_max[6] = {0.0};
@@ -263,26 +263,26 @@ int32_t remote_control(void)
 		case MOV:
 			if ((* (int16_t *) (current_cmd->cmd + 2)) > 0)
 			{
-				n = step_motor(current_cmd->cmd[1], STEP_FWD);
+				cmd_finished = step_motor(current_cmd->cmd[1], STEP_FWD);
 				//Decrement number of steps
 				(* (int16_t *) (current_cmd->cmd + 2))--;
 			}
 			else if ((* (int16_t *) (current_cmd->cmd + 2)) < 0)
 			{
-				n = step_motor(current_cmd->cmd[1], STEP_REV);
+				cmd_finished = step_motor(current_cmd->cmd[1], STEP_REV);
 				//Decrement number of steps
 				(* (int16_t *) (current_cmd->cmd + 2))++;
 			}
 			//Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
 			{
-				n = 1;
+				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 			}
 			//Check if command has been finished
 			if ((* (int16_t *) (current_cmd->cmd + 2)) == 0)
 			{
-				n = 1;
+				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 			}
 			break;
@@ -290,7 +290,7 @@ int32_t remote_control(void)
 			//Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
 			{
-				n = 1;
+				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 				first_run = 1;
 				break;
@@ -304,15 +304,16 @@ int32_t remote_control(void)
 			calculate_ratio_to_max(ratio_to_max, max_steps);
 			for (i = 0; i < 12; i += 2)
 			{
+				// TODO why is cmd_finished set to the return of step_motor()?
 				if ((* (int16_t *) (current_cmd->cmd + 1 + i)) > 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
 				{
-					n = step_motor(i / 2, STEP_FWD);
+					cmd_finished = step_motor(i / 2, STEP_FWD);
 					//Decrement number of steps
 					(* (int16_t *) (current_cmd->cmd + 1 + i))--;
 				}
 				else if ((* (int16_t *) (current_cmd->cmd + 1 + i)) < 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
 				{
-					n = step_motor(i / 2, STEP_REV);
+					cmd_finished = step_motor(i / 2, STEP_REV);
 					//Decrement number of steps
 					(* (int16_t *) (current_cmd->cmd + 1 + i))++;
 				}
@@ -325,36 +326,69 @@ int32_t remote_control(void)
 					  (* (int16_t *) (current_cmd->cmd + 9)) ||
 					  (* (int16_t *) (current_cmd->cmd + 11))))
 			{
-				n = 1;
+				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 				first_run = 1;
 			}
 			break;
 		case OFF:
 			stop_motor(current_cmd->cmd[1]);
-			n = 1;
+			cmd_finished = 1;
 			break;
 		case FREEZE:
 			DISABLE_ROBKO();
-			n = 1;
+			cmd_finished = 1;
 			break;
-		//TODO
-		//case GOTO_POS:
-		//case SAVE_POS:
-		//case SET_HOME:
+		case GOTO_POS:
+			current_cmd->cmd[0] = MOVE;
+			for (i = 0; i < 6; i++)
+			{
+				if (remote_step_size == HALF_STEP || (remote_step_size == USE_LOCAL_STEP && local_step_size == HALF_STEP))
+				{
+					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = * (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i];
+				}
+				else if (motor_pos[i] % 2 == 0)
+				{
+					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = ((* (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i]) / 2) + 1;
+				}
+				else
+				{
+					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = (* (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i]) / 2;
+				}
+			}
+			// Recursive call to avoid waiting one step delay before making the first step towards the desired position
+			remote_control();
+			break;
+		case SAVE_POS:
+			reply[0] = SAVE_POS_REPLY;
+			for (i = 0; i < 6; i++)
+			{
+				* (int16_t *) (reply + 1 + 2 * i) = motor_pos[i];
+			}
+			reply_len = 13;
+			cmd_finished = 1;
+			break;
+		case SET_HOME:
+			for (i = 0; i < 6; i++)
+			{
+				motor_pos[i] = 0;
+				step_motor(i, STEP_FWD);
+			}
+			cmd_finished = 1;
+			break;
 		case SET_STEP:
 			if (current_cmd->cmd[1] <= FULL_STEP)		//FULL_STEP has the highest value from the possible values of this flag
 			{
 				remote_step_size = current_cmd->cmd[1];
 			}
-			n = 1;
+			cmd_finished = 1;
 			break;
 		case SET_SPEED:
 			if ((* (uint16_t *) (current_cmd->cmd + 1)) >= MAX_STEP_SPEED || (* (uint16_t *) (current_cmd->cmd + 1)) == USE_LOCAL_TIME)
 			{
 				remote_step_time = (* (uint16_t *) (current_cmd->cmd + 1));
 			}
-			n = 1;
+			cmd_finished = 1;
 			break;
 		case OPTO:
 			//Sets a flag to stop movement at detection/loss of object
@@ -362,17 +396,23 @@ int32_t remote_control(void)
 			{
 				move_until=current_cmd->cmd[1];					//the possible values of this flag
 			}
-			n = 1;
+			cmd_finished = 1;
 			break;
 		//Unknown command
-		default: n = 1;
+		default: cmd_finished = 1;
 	}
-	if (n)
+	if (cmd_finished)
 	{
 		//Advance the current command to the next and delete the old one
 		old = current_cmd;
 		current_cmd = current_cmd->next_cmd;
 		free(old);
+		if (current_cmd != NULL && current_cmd->next_cmd == NULL)
+		{
+			reply[0] = LAST_CMD;
+			reply_len = 1;
+			send_reply(reply, reply_len);
+		}
 	}
 	return 0;
 }

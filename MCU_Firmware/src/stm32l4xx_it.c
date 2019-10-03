@@ -51,6 +51,7 @@ void USART1_IRQHandler(void)
 	}
 	else if (LL_USART_IsActiveFlag_TXE(USART1))
 	{
+		LL_USART_DisableIT_TXE(USART1);
 		send_reply(NULL, 0);
 	}
 

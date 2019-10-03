@@ -345,15 +345,15 @@ int32_t remote_control(void)
 			{
 				if (remote_step_size == HALF_STEP || (remote_step_size == USE_LOCAL_STEP && local_step_size == HALF_STEP))
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = * (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i];
+					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = * (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i];
 				}
 				else if (motor_pos[i] % 2 == 0)
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = ((* (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i]) / 2) + 1;
+					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = ((* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i]) / 2) + 1;
 				}
 				else
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + i << 1) = (* (int16_t *) (current_cmd->cmd + 1 + i << 1) - motor_pos[i]) / 2;
+					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = (* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i]) / 2;
 				}
 			}
 			// Recursive call to avoid waiting one step delay before making the first step towards the desired position
@@ -526,11 +526,11 @@ void read_cmd(void)
 				reply[0] = SPEED_REPLY;
 				if (remote_step_time == USE_LOCAL_TIME)
 				{
-					* (uint16_t) (reply + 1) = local_step_time;
+					* (uint16_t *) (reply + 1) = local_step_time;
 				}
 				else
 				{
-					* (uint16_t) (reply + 1) = remote_step_time;
+					* (uint16_t *) (reply + 1) = remote_step_time;
 				}
 				reply_len = 3;
 				break;
@@ -562,7 +562,7 @@ void read_cmd(void)
 					reply[1] = FULL_RAM;
 					reply_len = 2;
 				}
-				else if (heap_overflow(last_cmd))
+				else if (heap_overflow(last_cmd, sizeof(* last_cmd)))
 				{
 					reply[0] = ERROR_REPLY;
 					reply[1] = FULL_RAM;

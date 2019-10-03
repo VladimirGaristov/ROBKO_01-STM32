@@ -117,22 +117,12 @@ void DWT_Init(void)
 }
 
 //Provides delay in microseconds
+//WARNING! Using this function can interfere with the debugger!
 void DWT_Delay(uint32_t us)
 {
+	return;
 	int32_t tp = DWT->CYCCNT + us * (SystemCoreClock/1000000);
 	while (((int32_t)DWT->CYCCNT - tp) < 0);
-}
-
-inline int heap_overflow(void *new_alloc, size_t size)
-{
-	if (new_alloc + size > (void *) HEAP_LIMIT)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
 }
 
 /*
@@ -164,8 +154,9 @@ int send_reply(uint8_t *reply, uint8_t reply_len)
 		}
 		if (LL_USART_IsActiveFlag_TXE(USART1))
 		{
-			LL_USART_TransmitData9(USART1, reply_buffer[current_byte]);
+			LL_USART_TransmitData9(USART1, (uint16_t) reply_buffer[current_byte]);
 			current_byte++;
+			LL_USART_EnableIT_TXE(USART1);
 		}
 		return 0;
 	}
@@ -175,8 +166,9 @@ int send_reply(uint8_t *reply, uint8_t reply_len)
 		{
 			if (LL_USART_IsActiveFlag_TXE(USART1))
 			{
-				LL_USART_TransmitData9(USART1, reply_buffer[current_byte]);
+				LL_USART_TransmitData9(USART1, (uint16_t) reply_buffer[current_byte]);
 				current_byte++;
+				LL_USART_EnableIT_TXE(USART1);
 			}
 			return 0;
 		}

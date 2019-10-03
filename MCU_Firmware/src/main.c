@@ -89,8 +89,14 @@ int main(void)
   //Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
   //extern uint16_t local_step_time;
+  //uint8_t repl[12] = {49, 50, 51, 52, 49, 50, 51, 52, 49, 50, 51, 52};
+  //send_reply(repl, 12);
+  //send_string("lolwtf is dis bs pls work u pis of shit");
   while (1)
   {
+	  //LL_mDelay(10);
+	  //send_reply(repl, 12);
+	  //send_string("lolwtf is dis bs pls work u pis of shit");
 	  //serial_test();
 	  //LED_Blink();
 	  //LED_wave();
@@ -351,7 +357,7 @@ static void MX_GPIO_Init(void)
   /**/
   GPIO_InitStruct.Pin = LED3_PIN|LED4_PIN|LED10_PIN|LED11_PIN
                           |LED5_PIN|LED6_PIN|LED7_PIN|LED8_PIN
-                          |LED9_PIN|LED0_PIN|LED1_PIN|LED2_PIN;	//pins LED0-1 are used by the debugger
+                          |LED9_PIN;//|LED0_PIN|LED1_PIN|LED2_PIN;	//pins LED0-1 are used by the debugger
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;

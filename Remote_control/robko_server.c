@@ -19,7 +19,7 @@
 #define REPLY_MSG_SIZE 150
 #define FILE_BUFFER_SIZE 256
 #define CMD_MAX_SIZE 14
-#define SERIAL_PORT "/dev/ttyUSB0"
+#define SERIAL_PORT "/dev/ttyUSB1"
 #define BAUDRATE 115200
 #define STOP_BITS 1
 #define WORD_LENGHT 8
@@ -205,7 +205,7 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 		sp_nonblocking_write(ser_port, s_out + i, 1);
 		i++;
 	}
-	printf("Bytes written: %d\n", i);
+	printf("Bytes written: %d\n", i - 1);
 }
 
 int execute_file(script_file_t *file, struct sp_port *ser_port)
@@ -326,7 +326,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				return 1;
 			case LAST_CMD:
 				return 2;
-			case ERROR:
+			case ERROR_REPLY:
 				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
 				if (read_status < 1)
 				{
@@ -334,6 +334,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				}
 				switch (reply[1])
 				{
+					case UNKNOWN_CMD:
+						sprintf(msg, "Error - unknown command!\n");
+						return 1;
 					case FULL_RAM:
 						sprintf(msg, "Error - MCU RAM is full!\n");
 						return 1;

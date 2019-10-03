@@ -260,8 +260,21 @@ int8_t get_opto(void);
 int8_t check_opto_flag(void);
 int16_t max_steps_current_cmd(void);
 int32_t calculate_ratio_to_max(float ratio[6], int16_t max);
-inline int heap_overflow(void *new_alloc, size_t size);
+static inline int heap_overflow(void *new_alloc, size_t size);
 int send_reply(uint8_t *reply, uint8_t reply_len);
+
+static inline int heap_overflow(void *new_alloc, size_t size)
+{
+	return 0;
+	if (new_alloc + size > (void *) HEAP_LIMIT)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 /**
   * @}

@@ -19,7 +19,7 @@
 #define REPLY_MSG_SIZE 150
 #define FILE_BUFFER_SIZE 256
 #define CMD_MAX_SIZE 14
-#define SERIAL_PORT "/dev/ttyUSB1"
+#define SERIAL_PORT "/dev/ttyUSB0"
 #define BAUDRATE 115200
 #define STOP_BITS 1
 #define WORD_LENGHT 8

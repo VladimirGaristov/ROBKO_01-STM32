@@ -304,16 +304,15 @@ int32_t remote_control(void)
 			calculate_ratio_to_max(ratio_to_max, max_steps);
 			for (i = 0; i < 12; i += 2)
 			{
-				// TODO why is cmd_finished set to the return of step_motor()?
 				if ((* (int16_t *) (current_cmd->cmd + 1 + i)) > 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
 				{
-					cmd_finished = step_motor(i / 2, STEP_FWD);
+					step_motor(i / 2, STEP_FWD);
 					//Decrement number of steps
 					(* (int16_t *) (current_cmd->cmd + 1 + i))--;
 				}
 				else if ((* (int16_t *) (current_cmd->cmd + 1 + i)) < 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
 				{
-					cmd_finished = step_motor(i / 2, STEP_REV);
+					step_motor(i / 2, STEP_REV);
 					//Decrement number of steps
 					(* (int16_t *) (current_cmd->cmd + 1 + i))++;
 				}
@@ -691,8 +690,8 @@ int16_t max_steps_current_cmd(void)
 		tmp = * (int16_t *) (current_cmd->cmd + 1 + i);
 		if (tmp < 0)
 			tmp = -tmp;
-		max += tmp;
+		if (tmp > max)
+			max = tmp;
 	}
-	max /= 6;
 	return max;
 }

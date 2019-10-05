@@ -227,11 +227,11 @@
 // Heap limit
 extern int _ebss;
 extern int _estack;
-#define HEAP_BASE _ebss
-#define STACK_BASE _estack
-#define HEAP_SIZE (HEAP_LIMIT - HEAP_BASE)
+#define HEAP_BASE &_ebss
+#define STACK_BASE &_estack
+#define HEAP_SIZE (HEAP_LIMIT - (uint32_t) HEAP_BASE)
 #define STACK_SIZE 0x8000	// 32KB
-#define HEAP_LIMIT (&_estack - STACK_SIZE)
+#define HEAP_LIMIT ((uint32_t) STACK_BASE - STACK_SIZE)
 
 /* USER CODE END Private defines */
 
@@ -265,7 +265,6 @@ int send_reply(uint8_t *reply, uint8_t reply_len);
 
 static inline int heap_overflow(void *new_alloc, size_t size)
 {
-	return 0;
 	if (new_alloc + size > (void *) HEAP_LIMIT)
 	{
 		return 1;

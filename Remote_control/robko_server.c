@@ -27,6 +27,8 @@
 #define OUTPUT_FILE "position_log.robko"
 #define READ_TIMEOUT 25		//ms
 
+#define EN_DEBUG
+
 void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
 void transmit_string(struct sp_port *ser_port, char *s_out);
@@ -43,10 +45,12 @@ int main(void)
 	int sockfd, clilen;
 	struct sp_port *serial_port;
 	//Open serial connection
+	/*
 	if (port_configuration(&serial_port))
 	{
 		error("Serial port error\n");
 	}
+	*/
 	//Create a socket for receiving incoming requests
 	sockfd = socket(AF_INET, SOCK_PROTOCOL, 0);
 	if (sockfd < 0)
@@ -93,6 +97,7 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 	//Set the socket file descriptor to non-blocking mode
 	sock_flags = fcntl(client_sockfd, F_GETFL, 0);
 	fcntl(client_sockfd, F_SETFL, sock_flags | O_NONBLOCK);
+	puts("Client connected.");
 	while (1)
 	{
 		switch (parse_reply(ser_port, reply_msg))
@@ -109,12 +114,14 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				break;
 			default:;
 		}
+
 		if (ioctl(client_sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
 		{
 			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
 			errno = 0;
 			n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
 			//if file, add null byte
+			
 			//If FIN has been received, close the socket
 			if (!n)
 			{
@@ -123,9 +130,10 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				close(client_sockfd);
 				return 0;
 			}
+
 			if (n < 0)
 			{
-				if (errno == EAGAIN)
+				if (errno == EAGAIN || errno == EWOULDBLOCK)
 				{
 					continue;
 				}
@@ -135,7 +143,11 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 					return -2;
 				}
 			}
+
+			#ifdef EN_DEBUG
 			printf("Received %d bytes\n", n);
+			#endif
+
 			if (sock_buffer[1] == OPEN_FILE)
 			{
 				script_file.repeat = 0;
@@ -202,7 +214,7 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	int l = s_out[0];
 	while (i < l)
 	{
-		sp_nonblocking_write(ser_port, s_out + i, 1);
+		//sp_nonblocking_write(ser_port, s_out + i, 1);
 		i++;
 	}
 	printf("Bytes written: %d\n", i - 1);
@@ -246,9 +258,9 @@ int execute_file(script_file_t *file, struct sp_port *ser_port)
 
 int parse_reply(struct sp_port *ser_port, char *msg)
 {
-	uint8_t reply[13] = {0}, read_status;
+	uint8_t reply[13] = {0}, read_status = 0;
 	uint16_t speed = 0;
-	read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
+	//read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
 	if (!read_status)
 	{
 		return 0;

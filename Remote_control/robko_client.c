@@ -15,6 +15,8 @@
 
 #define BUFFER_SIZE (512)
 
+#define EN_DEBUG
+
 void error(char *msg);
 
 void error(char *msg)
@@ -33,6 +35,7 @@ int main(int argc, const char *argv[])
 	{
 		error("ERROR - plese specify the server IP address\n");
 	}
+
 	//Open a socket
 	sockfd = socket(AF_INET, SOCK_PROTOCOL, 0);
 	if (sockfd < 0)
@@ -40,6 +43,7 @@ int main(int argc, const char *argv[])
 		error("ERROR opening socket\n");
 	}
 	memset(&serv_addr, 0, sizeof(serv_addr));
+
 	//Set the server address and port
 	serv_addr.sin_family = AF_INET;
 	if (!(inet_aton(argv[1], (struct in_addr *) &serv_addr.sin_addr.s_addr)))
@@ -47,16 +51,20 @@ int main(int argc, const char *argv[])
 		error("ERROR converting server address\n");
 	}
 	serv_addr.sin_port = htons(SOCK_PORT);
-	printf("Attempting to connect...\n");
+	puts("Attempting to connect...");
+
 	//Connect to the server
 	if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
 	{
 		error("ERROR connecting\n");
 	}
+
 	//Set the socket file descriptor to non-blocking mode
 	sock_flags = fcntl(sockfd, F_GETFL, 0);
 	fcntl(sockfd, F_SETFL, sock_flags | O_NONBLOCK);
-	printf("Please enter a command: ");
+	fputs("Connected.\nType EXIT to quit.\nPlease enter a command: ", stdout);
+	fflush(stdout);
+
 	while (1)
 	{	
 		//File descriptor 0 is stdin
@@ -65,7 +73,10 @@ int main(int argc, const char *argv[])
 			memset(buffer, 0, BUFFER_SIZE);
 			memset(cmd, 0, BUFFER_SIZE);
 			fgets(buffer, BUFFER_SIZE, stdin);
-			printf("Please enter a command: ");
+			if (!strcmp(buffer, "EXIT\n"))
+			{
+				break;
+			}
 			//Add command verification?
 			decode_cmd(buffer, cmd);
 			//Send data to the server
@@ -74,8 +85,15 @@ int main(int argc, const char *argv[])
 			{
 				error("ERROR writing to socket\n");
 			}
+
+			#ifdef EN_DEBUG
 			printf("%d bytes sent.\n", n);
+			#endif
+
+			fputs("Please enter a command: ", stdout);
+			fflush(stdout);
 		}
+
 		if (ioctl(sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
 		{
 			memset(buffer, 0, BUFFER_SIZE);
@@ -84,9 +102,14 @@ int main(int argc, const char *argv[])
 			{
 				printf("ERROR reading from socket\n");
 			}
-			printf("Reply from server:\t%s\n", buffer);
+			else
+			{
+				printf("Reply from server:\t%s\n", buffer);
+			}
+			fflush(stdout);
 		}
 	}
-	//shutdown(sockfd, SHUT_WR);
+	shutdown(sockfd, SHUT_RDWR);
+	close(sockfd);
 	return 0;
 }

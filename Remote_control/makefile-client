@@ -5,7 +5,7 @@ decode.o: robko_decode.c
 	gcc -Wall -pedantic -std=c11 -c -o decode.o robko_decode.c
 
 client.o: robko_client.c
-	gcc -Wall -pedantic -std=c11 -c -o client.o robko_client.c
+	gcc -Wall -pedantic -std=c11 -c -O0 -o client.o robko_client.c
 
 clean:
 	rm decode.o client.o

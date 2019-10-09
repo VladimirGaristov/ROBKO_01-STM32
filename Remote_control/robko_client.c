@@ -100,11 +100,13 @@ int main(int argc, const char *argv[])
 			n = read(sockfd, buffer, BUFFER_SIZE - 1);
 			if (n < 0)
 			{
-				printf("ERROR reading from socket\n");
+				fputs("ERROR reading from socket\n", stdout);
+				fputs("Please enter a command: ", stdout);
 			}
 			else
 			{
-				printf("Reply from server:\t%s\n", buffer);
+				printf("Reply from server:\n\t%s\n", buffer);
+				fputs("Please enter a command: ", stdout);
 			}
 			fflush(stdout);
 		}

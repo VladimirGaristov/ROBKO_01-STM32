@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <pthread.h>
 #include "robko_decode.h"
 
 #define SOCK_BUFFER_SIZE 1501
@@ -27,7 +28,27 @@
 #define OUTPUT_FILE "position_log.robko"
 #define READ_TIMEOUT 25		//ms
 
+#define PARSED_REPEAT 2
+#define PARSED_REPLY 1
+
 #define EN_DEBUG
+
+typedef struct
+{
+	uint8_t repeat;
+	char filename[MAX_FILENAME_SIZE];
+}
+script_file_t;
+
+typedef struct
+{
+	int sockfd;
+	struct sp_port *ser_port;
+	script_file_t *script_file;
+}
+thread_args_t;
+
+pthread_mutex_t serial_port_mutex;
 
 void delay(int msec);
 int port_configuration(struct sp_port **ser_port);
@@ -38,19 +59,20 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port);
 int parse_reply(struct sp_port *ser_port, char *msg);
 int save_position(uint16_t *position);
 int send_reply(int client_sockfd, char *reply_msg);
+void *reply_thread(void *args);
 
 int main(void)
 {
 	struct sockaddr_in serv_addr, cli_addr;
 	int sockfd, clilen;
 	struct sp_port *serial_port;
+
 	//Open serial connection
-	/*
 	if (port_configuration(&serial_port))
 	{
 		error("Serial port error\n");
 	}
-	*/
+
 	//Create a socket for receiving incoming requests
 	sockfd = socket(AF_INET, SOCK_PROTOCOL, 0);
 	if (sockfd < 0)
@@ -71,35 +93,59 @@ int main(void)
 	}
 	listen(sockfd, 5);
 	clilen = sizeof(cli_addr);
+
 	while (1)
 	{
 		printf("\nAwaiting connection...\n");
 		//Open a socket to communicate with the client
 		get_client_commands(accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen), serial_port);
 	}
+
 	sp_free_port(serial_port);
 	return 0;
 }
 
 int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 {
-	int n, bytes_available = 0, sock_flags;
-	char sock_buffer[SOCK_BUFFER_SIZE], reply_msg[REPLY_MSG_SIZE];
+	int n, sock_flags;
+	//int bytes_available = 0;
+	char sock_buffer[SOCK_BUFFER_SIZE];
 	script_file_t script_file =
 	{
-		.repeat = 0, .last_cmd = 0, .filename[0] = '\0'
+		.repeat = 0, .filename[0] = '\0'
 	};
+	pthread_attr_t attributes;
+	pthread_t reply_thread_handle;
+	thread_args_t arguments;
+
 	if (client_sockfd < 0)
 	{
-		printf("ERROR on accept\n");
+		printf("ERROR on accept!\n");
 		return -1;
 	}
 	//Set the socket file descriptor to non-blocking mode
 	sock_flags = fcntl(client_sockfd, F_GETFL, 0);
 	fcntl(client_sockfd, F_SETFL, sock_flags | O_NONBLOCK);
 	puts("Client connected.");
+
+	pthread_mutex_init(&serial_port_mutex, NULL);
+	pthread_attr_init(&attributes);
+	pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_DETACHED);
+	arguments.sockfd = client_sockfd;
+	arguments.ser_port = ser_port;
+	arguments.script_file = &script_file;
+	if (pthread_create(&reply_thread_handle, &attributes, reply_thread, (void *) &arguments))
+	{
+		printf("ERROR creating secondary thread!\n");
+		pthread_attr_destroy(&attributes);
+		return -2;
+	}
+	pthread_attr_destroy(&attributes);
+
 	while (1)
 	{
+		/*
+		//Moved to secondary thread
 		switch (parse_reply(ser_port, reply_msg))
 		{
 			case 2:
@@ -114,13 +160,14 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				break;
 			default:;
 		}
+		*/
 
-		if (ioctl(client_sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
-		{
+		//if (ioctl(client_sockfd, FIONREAD, &bytes_available) == 0 && bytes_available > 0)
+		//{
 			memset(sock_buffer, 0, SOCK_BUFFER_SIZE);
 			errno = 0;
 			n = read(client_sockfd, sock_buffer, SOCK_BUFFER_SIZE - 1);
-			//if file, add null byte
+			//if file, add null byte?
 			
 			//If FIN has been received, close the socket
 			if (!n)
@@ -128,6 +175,8 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				//add a console message
 				shutdown(client_sockfd, SHUT_RDWR);
 				close(client_sockfd);
+				pthread_cancel(reply_thread_handle);
+				pthread_mutex_destroy(&serial_port_mutex);
 				return 0;
 			}
 
@@ -140,6 +189,8 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				else
 				{
 					printf("ERROR reading from socket\n");
+					pthread_cancel(reply_thread_handle);
+					pthread_mutex_destroy(&serial_port_mutex);
 					return -2;
 				}
 			}
@@ -152,14 +203,18 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 			{
 				script_file.repeat = 0;
 				strlcpy(script_file.filename, sock_buffer + 2, MAX_FILENAME_SIZE);
+				pthread_mutex_lock(&serial_port_mutex);
 				execute_file(&script_file, ser_port);
+				pthread_mutex_unlock(&serial_port_mutex);
 			}
 			else
 			{
 				script_file.repeat = 0;
+				pthread_mutex_lock(&serial_port_mutex);
 				transmit_string(ser_port, sock_buffer);
+				pthread_mutex_unlock(&serial_port_mutex);
 			}
-		}
+		//}
 	}
 }
 
@@ -214,7 +269,7 @@ void transmit_string(struct sp_port *ser_port, char *s_out)
 	int l = s_out[0];
 	while (i < l)
 	{
-		//sp_nonblocking_write(ser_port, s_out + i, 1);
+		sp_nonblocking_write(ser_port, s_out + i, 1);
 		i++;
 	}
 	printf("Bytes written: %d\n", i - 1);
@@ -260,7 +315,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 {
 	uint8_t reply[13] = {0}, read_status = 0;
 	uint16_t speed = 0;
-	//read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
+	read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
 	if (!read_status)
 	{
 		return 0;
@@ -281,13 +336,13 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				{
 					case USE_LOCAL_STEP:
 						sprintf(msg, "ROBKO 01 is set to use local step setting.\n");
-						return 1;
+						return PARSED_REPLY;
 					case FULL_STEP:
 						sprintf(msg, "Step mode is set to FULL_STEP.\n");
-						return 1;
+						return PARSED_REPLY;
 					case HALF_STEP:
 						sprintf(msg, "Step mode is set to HALF_STEP.\n");
-						return 1;
+						return PARSED_REPLY;
 					default:
 						return -1;
 				}
@@ -301,12 +356,12 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				if (speed == USE_LOCAL_TIME)
 				{
 					sprintf(msg, "ROBKO 01 is set to use local speed setting.\n");
-					return 1;
+					return PARSED_REPLY;
 				}
 				else
 				{
 					sprintf(msg, "Time between steps is %d miliseconds.\n", speed);
-					return 1;
+					return PARSED_REPLY;
 				}
 			case GET_POS_REPLY:
 			case SAVE_POS_REPLY:
@@ -335,9 +390,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				{
 					save_position((uint16_t *) (reply + 1));
 				}
-				return 1;
+				return PARSED_REPLY;
 			case LAST_CMD:
-				return 2;
+				return PARSED_REPEAT;
 			case ERROR_REPLY:
 				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
 				if (read_status < 1)
@@ -348,10 +403,10 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				{
 					case UNKNOWN_CMD:
 						sprintf(msg, "Error - unknown command!\n");
-						return 1;
+						return PARSED_REPLY;
 					case FULL_RAM:
 						sprintf(msg, "Error - MCU RAM is full!\n");
-						return 1;
+						return PARSED_REPLY;
 				}
 		}
 	}
@@ -387,4 +442,34 @@ int send_reply(int client_sockfd, char *reply_msg)
 	}
 	printf("%d bytes sent.\n", bytes_sent);
 	return 0;
+}
+
+// Secondary thread handles replies from the MCU to the client
+// and repeating files
+void *reply_thread(void *args)
+{
+	char reply_msg[REPLY_MSG_SIZE];
+	thread_args_t *arguments = (thread_args_t *) args;
+	while (1)
+	{
+		switch (parse_reply(arguments->ser_port, reply_msg))
+		{
+			case PARSED_REPEAT:
+				if (arguments->script_file->repeat)
+				{
+					pthread_mutex_lock(&serial_port_mutex);
+					execute_file(arguments->script_file, arguments->ser_port);
+					pthread_mutex_unlock(&serial_port_mutex);					
+				}
+				break;
+			case PARSED_REPLY:
+				#ifdef EN_DEBUG
+				puts(reply_msg);
+				#endif
+				send_reply(arguments->sockfd, reply_msg);
+				break;
+			default:;
+		}
+	}
+	return NULL;
 }

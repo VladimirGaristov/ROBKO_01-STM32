@@ -42,10 +42,3 @@
 #define MAX_FILENAME_SIZE 256
 
 int decode_cmd(char *buffer, uint8_t *cmd);
-
-typedef struct
-{
-	uint8_t repeat, last_cmd;
-	char filename[MAX_FILENAME_SIZE];
-}
-script_file_t;

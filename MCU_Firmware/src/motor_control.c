@@ -541,7 +541,7 @@ void read_cmd(void)
 			/* no break */
 			case OPTO: case OFF: case SET_STEP: rem_bytes += 1;
 			/* no break */
-			case FREEZE:
+			case FREEZE: case SAVE_POS: case SET_HOME:
 				//Allocate memory for the new command and add it to the linked list
 				//Check if the queue is empty
 				if (current_cmd == NULL)

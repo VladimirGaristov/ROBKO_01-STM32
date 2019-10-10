@@ -48,7 +48,7 @@ int decode_cmd(char *buffer, uint8_t *cmd)
 		cmd[0] = 14;
 		cmd[1] = GOTO_POS;
 		l = strlen(buffer);
-		* (int16_t *) (cmd + 2) = (int16_t) strtol(buffer + 5, &next_val, 10);
+		* (int16_t *) (cmd + 2) = (int16_t) strtol(buffer + 9, &next_val, 10);
 		for (i = 0; i < 10; i += 2)
 		{
 			//Prevents reading from adresses beyond the end of the buffer

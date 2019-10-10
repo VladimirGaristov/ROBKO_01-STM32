@@ -25,7 +25,7 @@
 #define STOP_BITS 1
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
-#define OUTPUT_FILE "position_log.robko"
+#define OUTPUT_FILE "/home/cartogan/Ac6/workspace/ROBKO_01/Remote_control/position_log.robko"
 #define READ_TIMEOUT 25		//ms
 
 #define PARSED_REPEAT 2
@@ -322,12 +322,17 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 	}
 	else if (read_status == 1)
 	{
+		#ifdef EN_DEBUG
+		printf("--- %d ---\n", reply[0]);
+		fflush(stdout);
+		#endif
+
 		switch (reply[0])
 		{
 			case ACK:
 				return 0;
 			case STEP_REPLY:
-				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
+				read_status = sp_blocking_read(ser_port, reply + 1, 1, READ_TIMEOUT);
 				if (read_status < 1)
 				{
 					return -1;
@@ -347,7 +352,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 						return -1;
 				}
 			case SPEED_REPLY:
-				read_status = sp_blocking_read(ser_port, reply + 1, 2, 100);
+				read_status = sp_blocking_read(ser_port, reply + 1, 2, READ_TIMEOUT);
 				if (read_status < 2)
 				{
 					return -1;
@@ -365,7 +370,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				}
 			case GET_POS_REPLY:
 			case SAVE_POS_REPLY:
-				read_status = sp_blocking_read(ser_port, reply + 1, 12, 100);
+				read_status = sp_blocking_read(ser_port, reply + 1, 12, READ_TIMEOUT);
 				if (read_status < 12)
 				{
 					return -1;
@@ -394,7 +399,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 			case LAST_CMD:
 				return PARSED_REPEAT;
 			case ERROR_REPLY:
-				read_status = sp_blocking_read(ser_port, reply + 1, 1, 100);
+				read_status = sp_blocking_read(ser_port, reply + 1, 1, READ_TIMEOUT);
 				if (read_status < 1)
 				{
 					return -1;
@@ -420,12 +425,13 @@ int save_position(uint16_t *position)
 	output_fp = fopen(OUTPUT_FILE, "a");
 	if (output_fp == NULL)
 	{
+		puts("ERROR opening output file!\n");
 		return -1;
 	}
-	fputs("MOVE ", output_fp);
+	fputs("GOTO_POS ", output_fp);
 	for (i = 0; i < 6; i++)
 	{
-		fprintf(output_fp, "%d ", * (position + 2 * i));
+		fprintf(output_fp, "%d ", position[i << 1]);
 	}
 	fputs("\n", output_fp);
 	return 0;
@@ -464,7 +470,8 @@ void *reply_thread(void *args)
 				break;
 			case PARSED_REPLY:
 				#ifdef EN_DEBUG
-				puts(reply_msg);
+				fputs(reply_msg, stdout);
+				fflush(stdout);
 				#endif
 				send_reply(arguments->sockfd, reply_msg);
 				break;

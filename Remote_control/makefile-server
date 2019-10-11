@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 all: decode.o server.o
 	gcc -Wall -pedantic -std=c11 -pthread -o robko_server server.o decode.o -L/usr/local/lib -lserialport -lbsd
 
@@ -8,4 +10,11 @@ server.o: robko_server.c
 	gcc -Wall -pedantic -std=c11 -pthread -c -o server.o robko_server.c
 
 clean:
-	rm decode.o server.o
+	if [ -a ./decode.o ] ; \
+	then \
+		rm decode.o; \
+	fi;
+	if [ -a ./server.o ] ; \
+	then \
+		rm server.o; \
+	fi;

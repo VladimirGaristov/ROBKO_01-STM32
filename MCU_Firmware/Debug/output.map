@@ -6124,7 +6124,7 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_line    0x000000000000bb31      0xada src/test_functions.o
  .debug_line    0x000000000000c60b       0x7f startup/startup_stm32l476xx.o
 
-.debug_str      0x0000000000000000   0x101621
+.debug_str      0x0000000000000000   0x101622
  .debug_str     0x0000000000000000    0xe174f HAL_Driver/Src/stm32l4xx_hal.o
                                       0xe2604 (size before relaxing)
  .debug_str     0x00000000000e174f      0x3aa HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -6147,18 +6147,18 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
                                       0xe79c7 (size before relaxing)
  .debug_str     0x00000000000f9dd6     0x3149 HAL_Driver/Src/stm32l4xx_ll_utils.o
                                       0xe86f7 (size before relaxing)
- .debug_str     0x00000000000fcf1f     0x30cb src/main.o
-                                      0xf90e6 (size before relaxing)
- .debug_str     0x00000000000fffea      0x282 src/motor_control.o
-                                      0xf81b2 (size before relaxing)
- .debug_str     0x000000000010026c       0xaf src/stm32l4xx_it.o
-                                      0xf7f1c (size before relaxing)
- .debug_str     0x000000000010031b     0x10d2 src/syscalls.o
+ .debug_str     0x00000000000fcf1f     0x30cc src/main.o
+                                      0xf90e7 (size before relaxing)
+ .debug_str     0x00000000000fffeb      0x282 src/motor_control.o
+                                      0xf81b3 (size before relaxing)
+ .debug_str     0x000000000010026d       0xaf src/stm32l4xx_it.o
+                                      0xf7f1d (size before relaxing)
+ .debug_str     0x000000000010031c     0x10d2 src/syscalls.o
                                        0x7d4f (size before relaxing)
- .debug_str     0x00000000001013ed       0x6a src/system_stm32l4xx.o
+ .debug_str     0x00000000001013ee       0x6a src/system_stm32l4xx.o
                                       0xe1b32 (size before relaxing)
- .debug_str     0x0000000000101457      0x1ca src/test_functions.o
-                                      0xf817e (size before relaxing)
+ .debug_str     0x0000000000101458      0x1ca src/test_functions.o
+                                      0xf817f (size before relaxing)
 
 .comment        0x0000000000000000       0xfe
  .comment       0x0000000000000000       0x7f HAL_Driver/Src/stm32l4xx_hal.o

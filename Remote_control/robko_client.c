@@ -105,7 +105,7 @@ int main(int argc, const char *argv[])
 			}
 			else
 			{
-				printf("Reply from server:\n\t%s\n", buffer);
+				printf("\nReply from server:\n\t%s\n", buffer);
 				fputs("Please enter a command: ", stdout);
 			}
 			fflush(stdout);

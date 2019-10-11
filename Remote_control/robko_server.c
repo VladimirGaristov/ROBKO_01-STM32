@@ -427,6 +427,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 						sprintf(msg, "Error - MCU RAM is full!\n");
 						return PARSED_REPLY;
 				}
+			default:;
 		}
 	}
 	return -1;

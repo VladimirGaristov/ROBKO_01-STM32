@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 all: decode.o client.o
 	gcc -Wall -pedantic -std=c11 -o robko_client client.o decode.o
 
@@ -8,4 +10,11 @@ client.o: robko_client.c
 	gcc -Wall -pedantic -std=c11 -c -O0 -o client.o robko_client.c
 
 clean:
-	rm decode.o client.o
+	if [ -a ./decode.o ] ; \
+	then \
+		rm decode.o; \
+	fi;
+	if [ -a ./client.o ] ; \
+	then \
+		rm client.o; \
+	fi;

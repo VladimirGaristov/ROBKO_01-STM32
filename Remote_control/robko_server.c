@@ -57,7 +57,7 @@ void error(const char *);
 int execute_file(script_file_t *file, struct sp_port *ser_port);
 int get_client_commands(int client_sockfd, struct sp_port *ser_port);
 int parse_reply(struct sp_port *ser_port, char *msg);
-int save_position(uint16_t *position);
+int save_position(int16_t *position);
 int send_reply(int client_sockfd, char *reply_msg);
 void *reply_thread(void *args);
 
@@ -138,6 +138,8 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 	{
 		printf("ERROR creating secondary thread!\n");
 		pthread_attr_destroy(&attributes);
+		shutdown(client_sockfd, SHUT_RDWR);
+		close(client_sockfd);
 		return -2;
 	}
 	pthread_attr_destroy(&attributes);
@@ -189,6 +191,8 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				else
 				{
 					printf("ERROR reading from socket\n");
+					shutdown(client_sockfd, SHUT_RDWR);
+					close(client_sockfd);
 					pthread_cancel(reply_thread_handle);
 					pthread_mutex_destroy(&serial_port_mutex);
 					return -2;
@@ -315,7 +319,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 {
 	uint8_t reply[13] = {0}, read_status = 0;
 	uint16_t speed = 0;
+	//pthread_mutex_lock(&serial_port_mutex);
 	read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
+	//pthread_mutex_unlock(&serial_port_mutex);
 	if (!read_status)
 	{
 		return 0;
@@ -332,7 +338,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 			case ACK:
 				return 0;
 			case STEP_REPLY:
+				pthread_mutex_lock(&serial_port_mutex);
 				read_status = sp_blocking_read(ser_port, reply + 1, 1, READ_TIMEOUT);
+				pthread_mutex_unlock(&serial_port_mutex);
 				if (read_status < 1)
 				{
 					return -1;
@@ -352,7 +360,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 						return -1;
 				}
 			case SPEED_REPLY:
+				pthread_mutex_lock(&serial_port_mutex);
 				read_status = sp_blocking_read(ser_port, reply + 1, 2, READ_TIMEOUT);
+				pthread_mutex_unlock(&serial_port_mutex);
 				if (read_status < 2)
 				{
 					return -1;
@@ -370,7 +380,9 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				}
 			case GET_POS_REPLY:
 			case SAVE_POS_REPLY:
+				pthread_mutex_lock(&serial_port_mutex);
 				read_status = sp_blocking_read(ser_port, reply + 1, 12, READ_TIMEOUT);
+				pthread_mutex_unlock(&serial_port_mutex);
 				if (read_status < 12)
 				{
 					return -1;
@@ -385,21 +397,23 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 					"\tMotor 3: %d\n"
 					"\tMotor 4: %d\n"
 					"\tMotor 5: %d\n",
-					* (uint16_t *) (reply + 1),
-					* (uint16_t *) (reply + 3),
-					* (uint16_t *) (reply + 5),
-					* (uint16_t *) (reply + 7),
-					* (uint16_t *) (reply + 9),
-					* (uint16_t *) (reply + 11));
+					* (int16_t *) (reply + 1),
+					* (int16_t *) (reply + 3),
+					* (int16_t *) (reply + 5),
+					* (int16_t *) (reply + 7),
+					* (int16_t *) (reply + 9),
+					* (int16_t *) (reply + 11));
 				if (reply[0] == SAVE_POS_REPLY)
 				{
-					save_position((uint16_t *) (reply + 1));
+					save_position((int16_t *) (reply + 1));
 				}
 				return PARSED_REPLY;
 			case LAST_CMD:
 				return PARSED_REPEAT;
 			case ERROR_REPLY:
+				pthread_mutex_lock(&serial_port_mutex);
 				read_status = sp_blocking_read(ser_port, reply + 1, 1, READ_TIMEOUT);
+				pthread_mutex_unlock(&serial_port_mutex);
 				if (read_status < 1)
 				{
 					return -1;
@@ -418,7 +432,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 	return -1;
 }
 
-int save_position(uint16_t *position)
+int save_position(int16_t *position)
 {
 	FILE *output_fp = NULL;
 	uint8_t i;
@@ -431,9 +445,10 @@ int save_position(uint16_t *position)
 	fputs("GOTO_POS ", output_fp);
 	for (i = 0; i < 6; i++)
 	{
-		fprintf(output_fp, "%d ", position[i << 1]);
+		fprintf(output_fp, "%d ", position[i]);
 	}
 	fputs("\n", output_fp);
+	fflush(output_fp);
 	return 0;
 }
 
@@ -477,6 +492,7 @@ void *reply_thread(void *args)
 				break;
 			default:;
 		}
+
 	}
 	return NULL;
 }

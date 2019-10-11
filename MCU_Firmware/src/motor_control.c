@@ -358,15 +358,6 @@ int32_t remote_control(void)
 			// Recursive call to avoid waiting one step delay before making the first step towards the desired position
 			remote_control();
 			break;
-		case SAVE_POS:
-			reply[0] = SAVE_POS_REPLY;
-			for (i = 0; i < 6; i++)
-			{
-				* (int16_t *) (reply + 1 + 2 * i) = motor_pos[i];
-			}
-			reply_len = 13;
-			cmd_finished = 1;
-			break;
 		case SET_HOME:
 			for (i = 0; i < 6; i++)
 			{
@@ -474,7 +465,7 @@ void read_cmd(void)
 		//Start of new command
 		current_byte = 1;
 		rem_bytes = 0;
-		//KILL, RESUME, GET_POS and CLEAR commands are not added to the queue. Instead they are executed with priority.
+		//KILL, RESUME, GET_STEP, GET_SPEED, GET_POS, SAVE_POS and CLEAR commands are not added to the queue. Instead they are executed with priority.
 		switch (read_buffer)
 		{
 			case KILL:
@@ -501,11 +492,14 @@ void read_cmd(void)
 				reply[0] = ACK;
 				reply_len = 1;
 				break;
-			case GET_POS:
-				reply[0] = GET_POS_REPLY;
+			case GET_POS: case SAVE_POS:
+				if (read_buffer == GET_POS)
+					reply[0] = GET_POS_REPLY;
+				else
+					reply[0] = SAVE_POS_REPLY;
 				for (i = 0; i < 6; i++)
 				{
-					* (int16_t *) (reply + 1 + 2 * i) = motor_pos[i];
+					* (int16_t *) (reply + 1 + (i << 1)) = motor_pos[i];
 				}
 				reply_len = 13;
 				break;
@@ -541,7 +535,7 @@ void read_cmd(void)
 			/* no break */
 			case OPTO: case OFF: case SET_STEP: rem_bytes += 1;
 			/* no break */
-			case FREEZE: case SAVE_POS: case SET_HOME:
+			case FREEZE: case SET_HOME:
 				//Allocate memory for the new command and add it to the linked list
 				//Check if the queue is empty
 				if (current_cmd == NULL)
@@ -579,7 +573,7 @@ void read_cmd(void)
 					memset(last_cmd, 0, sizeof(cmd_buffer_t));
 					//Write the byte of data that was read
 					last_cmd->cmd[0] = read_buffer;
-					if (read_buffer != FREEZE)
+					if (rem_bytes)
 					{
 						last_cmd->incomplete = 1;
 					}

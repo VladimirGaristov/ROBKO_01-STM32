@@ -7,9 +7,9 @@
   <WINDOW type="default" module="DXP"/>
   <WINDOW type="VIEW3D" module="VIEW3D">
    <camera>
-    <position x="2476500" y="-10911606" z="8943106"/>
-    <focus x="2476500" y="-1968500" z="0"/>
-    <up x="0" y="707106" z="707106"/>
+    <position x="-2273282" y="-2120264" z="11777142"/>
+    <focus x="1844331" y="-2120264" z="-181271"/>
+    <up x="945518" y="0" z="325568"/>
    </camera>
   </WINDOW>
   <WINDOW type="default" module="PROJNOTES"/>

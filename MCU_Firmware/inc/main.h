@@ -39,6 +39,9 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
+#define REV2
+//#define REV3		// Uncomment this line and comment the above one unless you have the old version of the board
+
 #ifndef USE_FULL_LL_DRIVER
 #define USE_FULL_LL_DRIVER
 #endif
@@ -76,7 +79,7 @@
 
 /* Private define ------------------------------------------------------------*/
 
-//TODO Switch the joysticks
+//TODO Switch the joysticks?
 #define CLAW_RELEASE_BUT_PIN LL_GPIO_PIN_13
 #define CLAW_GRAB_BUT_PIN LL_GPIO_PIN_12
 #define LEFT_RIGHT_POT_PIN LL_GPIO_PIN_1
@@ -88,7 +91,12 @@
 #define AUTO_MODE_PIN LL_GPIO_PIN_9
 #define MANUAL_MODE_PIN LL_GPIO_PIN_8
 #define JOYSTICK_CONNECTED_PIN LL_GPIO_PIN_7
+#ifdef REV2
 #define STEP_SIZE_PIN LL_GPIO_PIN_14		//Conflicts with LSE oscillator, solder SB49 and remove R34 on Nucleo board to use
+#endif
+#ifdef REV3
+#define STEP_SIZE_PIN LL_GPIO_PIN_5
+#endif
 #define STEP_TIME_PIN LL_GPIO_PIN_4
 
 #define IOW_PIN LL_GPIO_PIN_1
@@ -101,14 +109,25 @@
 #define D5_PIN LL_GPIO_PIN_13
 #define D6_PIN LL_GPIO_PIN_14
 #define D7_PIN LL_GPIO_PIN_15
+#ifdef REV2
 #define A0_PIN LL_GPIO_PIN_3		//Conflicts with debugger, but still works if asynchronous trace is not used (default)
+#endif
+#ifdef REV3
+#define A0_PIN LL_GPIO_PIN_7
+#endif
 #define A1_PIN LL_GPIO_PIN_4
 #define A2_PIN LL_GPIO_PIN_5
 #define ENABLE_PIN LL_GPIO_PIN_6
 
 #define TEST_LED_PIN LL_GPIO_PIN_5
+#ifdef REV2
 #define LED0_PIN LL_GPIO_PIN_13		//Conflicts with debugger
 #define LED1_PIN LL_GPIO_PIN_14		//Conflicts with debugger
+#endif
+#ifdef REV3
+#define LED0_PIN LL_GPIO_PIN_11
+#define LED1_PIN LL_GPIO_PIN_12
+#endif
 #define LED2_PIN LL_GPIO_PIN_15
 #define LED3_PIN LL_GPIO_PIN_0
 #define LED4_PIN LL_GPIO_PIN_1

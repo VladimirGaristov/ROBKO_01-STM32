@@ -4293,7 +4293,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc src/motor_control.o
  .text          0x0000000000000000        0x0 src/motor_control.o
  .debug_macro   0x0000000000000000      0xa72 src/motor_control.o
- .debug_macro   0x0000000000000000       0x1c src/motor_control.o
+ .debug_macro   0x0000000000000000       0x22 src/motor_control.o
  .debug_macro   0x0000000000000000       0x28 src/motor_control.o
  .debug_macro   0x0000000000000000       0x28 src/motor_control.o
  .debug_macro   0x0000000000000000       0x22 src/motor_control.o
@@ -4365,7 +4365,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 src/motor_control.o
  .debug_macro   0x0000000000000000       0x16 src/motor_control.o
  .debug_macro   0x0000000000000000       0x29 src/motor_control.o
- .debug_macro   0x0000000000000000      0x2de src/motor_control.o
+ .debug_macro   0x0000000000000000      0x2e8 src/motor_control.o
  .group         0x0000000000000000        0xc src/stm32l4xx_it.o
  .group         0x0000000000000000        0xc src/stm32l4xx_it.o
  .group         0x0000000000000000        0xc src/stm32l4xx_it.o
@@ -4500,7 +4500,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x9cd src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000      0x1e0 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000      0x320 src/stm32l4xx_it.o
- .debug_macro   0x0000000000000000       0x1c src/stm32l4xx_it.o
+ .debug_macro   0x0000000000000000       0x22 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000      0x708 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000      0x1c1 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000      0x302 src/stm32l4xx_it.o
@@ -4516,7 +4516,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000       0x16 src/stm32l4xx_it.o
  .debug_macro   0x0000000000000000       0x29 src/stm32l4xx_it.o
- .debug_macro   0x0000000000000000      0x2de src/stm32l4xx_it.o
+ .debug_macro   0x0000000000000000      0x2e8 src/stm32l4xx_it.o
  .group         0x0000000000000000        0x8 src/syscalls.o
  .group         0x0000000000000000        0x8 src/syscalls.o
  .group         0x0000000000000000        0x8 src/syscalls.o
@@ -4818,7 +4818,7 @@ Discarded input sections
  .text.motor_test
                 0x0000000000000000       0x4c src/test_functions.o
  .debug_macro   0x0000000000000000      0xa72 src/test_functions.o
- .debug_macro   0x0000000000000000       0x1c src/test_functions.o
+ .debug_macro   0x0000000000000000       0x22 src/test_functions.o
  .debug_macro   0x0000000000000000       0x28 src/test_functions.o
  .debug_macro   0x0000000000000000       0x28 src/test_functions.o
  .debug_macro   0x0000000000000000       0x22 src/test_functions.o
@@ -4890,7 +4890,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 src/test_functions.o
  .debug_macro   0x0000000000000000       0x16 src/test_functions.o
  .debug_macro   0x0000000000000000       0x29 src/test_functions.o
- .debug_macro   0x0000000000000000      0x2de src/test_functions.o
+ .debug_macro   0x0000000000000000      0x2e8 src/test_functions.o
  .text          0x0000000000000000       0x14 startup/startup_stm32l476xx.o
  .data          0x0000000000000000        0x0 startup/startup_stm32l476xx.o
  .bss           0x0000000000000000        0x0 startup/startup_stm32l476xx.o
@@ -5977,7 +5977,7 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_ranges  0x0000000000001000       0xa0 src/test_functions.o
  .debug_ranges  0x00000000000010a0       0x20 startup/startup_stm32l476xx.o
 
-.debug_macro    0x0000000000000000    0x2dfb3
+.debug_macro    0x0000000000000000    0x2dfc3
  .debug_macro   0x0000000000000000      0x330 HAL_Driver/Src/stm32l4xx_hal.o
  .debug_macro   0x0000000000000330      0x8ce HAL_Driver/Src/stm32l4xx_hal.o
  .debug_macro   0x0000000000000bfe       0xa6 HAL_Driver/Src/stm32l4xx_hal.o
@@ -6055,54 +6055,54 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_macro   0x0000000000029019      0x1ff HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_macro   0x0000000000029218      0x3cf src/main.o
  .debug_macro   0x00000000000295e7      0xa72 src/main.o
- .debug_macro   0x000000000002a059       0x1c src/main.o
- .debug_macro   0x000000000002a075       0x22 src/main.o
- .debug_macro   0x000000000002a097       0x8e src/main.o
- .debug_macro   0x000000000002a125       0x5e src/main.o
- .debug_macro   0x000000000002a183       0x18 src/main.o
- .debug_macro   0x000000000002a19b       0x35 src/main.o
- .debug_macro   0x000000000002a1d0       0x34 src/main.o
- .debug_macro   0x000000000002a204      0x330 src/main.o
- .debug_macro   0x000000000002a534       0x20 src/main.o
- .debug_macro   0x000000000002a554      0x18e src/main.o
- .debug_macro   0x000000000002a6e2       0x40 src/main.o
- .debug_macro   0x000000000002a722       0x1c src/main.o
- .debug_macro   0x000000000002a73e       0x3d src/main.o
- .debug_macro   0x000000000002a77b      0x16f src/main.o
- .debug_macro   0x000000000002a8ea      0x16b src/main.o
- .debug_macro   0x000000000002aa55      0x1b2 src/main.o
- .debug_macro   0x000000000002ac07       0x84 src/main.o
- .debug_macro   0x000000000002ac8b      0x2cb src/main.o
- .debug_macro   0x000000000002af56      0x2f7 src/main.o
- .debug_macro   0x000000000002b24d      0x176 src/main.o
- .debug_macro   0x000000000002b3c3       0x16 src/main.o
- .debug_macro   0x000000000002b3d9       0x35 src/main.o
- .debug_macro   0x000000000002b40e       0x16 src/main.o
- .debug_macro   0x000000000002b424       0x16 src/main.o
- .debug_macro   0x000000000002b43a       0x29 src/main.o
- .debug_macro   0x000000000002b463      0x2de src/main.o
- .debug_macro   0x000000000002b741      0x3cf src/motor_control.o
- .debug_macro   0x000000000002bb10      0x3d3 src/stm32l4xx_it.o
- .debug_macro   0x000000000002bee3      0xf3d src/stm32l4xx_it.o
- .debug_macro   0x000000000002ce20      0x236 src/syscalls.o
- .debug_macro   0x000000000002d056       0x52 src/syscalls.o
- .debug_macro   0x000000000002d0a8       0x8d src/syscalls.o
- .debug_macro   0x000000000002d135       0x57 src/syscalls.o
- .debug_macro   0x000000000002d18c      0x174 src/syscalls.o
- .debug_macro   0x000000000002d300       0x10 src/syscalls.o
+ .debug_macro   0x000000000002a059       0x22 src/main.o
+ .debug_macro   0x000000000002a07b       0x22 src/main.o
+ .debug_macro   0x000000000002a09d       0x8e src/main.o
+ .debug_macro   0x000000000002a12b       0x5e src/main.o
+ .debug_macro   0x000000000002a189       0x18 src/main.o
+ .debug_macro   0x000000000002a1a1       0x35 src/main.o
+ .debug_macro   0x000000000002a1d6       0x34 src/main.o
+ .debug_macro   0x000000000002a20a      0x330 src/main.o
+ .debug_macro   0x000000000002a53a       0x20 src/main.o
+ .debug_macro   0x000000000002a55a      0x18e src/main.o
+ .debug_macro   0x000000000002a6e8       0x40 src/main.o
+ .debug_macro   0x000000000002a728       0x1c src/main.o
+ .debug_macro   0x000000000002a744       0x3d src/main.o
+ .debug_macro   0x000000000002a781      0x16f src/main.o
+ .debug_macro   0x000000000002a8f0      0x16b src/main.o
+ .debug_macro   0x000000000002aa5b      0x1b2 src/main.o
+ .debug_macro   0x000000000002ac0d       0x84 src/main.o
+ .debug_macro   0x000000000002ac91      0x2cb src/main.o
+ .debug_macro   0x000000000002af5c      0x2f7 src/main.o
+ .debug_macro   0x000000000002b253      0x176 src/main.o
+ .debug_macro   0x000000000002b3c9       0x16 src/main.o
+ .debug_macro   0x000000000002b3df       0x35 src/main.o
+ .debug_macro   0x000000000002b414       0x16 src/main.o
+ .debug_macro   0x000000000002b42a       0x16 src/main.o
+ .debug_macro   0x000000000002b440       0x29 src/main.o
+ .debug_macro   0x000000000002b469      0x2e8 src/main.o
+ .debug_macro   0x000000000002b751      0x3cf src/motor_control.o
+ .debug_macro   0x000000000002bb20      0x3d3 src/stm32l4xx_it.o
+ .debug_macro   0x000000000002bef3      0xf3d src/stm32l4xx_it.o
+ .debug_macro   0x000000000002ce30      0x236 src/syscalls.o
+ .debug_macro   0x000000000002d066       0x52 src/syscalls.o
+ .debug_macro   0x000000000002d0b8       0x8d src/syscalls.o
+ .debug_macro   0x000000000002d145       0x57 src/syscalls.o
+ .debug_macro   0x000000000002d19c      0x174 src/syscalls.o
  .debug_macro   0x000000000002d310       0x10 src/syscalls.o
  .debug_macro   0x000000000002d320       0x10 src/syscalls.o
- .debug_macro   0x000000000002d330       0x35 src/syscalls.o
- .debug_macro   0x000000000002d365      0x122 src/syscalls.o
- .debug_macro   0x000000000002d487       0x10 src/syscalls.o
- .debug_macro   0x000000000002d497      0x241 src/syscalls.o
- .debug_macro   0x000000000002d6d8       0x1c src/syscalls.o
- .debug_macro   0x000000000002d6f4       0x10 src/syscalls.o
- .debug_macro   0x000000000002d704      0x159 src/syscalls.o
- .debug_macro   0x000000000002d85d       0x16 src/syscalls.o
- .debug_macro   0x000000000002d873       0x88 src/syscalls.o
- .debug_macro   0x000000000002d8fb      0x2e9 src/system_stm32l4xx.o
- .debug_macro   0x000000000002dbe4      0x3cf src/test_functions.o
+ .debug_macro   0x000000000002d330       0x10 src/syscalls.o
+ .debug_macro   0x000000000002d340       0x35 src/syscalls.o
+ .debug_macro   0x000000000002d375      0x122 src/syscalls.o
+ .debug_macro   0x000000000002d497       0x10 src/syscalls.o
+ .debug_macro   0x000000000002d4a7      0x241 src/syscalls.o
+ .debug_macro   0x000000000002d6e8       0x1c src/syscalls.o
+ .debug_macro   0x000000000002d704       0x10 src/syscalls.o
+ .debug_macro   0x000000000002d714      0x159 src/syscalls.o
+ .debug_macro   0x000000000002d86d       0x16 src/syscalls.o
+ .debug_macro   0x000000000002d883       0x88 src/syscalls.o
+ .debug_macro   0x000000000002d90b      0x2e9 src/system_stm32l4xx.o
+ .debug_macro   0x000000000002dbf4      0x3cf src/test_functions.o
 
 .debug_line     0x0000000000000000     0xc68a
  .debug_line    0x0000000000000000      0x9b1 HAL_Driver/Src/stm32l4xx_hal.o
@@ -6124,7 +6124,7 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
  .debug_line    0x000000000000bb31      0xada src/test_functions.o
  .debug_line    0x000000000000c60b       0x7f startup/startup_stm32l476xx.o
 
-.debug_str      0x0000000000000000   0x101622
+.debug_str      0x0000000000000000   0x101628
  .debug_str     0x0000000000000000    0xe174f HAL_Driver/Src/stm32l4xx_hal.o
                                       0xe2604 (size before relaxing)
  .debug_str     0x00000000000e174f      0x3aa HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -6147,18 +6147,18 @@ OUTPUT(ROBKO_01.elf elf32-littlearm)
                                       0xe79c7 (size before relaxing)
  .debug_str     0x00000000000f9dd6     0x3149 HAL_Driver/Src/stm32l4xx_ll_utils.o
                                       0xe86f7 (size before relaxing)
- .debug_str     0x00000000000fcf1f     0x30cc src/main.o
-                                      0xf90e7 (size before relaxing)
- .debug_str     0x00000000000fffeb      0x282 src/motor_control.o
-                                      0xf81b3 (size before relaxing)
- .debug_str     0x000000000010026d       0xaf src/stm32l4xx_it.o
-                                      0xf7f1d (size before relaxing)
- .debug_str     0x000000000010031c     0x10d2 src/syscalls.o
+ .debug_str     0x00000000000fcf1f     0x30d2 src/main.o
+                                      0xf90ed (size before relaxing)
+ .debug_str     0x00000000000ffff1      0x282 src/motor_control.o
+                                      0xf81b9 (size before relaxing)
+ .debug_str     0x0000000000100273       0xaf src/stm32l4xx_it.o
+                                      0xf7f23 (size before relaxing)
+ .debug_str     0x0000000000100322     0x10d2 src/syscalls.o
                                        0x7d4f (size before relaxing)
- .debug_str     0x00000000001013ee       0x6a src/system_stm32l4xx.o
+ .debug_str     0x00000000001013f4       0x6a src/system_stm32l4xx.o
                                       0xe1b32 (size before relaxing)
- .debug_str     0x0000000000101458      0x1ca src/test_functions.o
-                                      0xf817f (size before relaxing)
+ .debug_str     0x000000000010145e      0x1ca src/test_functions.o
+                                      0xf8185 (size before relaxing)
 
 .comment        0x0000000000000000       0xfe
  .comment       0x0000000000000000       0x7f HAL_Driver/Src/stm32l4xx_hal.o

@@ -271,12 +271,6 @@ typedef struct
 }
 __attribute__((packed)) mov_cmd_t;
 
-typedef struct
-{
-
-}
-__attribute__((packed)) _cmd_t;
-
 /* USER CODE END Private defines */
 
 //Exported function prototypes ----------------------------------------------

@@ -7,15 +7,6 @@
 
 #include "main.h"
 
-//Stores pending commands, used to implement a linked list
-typedef struct cmd_buffer_t
-{
-	uint8_t cmd[MAX_CMD_LEN];
-	uint8_t incomplete;
-	struct cmd_buffer_t *next_cmd;
-}
-cmd_buffer_t;
-
 cmd_buffer_t *current_cmd = NULL, *last_cmd = NULL;
 
 //Describes the sequence for driving the 4 coils in half-step mode of 2-phase unipolar stepper motor
@@ -258,20 +249,24 @@ int32_t remote_control(void)
 		return -2;
 	}
 	//Decode command
-	switch (current_cmd->cmd[0])
+	switch (current_cmd->cmd_type)
 	{
+		mov_cmd_t *mov_args;
+		uint16_t *new_speed;
+
 		case MOV:
-			if ((* (int16_t *) (current_cmd->cmd + 2)) > 0)
+			mov_args = (mov_cmd_t *) current_cmd->cmd_data;
+			if (mov_args->steps > 0)
 			{
-				cmd_finished = step_motor(current_cmd->cmd[1], STEP_FWD);
+				cmd_finished = step_motor(mov_args->motor, STEP_FWD);
 				//Decrement number of steps
-				(* (int16_t *) (current_cmd->cmd + 2))--;
+				mov_args->steps--;
 			}
-			else if ((* (int16_t *) (current_cmd->cmd + 2)) < 0)
+			else if (mov_args->steps < 0)
 			{
-				cmd_finished = step_motor(current_cmd->cmd[1], STEP_REV);
+				cmd_finished = step_motor(mov_args->motor, STEP_REV);
 				//Decrement number of steps
-				(* (int16_t *) (current_cmd->cmd + 2))++;
+				mov_args->steps++;
 			}
 			//Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
@@ -280,12 +275,13 @@ int32_t remote_control(void)
 				move_until = MOVE_FREELY;
 			}
 			//Check if command has been finished
-			if ((* (int16_t *) (current_cmd->cmd + 2)) == 0)
+			if (mov_args->steps == 0)
 			{
 				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 			}
 			break;
+
 		case MOVE:
 			//Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
@@ -302,62 +298,68 @@ int32_t remote_control(void)
 				calculate_ratio_to_max(orig_ratio_to_max, max_steps);
 			}
 			calculate_ratio_to_max(ratio_to_max, max_steps);
-			for (i = 0; i < 12; i += 2)
+
+			int16_t *steps_per_motor = (int16_t *) current_cmd->cmd_data;
+			for (i = 0; i < 6; i ++)
 			{
-				if ((* (int16_t *) (current_cmd->cmd + 1 + i)) > 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
+				if (steps_per_motor[i] > 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
-					step_motor(i / 2, STEP_FWD);
+					step_motor(i, STEP_FWD);
 					//Decrement number of steps
-					(* (int16_t *) (current_cmd->cmd + 1 + i))--;
+					steps_per_motor[i]--;
 				}
-				else if ((* (int16_t *) (current_cmd->cmd + 1 + i)) < 0 && ratio_to_max[i / 2] >= orig_ratio_to_max[i / 2])
+				else if (steps_per_motor[i] < 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
 					step_motor(i / 2, STEP_REV);
 					//Decrement number of steps
-					(* (int16_t *) (current_cmd->cmd + 1 + i))++;
+					steps_per_motor[i]++;
 				}
 			}
+
 			//Check if command has been finished
-			if (0 == ((* (int16_t *) (current_cmd->cmd + 1)) ||
-					  (* (int16_t *) (current_cmd->cmd + 3)) ||
-					  (* (int16_t *) (current_cmd->cmd + 5)) ||
-					  (* (int16_t *) (current_cmd->cmd + 7)) ||
-					  (* (int16_t *) (current_cmd->cmd + 9)) ||
-					  (* (int16_t *) (current_cmd->cmd + 11))))
+			if (0 == (steps_per_motor[0] || steps_per_motor[1] || steps_per_motor[2] ||
+					  steps_per_motor[3] || steps_per_motor[4] || steps_per_motor[5]))
 			{
 				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 				first_run = 1;
 			}
 			break;
+
 		case OFF:
-			stop_motor(current_cmd->cmd[1]);
+			stop_motor(current_cmd->cmd_data[0]);
 			cmd_finished = 1;
 			break;
+
 		case FREEZE:
 			DISABLE_ROBKO();
 			cmd_finished = 1;
 			break;
+
 		case GOTO_POS:
-			current_cmd->cmd[0] = MOVE;
+			// Convert the command to a MOVE command with parameters equal to the differences between the current motor positions
+			// and the coordinates of the requested position
+			current_cmd->cmd_type = MOVE;
+			int16_t *cmd_args = (int16_t *) current_cmd->cmd_data;
 			for (i = 0; i < 6; i++)
 			{
 				if (remote_step_size == HALF_STEP || (remote_step_size == USE_LOCAL_STEP && local_step_size == HALF_STEP))
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = * (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i];
+					cmd_args[i] = cmd_args[i] - motor_pos[i];
 				}
 				else if (motor_pos[i] % 2 == 0)
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = ((* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i]) / 2) + 1;
+					cmd_args[i] = ((cmd_args[i] - motor_pos[i]) / 2) + 1;
 				}
 				else
 				{
-					* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) = (* (int16_t *) (current_cmd->cmd + 1 + (i << 1)) - motor_pos[i]) / 2;
+					cmd_args[i] = (cmd_args[i] - motor_pos[i]) / 2;
 				}
 			}
 			// Recursive call to avoid waiting one step delay before making the first step towards the desired position
 			remote_control();
 			break;
+
 		case SET_HOME:
 			for (i = 0; i < 6; i++)
 			{
@@ -366,28 +368,33 @@ int32_t remote_control(void)
 			}
 			cmd_finished = 1;
 			break;
+
 		case SET_STEP:
-			if (current_cmd->cmd[1] <= FULL_STEP)		//FULL_STEP has the highest value from the possible values of this flag
+			if (current_cmd->cmd_data[0] <= FULL_STEP)		//FULL_STEP has the highest value from the possible values of this flag
 			{
-				remote_step_size = current_cmd->cmd[1];
+				remote_step_size = current_cmd->cmd_data[0];
 			}
 			cmd_finished = 1;
 			break;
+
 		case SET_SPEED:
-			if ((* (uint16_t *) (current_cmd->cmd + 1)) >= MAX_STEP_SPEED || (* (uint16_t *) (current_cmd->cmd + 1)) == USE_LOCAL_TIME)
+			new_speed = (uint16_t *) current_cmd->cmd_data;
+			if (*new_speed >= MAX_STEP_SPEED || *new_speed == USE_LOCAL_TIME)
 			{
-				remote_step_time = (* (uint16_t *) (current_cmd->cmd + 1));
+				remote_step_time = *new_speed;
 			}
 			cmd_finished = 1;
 			break;
+
 		case OPTO:
 			//Sets a flag to stop movement at detection/loss of object
-			if (current_cmd->cmd[1] <= MOVE_UNTIL_NO_DETECTION)	//MOVE_UNTIL_NO_DETECTION has the highest value from
-			{
-				move_until=current_cmd->cmd[1];					//the possible values of this flag
+			if (current_cmd->cmd_data[0] <= MOVE_UNTIL_NO_DETECTION)	//MOVE_UNTIL_NO_DETECTION has the highest value from
+			{															//the possible values of this flag
+				move_until=current_cmd->cmd_data[0];
 			}
 			cmd_finished = 1;
 			break;
+
 		//Unknown command
 		default: cmd_finished = 1;
 	}
@@ -450,7 +457,7 @@ void read_cmd(void)
 	if (rem_bytes > 0)
 	{
 		//Add the new byte to the unfinished command
-		last_cmd->cmd[current_byte] = read_buffer;
+		last_cmd->cmd_data[current_byte] = read_buffer;
 		current_byte++;
 		rem_bytes--;
 		if (!rem_bytes)
@@ -463,7 +470,7 @@ void read_cmd(void)
 	else
 	{
 		//Start of new command
-		current_byte = 1;
+		current_byte = 0;
 		rem_bytes = 0;
 		//KILL, RESUME, GET_STEP, GET_SPEED, GET_POS, SAVE_POS and CLEAR commands are not added to the queue. Instead they are executed with priority.
 		switch (read_buffer)
@@ -475,11 +482,13 @@ void read_cmd(void)
 				reply[0] = ACK;
 				reply_len = 1;
 				break;
+
 			case RESUME:
 				ENABLE_ROBKO();
 				reply[0] = ACK;
 				reply_len = 1;
 				break;
+
 			case CLEAR:
 				//Clear the command queue
 				do
@@ -492,17 +501,20 @@ void read_cmd(void)
 				reply[0] = ACK;
 				reply_len = 1;
 				break;
+
 			case GET_POS: case SAVE_POS:
 				if (read_buffer == GET_POS)
 					reply[0] = GET_POS_REPLY;
 				else
 					reply[0] = SAVE_POS_REPLY;
+				int16_t *reply_pos = (int16_t *) reply + 1;
 				for (i = 0; i < 6; i++)
 				{
-					* (int16_t *) (reply + 1 + (i << 1)) = motor_pos[i];
+					reply_pos[i] = motor_pos[i];
 				}
 				reply_len = 13;
 				break;
+
 			case GET_STEP:
 				reply[0] = STEP_REPLY;
 				if (remote_step_size == USE_LOCAL_STEP)
@@ -515,18 +527,21 @@ void read_cmd(void)
 				}
 				reply_len = 2;
 				break;
+
 			case GET_SPEED:
 				reply[0] = SPEED_REPLY;
+				uint16_t *reply_time = (uint16_t *) reply + 1;
 				if (remote_step_time == USE_LOCAL_TIME)
 				{
-					* (uint16_t *) (reply + 1) = local_step_time;
+					*reply_time = local_step_time;
 				}
 				else
 				{
-					* (uint16_t *) (reply + 1) = remote_step_time;
+					*reply_time = remote_step_time;
 				}
 				reply_len = 3;
 				break;
+
 			case GOTO_POS: case MOVE: rem_bytes += 9;
 			/* no break*/
 			case MOV: rem_bytes += 1;
@@ -572,13 +587,14 @@ void read_cmd(void)
 					//Zero-out the new block of memory
 					memset(last_cmd, 0, sizeof(cmd_buffer_t));
 					//Write the byte of data that was read
-					last_cmd->cmd[0] = read_buffer;
+					last_cmd->cmd_type = read_buffer;
 					if (rem_bytes)
 					{
 						last_cmd->incomplete = 1;
 					}
 				}
 				break;
+
 			default:
 				reply[0] = ERROR_REPLY;
 				reply[1] = UNKNOWN_CMD;
@@ -665,9 +681,10 @@ int32_t calculate_ratio_to_max(float ratio[6], int16_t max)
 	int16_t tmp;
 	if (current_cmd == NULL)
 		return -1;
-	for (i = 0; i < 12; i += 2)
+	int16_t *cmd_args = (int16_t *) current_cmd->cmd_data;
+	for (i = 0; i < 6; i ++)
 	{
-		tmp = * (int16_t *) (current_cmd->cmd + 1 + i);
+		tmp = cmd_args[i];
 		if (tmp < 0)
 			tmp = -tmp;
 		ratio[i >> 1] = (float) tmp / max;
@@ -679,9 +696,10 @@ int16_t max_steps_current_cmd(void)
 {
 	uint8_t i;
 	int16_t max = 0, tmp;
-	for (i = 0; i < 12; i += 2)
+	int16_t *cmd_args = (int16_t *) current_cmd->cmd_data;
+	for (i = 0; i < 6; i ++)
 	{
-		tmp = * (int16_t *) (current_cmd->cmd + 1 + i);
+		tmp = cmd_args[i];
 		if (tmp < 0)
 			tmp = -tmp;
 		if (tmp > max)

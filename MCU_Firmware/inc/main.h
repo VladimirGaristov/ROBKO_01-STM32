@@ -48,14 +48,6 @@
 #ifndef STM32L476xx
 #define STM32L476xx
 #endif
-#define USE_TIMEOUT 0
-
-/* Delay between ADC end of calibration and ADC enable.                     */
-/* Delay estimation in CPU cycles: Case of ADC enable done                  */
-/* immediately after ADC calibration, ADC clock setting slow                */
-/* (LL_ADC_CLOCK_ASYNC_DIV32). Use a higher delay if ratio                  */
-/* (CPU clock / ADC clock) is above 32.                                     */
-#define ADC_DELAY_CALIB_ENABLE_CPU_CYCLES  (LL_ADC_DELAY_CALIB_ENABLE_ADC_CYCLES * 32)
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_ll_adc.h"
@@ -78,6 +70,16 @@
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
+
+// ADC timeout enable
+#define USE_TIMEOUT 0
+
+/* Delay between ADC end of calibration and ADC enable.                     */
+/* Delay estimation in CPU cycles: Case of ADC enable done                  */
+/* immediately after ADC calibration, ADC clock setting slow                */
+/* (LL_ADC_CLOCK_ASYNC_DIV32). Use a higher delay if ratio                  */
+/* (CPU clock / ADC clock) is above 32.                                     */
+#define ADC_DELAY_CALIB_ENABLE_CPU_CYCLES  (LL_ADC_DELAY_CALIB_ENABLE_ADC_CYCLES * 32)
 
 //TODO Switch the joysticks?
 #define CLAW_RELEASE_BUT_PIN LL_GPIO_PIN_13
@@ -251,6 +253,29 @@ extern int _estack;
 #define HEAP_SIZE (HEAP_LIMIT - (uint32_t) HEAP_BASE)
 #define STACK_SIZE 0x8000	// 32KB
 #define HEAP_LIMIT ((uint32_t) STACK_BASE - STACK_SIZE)
+
+//Stores pending commands, used to implement a linked list
+typedef struct cmd_buffer_t
+{
+	struct cmd_buffer_t *next_cmd;
+	uint8_t incomplete;
+	uint8_t cmd_type;
+	uint8_t cmd_data[MAX_CMD_LEN - 1];	// The one byte type field counts towards MAX_CMD_LEN
+}
+__attribute__((packed)) cmd_buffer_t;
+
+typedef struct
+{
+	uint8_t motor;
+	int16_t steps;
+}
+__attribute__((packed)) mov_cmd_t;
+
+typedef struct
+{
+
+}
+__attribute__((packed)) _cmd_t;
 
 /* USER CODE END Private defines */
 

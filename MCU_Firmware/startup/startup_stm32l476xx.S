@@ -80,6 +80,24 @@ defined in linker script */
 Reset_Handler:
   ldr   sp, =_estack    /* System Workbench for STM32update: set stack pointer */
 
+Fill_RAM1_69:
+	mov r0, #0x69696969
+	ldr r2, =_estack
+	mov r1, #0x20000000
+Loop_Fill_RAM1_69:
+	str r0, [r1]
+	add r1, #4
+	cmp r2, r1
+	bhs Loop_Fill_RAM1_69
+Fill_RAM2_69:
+	mov r1, #0x10000000
+	add r2, r1, #0x8000
+Loop_Fill_RAM2_69:
+	str r0, [r1]
+	add r1, #4
+	cmp r2, r1
+	bhs Loop_Fill_RAM2_69
+
 /* Copy the data segment initializers from flash to SRAM */
   movs	r1, #0
   b	LoopCopyDataInit

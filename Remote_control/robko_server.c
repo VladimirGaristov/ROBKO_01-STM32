@@ -387,6 +387,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 				{
 					return -1;
 				}
+				int16_t *reply_pos = (int16_t *) (reply + 1);
 				//No hate pls
 				sprintf(
 					msg,
@@ -397,15 +398,15 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 					"\tMotor 3: %d\n"
 					"\tMotor 4: %d\n"
 					"\tMotor 5: %d\n",
-					* (int16_t *) (reply + 1),
-					* (int16_t *) (reply + 3),
-					* (int16_t *) (reply + 5),
-					* (int16_t *) (reply + 7),
-					* (int16_t *) (reply + 9),
-					* (int16_t *) (reply + 11));
+					reply_pos[0],
+					reply_pos[1],
+					reply_pos[2],
+					reply_pos[3],
+					reply_pos[4],
+					reply_pos[5]);
 				if (reply[0] == SAVE_POS_REPLY)
 				{
-					save_position((int16_t *) (reply + 1));
+					save_position(reply_pos);
 				}
 				return PARSED_REPLY;
 			case LAST_CMD:

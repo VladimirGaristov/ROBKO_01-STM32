@@ -300,7 +300,7 @@ int32_t remote_control(void)
 			calculate_ratio_to_max(ratio_to_max, max_steps);
 
 			int16_t *steps_per_motor = (int16_t *) current_cmd->cmd_data;
-			for (i = 0; i < 6; i ++)
+			for (i = 0; i < 6; i++)
 			{
 				if (steps_per_motor[i] > 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
@@ -310,7 +310,7 @@ int32_t remote_control(void)
 				}
 				else if (steps_per_motor[i] < 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
-					step_motor(i / 2, STEP_REV);
+					step_motor(i, STEP_REV);
 					//Decrement number of steps
 					steps_per_motor[i]++;
 				}
@@ -400,16 +400,16 @@ int32_t remote_control(void)
 	}
 	if (cmd_finished)
 	{
-		//Advance the current command to the next and delete the old one
-		old = current_cmd;
-		current_cmd = current_cmd->next_cmd;
-		free(old);
 		if (current_cmd != NULL && current_cmd->next_cmd == NULL)
 		{
 			reply[0] = LAST_CMD;
 			reply_len = 1;
 			send_reply(reply, reply_len);
 		}
+		//Advance the current command to the next and delete the old one
+		old = current_cmd;
+		current_cmd = current_cmd->next_cmd;
+		free(old);
 	}
 	return 0;
 }
@@ -507,7 +507,7 @@ void read_cmd(void)
 					reply[0] = GET_POS_REPLY;
 				else
 					reply[0] = SAVE_POS_REPLY;
-				int16_t *reply_pos = (int16_t *) reply + 1;
+				int16_t *reply_pos = (int16_t *) (reply + 1);
 				for (i = 0; i < 6; i++)
 				{
 					reply_pos[i] = motor_pos[i];
@@ -530,7 +530,7 @@ void read_cmd(void)
 
 			case GET_SPEED:
 				reply[0] = SPEED_REPLY;
-				uint16_t *reply_time = (uint16_t *) reply + 1;
+				uint16_t *reply_time = (uint16_t *) (reply + 1);
 				if (remote_step_time == USE_LOCAL_TIME)
 				{
 					*reply_time = local_step_time;
@@ -687,7 +687,7 @@ int32_t calculate_ratio_to_max(float ratio[6], int16_t max)
 		tmp = cmd_args[i];
 		if (tmp < 0)
 			tmp = -tmp;
-		ratio[i >> 1] = (float) tmp / max;
+		ratio[i] = (float) tmp / max;
 	}
 	return 0;
 }

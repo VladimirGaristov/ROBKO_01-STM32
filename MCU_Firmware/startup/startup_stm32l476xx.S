@@ -88,7 +88,7 @@ Loop_Fill_RAM1_69:
 	str r0, [r1]
 	add r1, #4
 	cmp r2, r1
-	bhs Loop_Fill_RAM1_69
+	bhi Loop_Fill_RAM1_69
 Fill_RAM2_69:
 	mov r1, #0x10000000
 	add r2, r1, #0x8000
@@ -96,7 +96,7 @@ Loop_Fill_RAM2_69:
 	str r0, [r1]
 	add r1, #4
 	cmp r2, r1
-	bhs Loop_Fill_RAM2_69
+	bhi Loop_Fill_RAM2_69
 
 /* Copy the data segment initializers from flash to SRAM */
   movs	r1, #0

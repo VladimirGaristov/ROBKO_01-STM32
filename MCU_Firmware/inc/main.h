@@ -186,9 +186,9 @@
 #define HALF_STEP 1
 #define USE_LOCAL_STEP 0
 #define USE_LOCAL_TIME 0
-#define MAX_STEP_SPEED 15
-#define FAST_STEP 15
-#define SLOW_STEP 50
+#define MAX_STEP_SPEED 5
+#define FAST_STEP 7
+#define SLOW_STEP 15
 #define STEP_FWD 1
 #define STEP_REV -1
 #define MOVE_UNTIL_DETECTION 1

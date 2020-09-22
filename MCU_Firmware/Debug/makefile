@@ -9,9 +9,8 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include startup/subdir.mk
--include src/subdir.mk
--include Utilities/STM32L4xx_Nucleo/subdir.mk
--include HAL_Driver/Src/subdir.mk
+-include Src/subdir.mk
+-include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -29,13 +28,13 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: ROBKO_01.elf
+all: ROBKO_01_F767.elf
 
 # Tool invocations
-ROBKO_01.elf: $(OBJS) $(USER_OBJS) /home/cartogan/Ac6/workspace/ROBKO_01/MCU_Firmware/LinkerScript.ld
+ROBKO_01_F767.elf: $(OBJS) $(USER_OBJS) ../STM32F767ZITx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"/home/cartogan/Ac6/workspace/ROBKO_01/MCU_Firmware/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F767ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01_F767.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -46,9 +45,9 @@ clean:
 	-@echo ' '
 
 post-build:
-	-@echo 'Generating binary and Printing size information:'
-	arm-none-eabi-objcopy -O binary "ROBKO_01.elf" "ROBKO_01.bin"
-	arm-none-eabi-size "ROBKO_01.elf"
+	-@echo 'Generating hex and Printing size information:'
+	arm-none-eabi-objcopy -O ihex "ROBKO_01_F767.elf" "ROBKO_01_F767.hex"
+	arm-none-eabi-size "ROBKO_01_F767.elf"
 	-@echo ' '
 
 .PHONY: all clean dependents

@@ -25,7 +25,7 @@ uint16_t local_step_time = SLOW_STEP, remote_step_time = USE_LOCAL_TIME;
 const uint32_t LED_pins[12] = {LED0_PIN, LED1_PIN, LED2_PIN, LED3_PIN, LED4_PIN, LED5_PIN,
 							   LED6_PIN, LED7_PIN, LED8_PIN, LED9_PIN, LED10_PIN, LED11_PIN};
 // Stores the potentiometer values after ADC conversion
-__IO uint16_t adc_pot_vals[4] = {POT_INIT_VAL};
+__IO uint16_t adc_pot_vals[4] = {POT_INIT_VAL, POT_INIT_VAL, POT_INIT_VAL, POT_INIT_VAL};
 
 // Translates an address of ROBKO register to states of the address pins
 int32_t set_addr(uint8_t addr)

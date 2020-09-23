@@ -16,6 +16,11 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
+  *
+  *	Solder bridge modifications on Nucleo-F767ZI:
+  *	Remove SB13, SB118, SB132, SB133, SB160, SB164, SB173, SB178, R37, R38
+  *	Solder SB144, SB145
+  *
   */
 /* USER CODE END Header */
 

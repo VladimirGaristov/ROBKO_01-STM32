@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+extern __IO uint16_t adc_pot_vals[4];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,11 +104,11 @@ int main(void)
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   DWT_Init();
-  //Begin reading potentiometer values
+  // Begin reading potentiometer values
   LL_ADC_REG_StartConversionSWStart(ADC1);
-  //Enable ROBKO 01
+  // Enable ROBKO 01
   ENABLE_ROBKO();
-  //Initialize ROBKO-01 registers
+  // Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
   /* USER CODE END 2 */
 
@@ -242,15 +242,11 @@ static void MX_ADC1_Init(void)
   LL_DMA_DisableFifoMode(DMA2, LL_DMA_STREAM_0);
 
   /* USER CODE BEGIN ADC1_Init 1 */
-
-/*
-  dma_initstruct.NbData                 = 4;
-  dma_initstruct.PeriphRequest          = LL_DMA_REQUEST_0;	//??
-  dma_initstruct.PeriphOrM2MSrcAddress  = LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA);
-  dma_initstruct.MemoryOrM2MDstAddress  = (uint32_t) &adc_pot_vals;
-//Enable DMA channel for ADC
-  LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_1);
-*/
+  LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_0, (uint32_t) adc_pot_vals);
+  LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_0, LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA));
+  LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_0, 4);
+  // Enable DMA channel for ADC
+  LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_0);
   /* USER CODE END ADC1_Init 1 */
   /** Common config 
   */
@@ -687,22 +683,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(LED9_GPIO_PORT, &GPIO_InitStruct);
 
-  /**/
+  /*
   GPIO_InitStruct.Pin = LED0_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(LED0_GPIO_PORT, &GPIO_InitStruct);
-
-  /**/
+*/
+  /*
   GPIO_InitStruct.Pin = LED1_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(LED1_GPIO_PORT, &GPIO_InitStruct);
-
+*/
   /**/
   GPIO_InitStruct.Pin = LED2_PIN;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;

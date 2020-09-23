@@ -9,25 +9,25 @@
 
 cmd_buffer_t *current_cmd = NULL, *last_cmd = NULL;
 
-//Describes the sequence for driving the 4 coils in half-step mode of 2-phase unipolar stepper motor
-//For full-step mode only the every even numbered state is skipped
+// Describes the sequence for driving the 4 coils in half-step mode of 2-phase unipolar stepper motor
+// For full-step mode only the every even numbered state is skipped
 const uint8_t coil_current[4][8] = {{1, 1, 0, 0, 0, 0, 0, 1}, {0, 0, 0, 1, 1, 1, 0, 0},
 									{0, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1}};
-//Stores how many steps have the motors moved
+// Stores how many steps have the motors moved
 int16_t motor_pos[6] = {1, 1, 1, 1, 1, 1};
-//Stores the direction of the last steps. Used to determine which status LEDs to illuminate
+// Stores the direction of the last steps. Used to determine which status LEDs to illuminate
 int8_t motor_status[6] = {0};
-//Step size and speed parameters
+// Step size and speed parameters
 uint8_t move_until = MOVE_FREELY;
 uint8_t local_step_size = FULL_STEP, remote_step_size = FULL_STEP;
 uint16_t local_step_time = SLOW_STEP, remote_step_time = USE_LOCAL_TIME;
-//This is needed for looping
+// This is needed for looping
 const uint32_t LED_pins[12] = {LED0_PIN, LED1_PIN, LED2_PIN, LED3_PIN, LED4_PIN, LED5_PIN,
 							   LED6_PIN, LED7_PIN, LED8_PIN, LED9_PIN, LED10_PIN, LED11_PIN};
-//Stores the potentiometer values after ADC conversion
+// Stores the potentiometer values after ADC conversion
 __IO uint16_t adc_pot_vals[4] = {POT_INIT_VAL};
 
-//Translates an address of ROBKO register to states of the address pins
+// Translates an address of ROBKO register to states of the address pins
 int32_t set_addr(uint8_t addr)
 {
 	if (addr > 7)
@@ -50,14 +50,14 @@ int32_t set_addr(uint8_t addr)
 	return 0;
 }
 
-//Moves a motor one step in a specified direction
+// Moves a motor one step in a specified direction
 int32_t step_motor(uint8_t motor, int8_t dir)
 {
 	if (motor > 5)
 	{
 		return -1;
 	}
-	//Increment/decrement motor position
+	// Increment/decrement motor position
 	if (remote_step_size == USE_LOCAL_STEP)
 	{
 		motor_pos[motor] += dir * local_step_size;
@@ -71,19 +71,19 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 	{
 		motor_pos[motor] -= dir;
 	}
-	//Overflow and underflow protection
+	// Overflow and underflow protection
 	int16_t new_pos = motor_pos[motor];
 	new_pos %= 8;
 	if (new_pos < 0)
 	{
 		new_pos += 8;
 	}
-	//Pass the direction of movement to set_LEDs()
+	// Pass the direction of movement to set_LEDs()
 	motor_status[motor] = dir;
-	//Select this motor's register
+	// Select this motor's register
 	set_addr(motor);
 	LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, D0_PIN | D1_PIN | D2_PIN | D3_PIN);
-	//Set register bits to represent the active coils for the next step
+	// Set register bits to represent the active coils for the next step
 	if (coil_current[0][new_pos] == 1)
 	{
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, D0_PIN);
@@ -100,15 +100,15 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 	{
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, D3_PIN);
 	}
-	//Send the data to ROBKO 01
+	// Send the data to ROBKO 01
 	LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOW_PIN);
 	DWT_Delay(10);
 	LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN);
 	return 0;
 }
 
-//Determines the mode of operation (manual/remote), sets the STEP_SIZE and STEP_TIME
-//and calls remote_control() or manual_control()
+// Determines the mode of operation (manual/remote), sets the STEP_SIZE and STEP_TIME
+// and calls remote_control() or manual_control()
 void check_mode(void)
 {
 	uint32_t auto_mode, manual_mode, joystick;
@@ -154,7 +154,7 @@ void check_mode(void)
 		}
 	}
 	set_LEDs();
-	//Wait for the motors to finish moving
+	// Wait for the motors to finish moving
 	if (remote_step_time==USE_LOCAL_TIME)
 	{
 		LL_mDelay(local_step_time);
@@ -226,10 +226,10 @@ void manual_control(void)
 	}
 }
 
-//Executes a stored command
+// Executes a stored command
 int32_t remote_control(void)
 {
-	//cmd_finished is a flag, raised if the current command has been completed and can be deleted
+	// cmd_finished is a flag, raised if the current command has been completed and can be deleted
 	uint8_t cmd_finished = 0, i;
 	cmd_buffer_t *old;
 	int16_t max_steps;
@@ -238,17 +238,17 @@ int32_t remote_control(void)
 	static uint8_t first_run = 1;
 	uint8_t reply[MAX_REPLY_LEN];
 	uint8_t reply_len = 0;
-	//Check if any commands are pending and if the robot is enabled
+	// Check if any commands are pending and if the robot is enabled
 	if (current_cmd == NULL || LL_GPIO_IsOutputPinSet(ADDR_DATA_PORT, ENABLE_PIN) == 0)
 	{
 		return -1;
 	}
-	//Check if the entire command has been buffered
+	// Check if the entire command has been buffered
 	if (current_cmd->incomplete)
 	{
 		return -2;
 	}
-	//Decode command
+	// Decode command
 	switch (current_cmd->cmd_type)
 	{
 		mov_cmd_t *mov_args;
@@ -259,22 +259,22 @@ int32_t remote_control(void)
 			if (mov_args->steps > 0)
 			{
 				cmd_finished = step_motor(mov_args->motor, STEP_FWD);
-				//Decrement number of steps
+				// Decrement number of steps
 				mov_args->steps--;
 			}
 			else if (mov_args->steps < 0)
 			{
 				cmd_finished = step_motor(mov_args->motor, STEP_REV);
-				//Decrement number of steps
+				// Decrement number of steps
 				mov_args->steps++;
 			}
-			//Checks if the robot should stop moving before finishing the command
+			// Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
 			{
 				cmd_finished = 1;
 				move_until = MOVE_FREELY;
 			}
-			//Check if command has been finished
+			// Check if command has been finished
 			if (mov_args->steps == 0)
 			{
 				cmd_finished = 1;
@@ -283,7 +283,7 @@ int32_t remote_control(void)
 			break;
 
 		case MOVE:
-			//Checks if the robot should stop moving before finishing the command
+			// Checks if the robot should stop moving before finishing the command
 			if (check_opto_flag())
 			{
 				cmd_finished = 1;
@@ -305,18 +305,18 @@ int32_t remote_control(void)
 				if (steps_per_motor[i] > 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
 					step_motor(i, STEP_FWD);
-					//Decrement number of steps
+					// Decrement number of steps
 					steps_per_motor[i]--;
 				}
 				else if (steps_per_motor[i] < 0 && ratio_to_max[i] >= orig_ratio_to_max[i])
 				{
 					step_motor(i, STEP_REV);
-					//Decrement number of steps
+					// Decrement number of steps
 					steps_per_motor[i]++;
 				}
 			}
 
-			//Check if command has been finished
+			// Check if command has been finished
 			if (0 == (steps_per_motor[0] || steps_per_motor[1] || steps_per_motor[2] ||
 					  steps_per_motor[3] || steps_per_motor[4] || steps_per_motor[5]))
 			{
@@ -370,7 +370,7 @@ int32_t remote_control(void)
 			break;
 
 		case SET_STEP:
-			if (current_cmd->cmd_data[0] <= FULL_STEP)		//FULL_STEP has the highest value from the possible values of this flag
+			if (current_cmd->cmd_data[0] <= FULL_STEP)		// FULL_STEP has the highest value from the possible values of this flag
 			{
 				remote_step_size = current_cmd->cmd_data[0];
 			}
@@ -387,15 +387,15 @@ int32_t remote_control(void)
 			break;
 
 		case OPTO:
-			//Sets a flag to stop movement at detection/loss of object
-			if (current_cmd->cmd_data[0] <= MOVE_UNTIL_NO_DETECTION)	//MOVE_UNTIL_NO_DETECTION has the highest value from
-			{															//the possible values of this flag
+			// Sets a flag to stop movement at detection/loss of object
+			if (current_cmd->cmd_data[0] <= MOVE_UNTIL_NO_DETECTION)	// MOVE_UNTIL_NO_DETECTION has the highest value from
+			{															// the possible values of this flag
 				move_until=current_cmd->cmd_data[0];
 			}
 			cmd_finished = 1;
 			break;
 
-		//Unknown command
+		// Unknown command
 		default: cmd_finished = 1;
 	}
 	if (cmd_finished)
@@ -406,7 +406,7 @@ int32_t remote_control(void)
 			reply_len = 1;
 			send_reply(reply, reply_len);
 		}
-		//Advance the current command to the next and delete the old one
+		// Advance the current command to the next and delete the old one
 		old = current_cmd;
 		current_cmd = current_cmd->next_cmd;
 		free(old);
@@ -414,7 +414,7 @@ int32_t remote_control(void)
 	return 0;
 }
 
-//Turns off all coils in a motor, allowing to move it by hand
+// Turns off all coils in a motor, allowing to move it by hand
 int32_t stop_motor(uint8_t motor)
 {
 	uint8_t n;
@@ -422,7 +422,7 @@ int32_t stop_motor(uint8_t motor)
 	{
 		set_addr(motor);
 		LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, D0_PIN | D1_PIN | D2_PIN | D3_PIN);
-		//Send the data to ROBKO 01
+		// Send the data to ROBKO 01
 		LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOW_PIN);
 		DWT_Delay(10);
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN);
@@ -430,7 +430,7 @@ int32_t stop_motor(uint8_t motor)
 	}
 	else if (motor == ALL_MOTORS)
 	{
-		//Recursion
+		// Recursion
 		for (n = 0; n < 6; n++)
 		{
 			stop_motor(n);
@@ -443,7 +443,7 @@ int32_t stop_motor(uint8_t motor)
 	}
 }
 
-//Called by interrupt when a byte of data has been received by USART
+// Called by interrupt when a byte of data has been received by USART
 void read_cmd(void)
 {
 	static uint8_t rem_bytes = 0, current_byte = 0;
@@ -451,12 +451,12 @@ void read_cmd(void)
 	cmd_buffer_t *eraser;
 	uint8_t reply[MAX_REPLY_LEN];
 	uint8_t i, reply_len = 0;
-	//Read a byte of data
+	// Read a byte of data
 	read_buffer = LL_USART_ReceiveData9(USART1);
-	//Check if there is a command not fully received
+	// Check if there is a command not fully received
 	if (rem_bytes > 0)
 	{
-		//Add the new byte to the unfinished command
+		// Add the new byte to the unfinished command
 		last_cmd->cmd_data[current_byte] = read_buffer;
 		current_byte++;
 		rem_bytes--;
@@ -469,14 +469,14 @@ void read_cmd(void)
 	}
 	else
 	{
-		//Start of new command
+		// Start of new command
 		current_byte = 0;
 		rem_bytes = 0;
-		//KILL, RESUME, GET_STEP, GET_SPEED, GET_POS, SAVE_POS and CLEAR commands are not added to the queue. Instead they are executed with priority.
+		// KILL, RESUME, GET_STEP, GET_SPEED, GET_POS, SAVE_POS and CLEAR commands are not added to the queue. Instead they are executed with priority.
 		switch (read_buffer)
 		{
 			case KILL:
-				//Emergency stop
+				// Emergency stop
 				stop_motor(6);
 				DISABLE_ROBKO();
 				reply[0] = ACK;
@@ -490,7 +490,7 @@ void read_cmd(void)
 				break;
 
 			case CLEAR:
-				//Clear the command queue
+				// Clear the command queue
 				do
 				{
 					eraser = current_cmd;
@@ -551,8 +551,8 @@ void read_cmd(void)
 			case OPTO: case OFF: case SET_STEP: rem_bytes += 1;
 			/* no break */
 			case FREEZE: case SET_HOME:
-				//Allocate memory for the new command and add it to the linked list
-				//Check if the queue is empty
+				// Allocate memory for the new command and add it to the linked list
+				// Check if the queue is empty
 				if (current_cmd == NULL)
 				{
 					current_cmd = malloc(sizeof(cmd_buffer_t));
@@ -563,7 +563,7 @@ void read_cmd(void)
 					last_cmd->next_cmd = malloc(sizeof(cmd_buffer_t));
 					last_cmd = last_cmd->next_cmd;
 				}
-				//Check if memory was allocated successfully
+				// Check if memory was allocated successfully
 				if (last_cmd == NULL)
 				{
 					reply[0] = ERROR_REPLY;
@@ -584,9 +584,9 @@ void read_cmd(void)
 				}
 				else
 				{
-					//Zero-out the new block of memory
+					// Zero-out the new block of memory
 					memset(last_cmd, 0, sizeof(cmd_buffer_t));
-					//Write the byte of data that was read
+					// Write the byte of data that was read
 					last_cmd->cmd_type = read_buffer;
 					if (rem_bytes)
 					{
@@ -607,16 +607,16 @@ void read_cmd(void)
 	}
 }
 
-//Illuminate the status LEDs corresponding to the direction of movement of the motors
+// Illuminate the status LEDs corresponding to the direction of movement of the motors
 void set_LEDs(void)
 {
 	uint8_t i;
-	//Turn off all LEDs
+	// Turn off all LEDs
 	for (i = 0; i < 12; i++)
 	{
 		LL_GPIO_ResetOutputPin(LED_PORT, LED_pins[i]);
 	}
-	//Turn on the LEDs corresponding to the last steps made
+	// Turn on the LEDs corresponding to the last steps made
 	for (i = 0; i < 6; i++)
 	{
 		if (motor_status[i] == STEP_FWD)
@@ -628,16 +628,16 @@ void set_LEDs(void)
 			LL_GPIO_SetOutputPin(LED_PORT, LED_pins[i * 2 + 1]);
 		}
 	}
-	//Clear the motor_status array so the step_motor() function can safely set it
+	// Clear the motor_status array so the step_motor() function can safely set it
 	memset(motor_status, 0, sizeof(motor_status[0]) * 6);
 }
 
-//Check if an object is detected inside the claw
+// Check if an object is detected inside the claw
 int8_t get_opto(void)
 {
 	uint8_t opto_state;
 	set_addr(7);
-	//Read the state of pin IN6 on ROBKO 01
+	// Read the state of pin IN6 on ROBKO 01
 	LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOR_PIN);
 	DWT_Delay(10);
 	opto_state = LL_GPIO_IsInputPinSet(ADDR_DATA_PORT, D6_PIN);
@@ -652,8 +652,8 @@ int8_t get_opto(void)
 	}
 }
 
-//Checks if the conditions to stop moving are met.
-//Command OPTO sets the move_until flag when the robot must move until it detects/loses an object.
+// Checks if the conditions to stop moving are met.
+// Command OPTO sets the move_until flag when the robot must move until it detects/loses an object.
 int8_t check_opto_flag(void)
 {
 	int8_t opto_state = get_opto();

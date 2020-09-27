@@ -101,6 +101,7 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 		LL_GPIO_SetOutputPin(ADDR_DATA_PORT, D3_PIN);
 	}
 	// Send the data to ROBKO 01
+	DWT_Delay(10);
 	LL_GPIO_ResetOutputPin(ADDR_DATA_PORT, IOW_PIN);
 	DWT_Delay(10);
 	LL_GPIO_SetOutputPin(ADDR_DATA_PORT, IOW_PIN);
@@ -116,19 +117,19 @@ void check_mode(void)
 	manual_mode = LL_GPIO_IsInputPinSet(INPUT_PORT, MANUAL_MODE_PIN);
 	if (LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_SIZE_PIN))
 	{
-		local_step_size=FULL_STEP;
+		local_step_size = FULL_STEP;
 	}
 	else
 	{
-		local_step_size=FULL_STEP;
+		local_step_size = FULL_STEP;
 	}
 	if (LL_GPIO_IsInputPinSet(INPUT_PORT, STEP_TIME_PIN))
 	{
-		local_step_time=FAST_STEP;
+		local_step_time = FAST_STEP;
 	}
 	else
 	{
-		local_step_time=SLOW_STEP;
+		local_step_time = SLOW_STEP;
 	}
 	if (!auto_mode)
 	{
@@ -155,7 +156,7 @@ void check_mode(void)
 	}
 	set_LEDs();
 	// Wait for the motors to finish moving
-	if (remote_step_time==USE_LOCAL_TIME)
+	if (remote_step_time == USE_LOCAL_TIME)
 	{
 		LL_mDelay(local_step_time);
 	}

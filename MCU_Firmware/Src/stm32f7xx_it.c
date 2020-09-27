@@ -225,7 +225,10 @@ void USART1_IRQHandler(void)
 void DMA2_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream0_IRQn 0 */
-
+	if (LL_DMA_IsActiveFlag_TC0(DMA2))
+	{
+		LL_DMA_ClearFlag_TC0(DMA2);
+	}
   /* USER CODE END DMA2_Stream0_IRQn 0 */
   
   /* USER CODE BEGIN DMA2_Stream0_IRQn 1 */

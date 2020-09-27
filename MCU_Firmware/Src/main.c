@@ -107,7 +107,7 @@ int main(void)
   // Begin reading potentiometer values
   LL_ADC_REG_StartConversionSWStart(ADC1);
   // Enable ROBKO 01
-  ENABLE_ROBKO();
+   ENABLE_ROBKO();
   // Initialize ROBKO-01 registers
   stop_motor(ALL_MOTORS);
   /* USER CODE END 2 */
@@ -245,6 +245,7 @@ static void MX_ADC1_Init(void)
   LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_0, (uint32_t) adc_pot_vals);
   LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_0, LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA));
   LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_0, 4);
+  //LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_0);
   // Enable DMA channel for ADC
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_0);
   /* USER CODE END ADC1_Init 1 */
@@ -345,7 +346,7 @@ static void MX_USART1_UART_Init(void)
   LL_USART_ConfigAsyncMode(USART1);
   LL_USART_Enable(USART1);
   /* USER CODE BEGIN USART1_Init 2 */
-
+  LL_USART_EnableIT_RXNE(USART1);
   /* USER CODE END USART1_Init 2 */
 
 }

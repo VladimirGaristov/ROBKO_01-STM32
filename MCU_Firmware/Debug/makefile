@@ -28,13 +28,13 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: ROBKO_01_F767.elf
+all: ROBKO_01.elf
 
 # Tool invocations
-ROBKO_01_F767.elf: $(OBJS) $(USER_OBJS) ../STM32F767ZITx_FLASH.ld
+ROBKO_01.elf: $(OBJS) $(USER_OBJS) ../STM32F767ZITx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F767ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01_F767.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F767ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "ROBKO_01.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -46,8 +46,8 @@ clean:
 
 post-build:
 	-@echo 'Generating hex and Printing size information:'
-	arm-none-eabi-objcopy -O ihex "ROBKO_01_F767.elf" "ROBKO_01_F767.hex"
-	arm-none-eabi-size "ROBKO_01_F767.elf"
+	arm-none-eabi-objcopy -O ihex "ROBKO_01.elf" "ROBKO_01.hex"
+	arm-none-eabi-size "ROBKO_01.elf"
 	-@echo ' '
 
 .PHONY: all clean dependents

@@ -122,6 +122,7 @@ int16_t max_steps_current_cmd(void);
 int32_t calculate_ratio_to_max(float ratio[6], int16_t max);
 static inline int heap_overflow(void *new_alloc, size_t size);
 int send_reply(uint8_t *reply, uint8_t reply_len);
+int32_t update_step_count(int16_t *counter, int8_t dir);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

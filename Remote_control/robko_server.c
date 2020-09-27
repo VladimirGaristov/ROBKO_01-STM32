@@ -25,7 +25,7 @@
 #define STOP_BITS 1
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
-#define OUTPUT_FILE "/home/cartogan/Ac6/workspace/ROBKO_01/Remote_control/position_log.robko"
+#define OUTPUT_FILE "/home/cartogan/Ac6/workspace/ROBKO_01-STM32/Remote_control/position_log.robko"
 #define READ_TIMEOUT 25		//ms
 
 #define PARSED_REPEAT 2

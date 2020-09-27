@@ -65,7 +65,14 @@ int32_t step_motor(uint8_t motor, int8_t dir)
 	}
 
 	// Increment/decrement motor position
-	update_step_count(&motor_pos[motor], dir);
+	if (remote_step_size == USE_LOCAL_STEP)
+	{
+		motor_pos[motor] += dir * local_step_size;
+	}
+	else if (remote_step_size == FULL_STEP || remote_step_size == HALF_STEP)
+	{
+		motor_pos[motor] += dir * remote_step_size;
+	}
 	if ((motor_pos[motor] % 2 == 0 && remote_step_size == FULL_STEP) ||
 		(motor_pos[motor] % 2 == 0 && remote_step_size == USE_LOCAL_STEP && local_step_size == FULL_STEP))
 		{
@@ -366,6 +373,8 @@ int32_t remote_control(void)
 
 			for (i = 0; i < 6; i++)
 			{
+				cmd_args[i] = cmd_args[i] - motor_pos[i];
+				/*
 				if (remote_step_size == HALF_STEP || (remote_step_size == USE_LOCAL_STEP && local_step_size == HALF_STEP))
 				{
 					cmd_args[i] = cmd_args[i] - motor_pos[i];
@@ -378,6 +387,7 @@ int32_t remote_control(void)
 				{
 					cmd_args[i] = (cmd_args[i] - motor_pos[i]) / 2;
 				}
+				*/
 			}
 
 			// Recursive call to avoid waiting one step delay before making the first step towards the desired position
@@ -762,10 +772,14 @@ int32_t update_step_count(int16_t *counter, int8_t dir)
 	if (remote_step_size == USE_LOCAL_STEP)
 	{
 		*counter += dir * local_step_size;
+		if ((*counter == 1 || *counter == -1) && local_step_size == FULL_STEP)
+			*counter = 0;
 	}
 	else if (remote_step_size == FULL_STEP || remote_step_size == HALF_STEP)
 	{
 		*counter += dir * remote_step_size;
+		if ((*counter == 1 || *counter == -1) && remote_step_size == FULL_STEP)
+					*counter = 0;
 	}
 
 	return 0;

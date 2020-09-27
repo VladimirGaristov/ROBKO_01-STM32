@@ -238,9 +238,9 @@ int32_t update_step_count(int16_t *counter, int8_t dir);
 /* (CPU clock / ADC clock) is above 32.                                     */
 #define ADC_DELAY_CALIB_ENABLE_CPU_CYCLES  (LL_ADC_DELAY_CALIB_ENABLE_ADC_CYCLES * 32)
 
-#define ADDR_DATA_PORT GPIOB
-#define INPUT_PORT GPIOC
-#define LED_PORT GPIOA
+#define ADDR_DATA_PORT	GPIOB
+#define INPUT_PORT		GPIOC
+#define LED_PORT		GPIOA
 
 //ADC thresholds
 #define LEFT_THR		0x09CBU	//2.02V
@@ -250,64 +250,64 @@ int32_t update_step_count(int16_t *counter, int8_t dir);
 #define LKG_CORRECTION	0x003EU	//0.05V	Subtract from threshold
 #define POT_INIT_VAL	0x0800U
 
-#define FULL_STEP 2
-#define HALF_STEP 1
-#define USE_LOCAL_STEP 0
-#define USE_LOCAL_TIME 0
-#define MAX_STEP_SPEED 5
-#define FAST_STEP 7
-#define SLOW_STEP 15
-#define STEP_FWD 1
-#define STEP_REV -1
-#define MOVE_UNTIL_DETECTION 1
-#define MOVE_UNTIL_NO_DETECTION 2
-#define MOVE_FREELY 0
+#define FULL_STEP		2
+#define HALF_STEP		1
+#define USE_LOCAL_STEP	0
+#define USE_LOCAL_TIME	0
+#define MAX_STEP_SPEED	5
+#define FAST_STEP		7
+#define SLOW_STEP		15
+#define STEP_FWD		1
+#define STEP_REV		-1
+#define MOVE_UNTIL_DETECTION	1
+#define MOVE_UNTIL_NO_DETECTION	2
+#define MOVE_FREELY		0
 
 //Stepper motors addresses and directions
-#define ROTATION_MOTOR 0	//FWD=left
-#define SHOULDER_MOTOR 1	//FWD=forward
-#define ELBOW_MOTOR 2		//FWD=up
-#define CLAW_GRAB_MOTOR 5	//FWD=open
-#define CLAW_ROT_MOTOR_L 4	//FWD=up
-#define CLAW_ROT_MOTOR_R 3	//FWD=down
-#define ALL_MOTORS 6
+#define ROTATION_MOTOR		0	//FWD=left
+#define SHOULDER_MOTOR		1	//FWD=forward
+#define ELBOW_MOTOR			2		//FWD=up
+#define CLAW_GRAB_MOTOR		5	//FWD=open
+#define CLAW_ROT_MOTOR_L	4	//FWD=up
+#define CLAW_ROT_MOTOR_R	3	//FWD=down
+#define ALL_MOTORS			6
 
-#define LEFT_RIGHT_POT_NUM 1
-#define SHOULDER_POT_NUM 0
-#define ELBOW_POT_NUM 3
-#define CLAW_ROTATION_POT_NUM 2
+#define LEFT_RIGHT_POT_NUM		1
+#define SHOULDER_POT_NUM		0
+#define ELBOW_POT_NUM			3
+#define CLAW_ROTATION_POT_NUM	2
 
 //Commands for remote control
-#define MOV 1
-#define MOVE 2
-#define OFF 3
-#define OPEN_FILE 4
-#define GOTO_POS 5
-#define GET_POS 6
-#define KILL 7
-#define CLEAR 8
-#define FREEZE 9
-#define RESUME 10
-#define SAVE_POS 11
-#define OPTO 12
-#define SET_STEP 13
-#define SET_SPEED 14
-#define GET_STEP 15
-#define GET_SPEED 16
-#define SET_HOME 17
+#define MOV			1
+#define MOVE		2
+#define OFF			3
+#define OPEN_FILE	4
+#define GOTO_POS	5
+#define GET_POS		6
+#define KILL		7
+#define CLEAR		8
+#define FREEZE		9
+#define RESUME		10
+#define SAVE_POS	11
+#define OPTO		12
+#define SET_STEP	13
+#define SET_SPEED	14
+#define GET_STEP	15
+#define GET_SPEED	16
+#define SET_HOME	17
 
-#define GET_POS_REPLY 18
-#define SAVE_POS_REPLY 199
-#define STEP_REPLY 20
-#define SPEED_REPLY 21
-#define ACK 22
-#define ERROR_REPLY 23
-#define LAST_CMD 24
+#define GET_POS_REPLY	18
+#define SAVE_POS_REPLY	69
+#define STEP_REPLY		20
+#define SPEED_REPLY		21
+#define ACK				22
+#define ERROR_REPLY		23
+#define LAST_CMD		24
 
-#define REPEAT 25
+#define REPEAT			25
 
-#define FULL_RAM 101
-#define UNKNOWN_CMD 102
+#define FULL_RAM		101
+#define UNKNOWN_CMD		102
 
 //Enabling and disabling ROBKO 01
 #define ENABLE_ROBKO() LL_GPIO_SetOutputPin(ADDR_DATA_PORT, ENABLE_PIN)

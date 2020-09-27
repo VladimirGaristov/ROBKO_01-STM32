@@ -23,7 +23,7 @@
 #define REPEAT		25
 
 #define GET_POS_REPLY	18
-#define SAVE_POS_REPLY	19
+#define SAVE_POS_REPLY	69
 #define STEP_REPLY		20
 #define SPEED_REPLY		21
 #define ACK				22

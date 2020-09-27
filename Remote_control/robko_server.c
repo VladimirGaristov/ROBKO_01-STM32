@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <pthread.h>
+#include <sched.h>
 #include "robko_decode.h"
 
 #define SOCK_BUFFER_SIZE 1501
@@ -25,7 +26,7 @@
 #define STOP_BITS 1
 #define WORD_LENGHT 8
 #define PARITY SP_PARITY_ODD
-#define OUTPUT_FILE "/home/cartogan/Ac6/workspace/ROBKO_01-STM32/Remote_control/position_log.robko"
+#define OUTPUT_FILE "/home/cartogan/Ac6/workspace/ROBKO_01/Remote_control/position_log.robko"
 #define READ_TIMEOUT 25		// ms
 
 #define PARSED_REPEAT 2
@@ -221,6 +222,7 @@ int get_client_commands(int client_sockfd, struct sp_port *ser_port)
 				pthread_mutex_unlock(&serial_port_mutex);
 			}
 		// }
+		sched_yield();
 	}
 }
 
@@ -322,7 +324,7 @@ int parse_reply(struct sp_port *ser_port, char *msg)
 	uint8_t reply[13] = {0}, read_status = 0;
 	uint16_t speed = 0;
 	pthread_mutex_lock(&serial_port_mutex);
-	read_status = sp_blocking_read(ser_port, reply, 1, READ_TIMEOUT);
+	read_status = sp_nonblocking_read(ser_port, reply, 1);
 	pthread_mutex_unlock(&serial_port_mutex);
 	if (!read_status)
 	{
@@ -454,6 +456,7 @@ int save_position(int16_t *position)
 	}
 	fputs("\n", output_fp);
 	fflush(output_fp);
+	fclose(output_fp);
 	return 0;
 }
 
@@ -505,6 +508,7 @@ void *reply_thread(void *args)
 
 			default:;
 		}
+		sched_yield();
 	}
 
 	return NULL;
